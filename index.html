@@ -1689,23 +1689,159 @@ footer {
 .foot-base a { color: var(--w60); text-decoration: none; font-size: 0.84rem; }
 .foot-base a:hover { color: var(--mint); }
 
+/* ─────────────────────────────── HAMBURGER + MOBILE NAV ─────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  border: 1px solid var(--w20);
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform 0.3s var(--ease), opacity 0.2s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(5,6,5,0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  flex-direction: column;
+  padding: 100px 28px 48px;
+  transform: translateX(100%);
+  transition: transform 0.4s var(--ease);
+  overflow-y: auto;
+}
+.mobile-nav.open { transform: translateX(0); }
+.mobile-nav ul { list-style: none; display: flex; flex-direction: column; }
+.mobile-nav ul li a {
+  display: block;
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: 2.2rem;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--w10);
+  transition: color 0.2s;
+}
+.mobile-nav ul li:last-child a { border-bottom: none; }
+.mobile-nav ul li a:hover { color: var(--mint); }
+.mob-cta {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mob-socials {
+  display: flex;
+  gap: 12px;
+  padding-top: 24px;
+}
+.mob-socials a {
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--w20);
+  display: grid; place-items: center;
+  color: var(--white);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.mob-socials a:hover { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+
 /* ─────────────────────────────── RESPONSIVE ─────────────────────────────── */
 @media (max-width: 1100px) {
   .hero { grid-template-columns: 1fr; }
-  .about, .book, .coaching { grid-template-columns: 1fr; gap: 48px; }
+  .about, .book { grid-template-columns: 1fr; gap: 48px; }
+  .coaching { grid-template-columns: 1fr; gap: 0; }
   .merch-grid { grid-template-columns: repeat(3, 1fr); }
   .prog-grid, .test-grid, .journal-grid { grid-template-columns: 1fr 1fr; }
   .pillar-grid { grid-template-columns: 1fr; }
   .pillar { border-right: none; border-bottom: 1px solid var(--w10); }
   .foot-grid { grid-template-columns: 1fr 1fr; }
+  .section-intro { grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
+  .about-signature { right: 0; bottom: -14px; }
+  .book-3d { width: 260px; }
 }
+
 @media (max-width: 720px) {
-  nav, section { padding-left: 22px; padding-right: 22px; }
+  nav { padding: 14px 20px; }
   .nav-links { display: none; }
-  .merch-grid { grid-template-columns: 1fr 1fr; }
+  .hamburger { display: flex; }
+  .nav-actions .btn-primary { display: none; }
+
+  section { padding: 64px 20px; }
+  .hero { padding: 40px 20px 52px; gap: 36px; min-height: auto; }
+  .newsletter { padding: 72px 20px; }
+  footer { padding: 56px 20px 28px; }
+
+  .merch-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
   .prog-grid, .test-grid, .journal-grid { grid-template-columns: 1fr; }
-  .foot-grid { grid-template-columns: 1fr; gap: 36px; }
+  .foot-grid { grid-template-columns: 1fr; gap: 32px; }
   .chip-1, .chip-2 { display: none; }
+
+  .hero h1 { font-size: clamp(2.8rem, 13vw, 4.2rem); }
+  .hero p.lead { font-size: 1rem; }
+  .hero-stats { gap: 16px; flex-wrap: wrap; }
+  .hero-stat strong { font-size: 1.5rem; }
+  .hero-stat { padding-left: 12px; }
+  .hero-cta { flex-direction: column; gap: 10px; }
+  .hero-cta .btn-primary, .hero-cta .btn-ghost { justify-content: center; text-align: center; }
+
+  .pillar { padding: 36px 20px; }
+
+  .about-signature { display: none; }
+  .about-credentials { grid-template-columns: 1fr; }
+
+  .prog-card.feat .media { height: 220px; }
+
+  .book-3d { width: 180px; transform: perspective(900px) rotateY(-12deg) rotateX(2deg); }
+  .book-features { grid-template-columns: 1fr; gap: 10px; }
+  .cta-row { flex-direction: column; }
+  .cta-row .btn-primary, .cta-row .btn-ghost { justify-content: center; text-align: center; }
+
+  .coaching { border-radius: 20px; }
+  .coach-left { padding: 36px 24px; }
+  .coach-right { padding: 36px 24px; }
+  .coach-tier .price { font-size: 2.8rem; }
+  .coach-form .row { grid-template-columns: 1fr; }
+
+  .subscribe { flex-direction: column; border-radius: 18px; padding: 14px; align-items: stretch; gap: 10px; }
+  .subscribe input { padding: 10px 6px; }
+  .subscribe button { border-radius: 12px; padding: 14px; }
+
+  .foot-base { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+  .foot-base nav { position: static; padding: 0; background: none; border: none; backdrop-filter: none; display: flex; gap: 10px 18px; flex-wrap: wrap; justify-content: center; }
+
+  h2.section-title { font-size: clamp(2rem, 8vw, 3rem); }
+}
+
+@media (max-width: 480px) {
+  .merch-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .shop-bar { gap: 6px; }
+  .chip { padding: 8px 14px; font-size: 0.72rem; }
+  .test { padding: 28px 22px; }
+  .pillar h3 { font-size: 1.8rem; }
 }
 </style>
 </head>
@@ -1751,8 +1887,35 @@ footer {
       Book a call
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
     </a>
+    <button class="hamburger" aria-label="Open menu" id="menuBtn" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- ── MOBILE NAV ── -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#book">The Book</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#coaching">Coaching</a></li>
+  </ul>
+  <div class="mob-cta">
+    <a href="#coaching" class="btn-primary" style="justify-content:center;padding:16px 22px;">
+      Book a call
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+    </a>
+    <a href="#shop" class="btn-ghost" style="justify-content:center;padding:16px 22px;">Shop the store</a>
+  </div>
+  <div class="mob-socials">
+    <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4Z"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+    <a href="#" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.7A5.4 5.4 0 0 1 16 4h-3v12.3a2.7 2.7 0 1 1-2.7-2.7c.27 0 .5 0 .77.1V10.6a6 6 0 0 0-.77-.05A5.7 5.7 0 1 0 16 16.3V9.5a8.4 8.4 0 0 0 4.8 1.5V8a5.3 5.3 0 0 1-1.2-1.3Z"/></svg></a>
+    <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.5 7.2a2.7 2.7 0 0 0-1.9-1.9C18.9 4.8 12 4.8 12 4.8s-6.9 0-8.6.5A2.7 2.7 0 0 0 1.5 7.2 28 28 0 0 0 1 12a28 28 0 0 0 .5 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 8.6.5 8.6.5s6.9 0 8.6-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 23 12a28 28 0 0 0-.5-4.8Zm-12.8 7.7V9.1l5.7 2.9Z"/></svg></a>
+  </div>
+</div>
 
 <!-- ── HERO ── -->
 <header class="hero" data-screen-label="Hero">
