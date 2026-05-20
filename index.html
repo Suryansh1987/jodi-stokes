@@ -2607,5 +2607,39 @@ footer {
   </div>
 </footer>
 
+<script>
+(function() {
+  var btn = document.getElementById('menuBtn');
+  var nav = document.getElementById('mobileNav');
+  if (!btn || !nav) return;
+
+  function openMenu() {
+    nav.classList.add('open');
+    btn.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    nav.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    nav.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    nav.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', function() {
+    nav.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  nav.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && nav.classList.contains('open')) closeMenu();
+  });
+})();
+</script>
 </body>
 </html>
