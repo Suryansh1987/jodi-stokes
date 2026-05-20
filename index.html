@@ -1,0 +1,2448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jodi Stokes Fitness — Train. Lifestyle. Nutrition.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Base */
+  --black:        #0a0b0a;
+  --black-deep:   #050605;
+  --s1:           #131413;
+  --s2:           #1c1d1c;
+  --s3:           #262726;
+  --bone:         #f6f4ee;
+  --white:        #ffffff;
+  --w80:          rgba(255,255,255,0.82);
+  --w60:          rgba(255,255,255,0.6);
+  --w40:          rgba(255,255,255,0.42);
+  --w20:          rgba(255,255,255,0.2);
+  --w10:          rgba(255,255,255,0.1);
+  --w06:          rgba(255,255,255,0.06);
+
+  /* Brand accents — pulled from Jodi's neon sign + logo */
+  --mint:         #14E8B0;        /* primary — her neon sign */
+  --mint-dim:     #0fb487;
+  --mint-glow:    rgba(20,232,176,0.18);
+  --coral:        #FF4D5E;        /* energy red from logo */
+  --gold:         #F5C04A;        /* warm sand */
+  --ink:          #0a0b0a;
+
+  /* Type */
+  --font-d:       'Syne', sans-serif;
+  --font-b:       'DM Sans', sans-serif;
+  --font-script:  'Caveat', cursive;
+
+  --ease:         cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out:     cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-b);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 999;
+  mix-blend-mode: overlay;
+}
+
+/* ─────────────────────────────── MARQUEE BAR ─────────────────────────────── */
+.topbar {
+  background: var(--mint);
+  color: var(--ink);
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 9px 0;
+  position: relative;
+  z-index: 90;
+}
+.topbar .marquee {
+  display: inline-flex;
+  gap: 48px;
+  padding-left: 48px;
+  animation: scroll 32s linear infinite;
+}
+.topbar .marquee span { display: inline-flex; align-items: center; gap: 16px; }
+.topbar .marquee i {
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: var(--ink);
+  border-radius: 50%;
+}
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ─────────────────────────────── NAV ─────────────────────────────── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10,11,10,0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--w10);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--white);
+}
+.logo .mark {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--mint) 0%, var(--mint-dim) 100%);
+  display: grid; place-items: center;
+  font-family: var(--font-d);
+  font-weight: 800;
+  color: var(--ink);
+  font-size: 0.78rem;
+  letter-spacing: 0;
+  box-shadow: 0 0 22px var(--mint-glow);
+}
+.logo .name { line-height: 1; }
+.logo .name small {
+  display: block;
+  font-family: var(--font-b);
+  font-weight: 500;
+  font-size: 0.62rem;
+  color: var(--w60);
+  letter-spacing: 0.24em;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--w80);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a:hover { color: var(--mint); }
+.nav-actions { display: flex; align-items: center; gap: 14px; }
+.icon-btn {
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  background: transparent;
+  border: 1px solid var(--w20);
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--white);
+  transition: all 0.2s;
+  position: relative;
+}
+.icon-btn:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
+.icon-btn .bubble {
+  position: absolute;
+  top: -4px; right: -4px;
+  background: var(--coral);
+  color: var(--white);
+  font-size: 0.62rem;
+  font-weight: 700;
+  width: 16px; height: 16px;
+  border-radius: 999px;
+  display: grid; place-items: center;
+  font-family: var(--font-b);
+}
+.btn-primary {
+  background: var(--mint);
+  color: var(--ink);
+  border: none;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px var(--mint-glow); }
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--w20);
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-family: var(--font-d);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.btn-ghost:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
+
+/* ─────────────────────────────── HERO ─────────────────────────────── */
+.hero {
+  position: relative;
+  padding: 64px 48px 72px;
+  min-height: calc(100vh - 90px);
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 56px;
+  align-items: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle 600px at 18% 30%, var(--mint-glow), transparent 70%),
+    radial-gradient(circle 500px at 80% 80%, rgba(255,77,94,0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--w06);
+  border: 1px solid var(--w10);
+  border-radius: 999px;
+  padding: 7px 16px 7px 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--w80);
+  width: fit-content;
+  margin-bottom: 28px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.hero-tag .dot {
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  background: var(--mint);
+  box-shadow: 0 0 12px var(--mint);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.18); }
+}
+
+.hero h1 {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: clamp(3.6rem, 8.4vw, 9rem);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  margin-bottom: 28px;
+  position: relative;
+}
+.hero h1 .accent { color: var(--mint); font-style: italic; font-weight: 700; }
+.hero h1 .script {
+  font-family: var(--font-script);
+  color: var(--mint);
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: -0.01em;
+  font-size: 0.86em;
+  text-shadow: 0 0 26px var(--mint-glow), 0 0 60px var(--mint-glow);
+  display: inline-block;
+  transform: rotate(-2deg);
+  line-height: 0.9;
+}
+.hero p.lead {
+  font-size: 1.12rem;
+  color: var(--w80);
+  max-width: 480px;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+.hero-stat {
+  border-left: 1px solid var(--w20);
+  padding-left: 16px;
+}
+.hero-stat strong {
+  display: block;
+  font-family: var(--font-d);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+.hero-stat span {
+  font-size: 0.78rem;
+  color: var(--w60);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+}
+
+/* Hero image card */
+.hero-photo {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 28px;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px var(--w10);
+}
+.hero-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  filter: saturate(1.05) contrast(1.02);
+}
+.hero-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+}
+.hero-photo .badge {
+  position: absolute;
+  left: 22px; top: 22px;
+  background: var(--mint);
+  color: var(--ink);
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 999px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero-photo .caption {
+  position: absolute;
+  left: 22px; right: 22px; bottom: 22px;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.hero-photo .caption h4 {
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+.hero-photo .caption p {
+  font-size: 0.82rem;
+  color: var(--w80);
+  margin-top: 4px;
+}
+.play-btn {
+  width: 56px; height: 56px;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  border: none;
+  cursor: pointer;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.play-btn:hover { transform: scale(1.08); }
+
+/* floating mini chip */
+.float-chip {
+  position: absolute;
+  background: var(--bone);
+  color: var(--ink);
+  padding: 14px 16px;
+  border-radius: 18px;
+  font-family: var(--font-b);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  z-index: 3;
+}
+.float-chip .icon {
+  width: 36px; height: 36px;
+  background: var(--mint);
+  border-radius: 12px;
+  display: grid; place-items: center;
+  color: var(--ink);
+}
+.float-chip strong {
+  display: block;
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: -0.01em;
+}
+.float-chip span {
+  font-size: 0.72rem;
+  color: rgba(10,11,10,0.55);
+}
+.chip-1 { left: -36px; top: 36%; }
+.chip-2 { right: -28px; bottom: 14%; background: var(--ink); color: var(--white); border: 1px solid var(--w20); }
+.chip-2 .icon { background: var(--coral); color: var(--white); }
+.chip-2 span { color: var(--w60); }
+
+/* ─────────────────────────────── SECTION SCAFFOLD ─────────────────────────────── */
+section { padding: 110px 48px; position: relative; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-d);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-bottom: 18px;
+}
+.eyebrow::before {
+  content: '';
+  width: 28px; height: 1px;
+  background: var(--mint);
+}
+h2.section-title {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  max-width: 14ch;
+  margin-bottom: 22px;
+}
+h2.section-title .accent { color: var(--mint); font-style: italic; font-weight: 700; }
+.section-intro {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 70px;
+}
+.section-intro p {
+  color: var(--w80);
+  font-size: 1.05rem;
+  max-width: 48ch;
+}
+
+/* ─────────────────────────────── PILLARS (TRAINER · LIFESTYLE · NUTRITION) ─────────────────────────────── */
+.pillars {
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(20,232,176,0.04) 50%, transparent 100%),
+    var(--black);
+  border-block: 1px solid var(--w10);
+}
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--w10);
+  border-bottom: 1px solid var(--w10);
+}
+.pillar {
+  padding: 56px 44px;
+  border-right: 1px solid var(--w10);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: background 0.4s var(--ease);
+  cursor: pointer;
+}
+.pillar:last-child { border-right: none; }
+.pillar:hover { background: var(--s1); }
+.pillar .num {
+  font-family: var(--font-d);
+  font-size: 0.82rem;
+  color: var(--mint);
+  letter-spacing: 0.18em;
+  font-weight: 600;
+}
+.pillar h3 {
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+.pillar p {
+  color: var(--w60);
+  font-size: 0.96rem;
+  max-width: 32ch;
+}
+.pillar .arrow {
+  margin-top: 16px;
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--w20);
+  display: grid; place-items: center;
+  color: var(--white);
+  transition: all 0.3s var(--ease);
+}
+.pillar:hover .arrow {
+  background: var(--mint);
+  color: var(--ink);
+  border-color: var(--mint);
+  transform: rotate(-45deg);
+}
+
+/* ─────────────────────────────── ABOUT ─────────────────────────────── */
+.about {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-photo {
+  position: relative;
+  aspect-ratio: 5/6;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+}
+.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 12%; }
+.about-photo .glow {
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(circle at 50% 50%, var(--mint-glow), transparent 70%);
+  z-index: -1;
+}
+.about-signature {
+  position: absolute;
+  bottom: -22px; right: -22px;
+  background: var(--mint);
+  color: var(--ink);
+  padding: 18px 22px;
+  border-radius: 18px;
+  font-family: var(--font-script);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 0.9;
+  transform: rotate(-4deg);
+  box-shadow: 0 18px 40px rgba(20,232,176,0.3);
+}
+.about-signature small {
+  display: block;
+  font-family: var(--font-d);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  opacity: 0.7;
+}
+.about-content h2 {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 4.4vw, 3.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+.about-content h2 .accent { color: var(--mint); }
+.about-content p {
+  color: var(--w80);
+  font-size: 1.04rem;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+.about-credentials {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 28px;
+  padding: 28px;
+  background: var(--s1);
+  border: 1px solid var(--w10);
+  border-radius: 20px;
+}
+.cred {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.cred .tick {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 999px;
+  background: var(--mint);
+  display: grid; place-items: center;
+  color: var(--ink);
+  margin-top: 2px;
+}
+.cred strong {
+  display: block;
+  font-family: var(--font-d);
+  font-weight: 600;
+  font-size: 0.96rem;
+  color: var(--white);
+}
+.cred span { font-size: 0.82rem; color: var(--w60); }
+
+/* ─────────────────────────────── PROGRAMS ─────────────────────────────── */
+.programs {
+  background: var(--s1);
+  border-block: 1px solid var(--w10);
+}
+.prog-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 22px;
+}
+.prog-card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--black);
+  border: 1px solid var(--w10);
+  display: flex;
+  flex-direction: column;
+  min-height: 460px;
+  transition: transform 0.4s var(--ease), border-color 0.3s;
+}
+.prog-card:hover { transform: translateY(-6px); border-color: var(--mint); }
+.prog-card .media {
+  height: 220px;
+  background: linear-gradient(135deg, var(--s2), var(--s3));
+  position: relative;
+  overflow: hidden;
+}
+.prog-card .media img { width: 100%; height: 100%; object-fit: cover; }
+.prog-card.feat { grid-row: span 1; }
+.prog-card.feat .media { height: 300px; }
+.prog-card .body {
+  padding: 28px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.prog-card .tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.prog-card .tag {
+  font-family: var(--font-d);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--w06);
+  color: var(--w80);
+  border: 1px solid var(--w10);
+}
+.prog-card .tag.mint { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+.prog-card h3 {
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.prog-card.feat h3 { font-size: 2rem; }
+.prog-card p {
+  color: var(--w60);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+.prog-card .footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--w10);
+}
+.prog-card .price {
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+.prog-card .price small {
+  color: var(--w60);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  margin-left: 4px;
+}
+.prog-card button.add {
+  background: var(--white);
+  color: var(--ink);
+  border: none;
+  width: 42px; height: 42px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: grid; place-items: center;
+  transition: all 0.2s;
+}
+.prog-card button.add:hover { background: var(--mint); transform: scale(1.06); }
+
+/* ─────────────────────────────── BOOK FEATURE ─────────────────────────────── */
+.book {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 80px;
+  align-items: center;
+}
+.book-cover {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.book-3d {
+  position: relative;
+  width: 320px;
+  aspect-ratio: 3/4;
+  transform: perspective(1200px) rotateY(-22deg) rotateX(4deg);
+  transform-style: preserve-3d;
+  filter: drop-shadow(20px 30px 50px rgba(0,0,0,0.55));
+  transition: transform 0.5s var(--ease-out);
+}
+.book-3d:hover { transform: perspective(1200px) rotateY(-10deg) rotateX(2deg); }
+.book-front {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(165deg, #0e2620 0%, #1a4a3c 45%, #0e2620 100%);
+  border-radius: 4px 14px 14px 4px;
+  padding: 38px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--bone);
+  overflow: hidden;
+}
+.book-front::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 16px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.5), transparent);
+}
+.book-front::after {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(246,244,238,0.18);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.book-front .pub {
+  font-family: var(--font-d);
+  font-size: 0.66rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--mint);
+  font-weight: 700;
+}
+.book-front .title {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: 2.4rem;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+.book-front .title em {
+  font-style: italic;
+  font-family: var(--font-script);
+  color: var(--mint);
+  font-size: 1.3em;
+  font-weight: 700;
+  display: block;
+  margin: 6px 0 4px;
+}
+.book-front .author {
+  font-family: var(--font-d);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone);
+}
+.book-front .author small {
+  display: block;
+  font-family: var(--font-b);
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  margin-top: 4px;
+  opacity: 0.7;
+}
+.book-front-img {
+  background: var(--bone);
+  padding: 0;
+  overflow: hidden;
+}
+.book-front-img::before {
+  z-index: 2;
+}
+.book-front-img::after { display: none; }
+.book-front-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.book-spine {
+  position: absolute;
+  left: -22px; top: 0; bottom: 0;
+  width: 22px;
+  background: linear-gradient(180deg, #0a1f1a 0%, #133a30 100%);
+  transform: rotateY(-90deg);
+  transform-origin: right;
+  border-radius: 2px 0 0 2px;
+}
+.book-glow {
+  position: absolute;
+  inset: -50px;
+  background: radial-gradient(ellipse, var(--mint-glow), transparent 70%);
+  z-index: -1;
+}
+
+.book-content .price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.book-content .price-row .now {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: 2.4rem;
+  color: var(--mint);
+  letter-spacing: -0.02em;
+}
+.book-content .price-row .was {
+  color: var(--w40);
+  text-decoration: line-through;
+  font-size: 1.2rem;
+}
+.book-content .price-row .off {
+  background: var(--coral);
+  color: var(--white);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: var(--font-d);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.book-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 20px;
+  margin: 28px 0 36px;
+}
+.book-features li {
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.94rem;
+  color: var(--w80);
+}
+.book-features li svg { flex-shrink: 0; margin-top: 3px; color: var(--mint); }
+
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ─────────────────────────────── MERCH SHOP ─────────────────────────────── */
+.shop-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.chip {
+  font-family: var(--font-d);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--w80);
+  border: 1px solid var(--w20);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.chip.active, .chip:hover { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+.merch {
+  background: var(--s1);
+  border: 1px solid var(--w10);
+  border-radius: 22px;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease), border-color 0.3s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.merch:hover { transform: translateY(-6px); border-color: var(--mint); }
+.merch .img {
+  aspect-ratio: 1/1;
+  position: relative;
+  overflow: hidden;
+}
+.merch .img .swatch {
+  width: 100%; height: 100%;
+  display: grid;
+  place-items: center;
+}
+.merch .img .badge {
+  position: absolute;
+  top: 14px; left: 14px;
+  background: var(--ink);
+  color: var(--mint);
+  font-family: var(--font-d);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--mint);
+}
+.merch .img .badge.coral { color: var(--coral); border-color: var(--coral); }
+.merch .img .heart {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 36px; height: 36px;
+  border-radius: 999px;
+  background: rgba(10,11,10,0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--w20);
+  display: grid; place-items: center;
+  color: var(--white);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.merch .img .heart:hover { background: var(--coral); border-color: var(--coral); }
+.merch .body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 6px; }
+.merch .body .cat {
+  font-family: var(--font-d);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mint);
+}
+.merch .body h4 {
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 1.08rem;
+  letter-spacing: -0.01em;
+}
+.merch .body .row {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.merch .body .row .price {
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+.merch .colors { display: flex; gap: 6px; }
+.merch .colors i {
+  width: 14px; height: 14px;
+  border-radius: 999px;
+  border: 1px solid var(--w20);
+}
+
+/* product art — pure CSS placeholders */
+.art-tee {
+  position: relative;
+  width: 100%; height: 100%;
+  background: linear-gradient(180deg, var(--s2), var(--s1));
+  display: grid; place-items: center;
+}
+.tee-shape {
+  width: 70%;
+  aspect-ratio: 1/1.05;
+  background: var(--bone);
+  clip-path: polygon(20% 18%, 32% 8%, 38% 14%, 50% 16%, 62% 14%, 68% 8%, 80% 18%, 96% 28%, 88% 42%, 76% 36%, 76% 95%, 24% 95%, 24% 36%, 12% 42%, 4% 28%);
+  display: grid; place-items: center;
+  position: relative;
+}
+.tee-shape.coral { background: var(--coral); }
+.tee-shape.mint { background: var(--mint); }
+.tee-shape.black { background: var(--ink); border: 1px solid var(--w20); }
+.tee-print {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.05;
+  padding: 0 18px;
+  margin-top: 24%;
+}
+.tee-shape.black .tee-print, .tee-shape.coral .tee-print { color: var(--white); }
+.tee-shape.mint .tee-print { color: var(--ink); }
+.tee-print em { font-family: var(--font-script); font-style: normal; font-size: 1.6em; display: block; }
+
+.art-bottle {
+  width: 100%; height: 100%;
+  background: radial-gradient(ellipse at 50% 60%, var(--s3), var(--s1));
+  display: grid; place-items: center;
+  position: relative;
+}
+.bottle-shape {
+  width: 38%;
+  height: 80%;
+  background: linear-gradient(180deg, var(--mint) 0%, var(--mint-dim) 100%);
+  border-radius: 24px 24px 28px 28px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset -10px 0 20px rgba(0,0,0,0.18), inset 8px 0 18px rgba(255,255,255,0.18);
+}
+.bottle-shape::before {
+  content: '';
+  position: absolute;
+  top: -22px;
+  left: 30%; right: 30%;
+  height: 18px;
+  background: var(--ink);
+  border-radius: 6px 6px 4px 4px;
+}
+.bottle-shape::after {
+  content: '';
+  position: absolute;
+  top: -34px;
+  left: 36%; right: 36%;
+  height: 14px;
+  background: var(--ink);
+  border-radius: 4px;
+}
+.bottle-label {
+  font-family: var(--font-d);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: 0.18em;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-transform: uppercase;
+}
+
+.art-mat {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--s2), var(--s1));
+  display: grid; place-items: center;
+}
+.mat-roll {
+  width: 78%; height: 26%;
+  background: linear-gradient(180deg, var(--coral), #c93644 60%, var(--coral));
+  border-radius: 999px;
+  position: relative;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.4);
+}
+.mat-roll::before, .mat-roll::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ff7e8c, #c93644);
+  transform: translateY(-50%);
+}
+.mat-roll::before { left: -10px; }
+.mat-roll::after { right: -10px; }
+
+.art-cap {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--s2), var(--s1));
+  display: grid; place-items: center;
+}
+.cap-shape {
+  width: 70%;
+  aspect-ratio: 1.6/1;
+  background: var(--ink);
+  border-radius: 999px 999px 28px 28px;
+  position: relative;
+  border: 1px solid var(--w20);
+  display: grid;
+  place-items: center;
+}
+.cap-shape::before {
+  content: '';
+  position: absolute;
+  left: 12%; right: 12%;
+  bottom: -10%;
+  height: 25%;
+  background: var(--ink);
+  border-radius: 6px;
+  border: 1px solid var(--w20);
+}
+.cap-logo {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: 0.8rem;
+  color: var(--mint);
+  letter-spacing: 0.2em;
+}
+.cap-shape.mint { background: var(--mint); border-color: transparent; }
+.cap-shape.mint::before { background: var(--mint); border-color: transparent; }
+.cap-shape.mint .cap-logo { color: var(--ink); }
+
+.art-bag {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--s2), var(--s1));
+  display: grid; place-items: center;
+}
+.bag-shape {
+  width: 64%; height: 70%;
+  background: var(--bone);
+  border-radius: 4px;
+  position: relative;
+  padding: 24px 18px;
+  display: flex;
+  align-items: flex-end;
+}
+.bag-shape::before, .bag-shape::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  width: 14px; height: 26px;
+  border: 3px solid var(--bone);
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
+}
+.bag-shape::before { left: 22%; }
+.bag-shape::after { right: 22%; }
+.bag-print {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: 0.78rem;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.bag-print em { font-family: var(--font-script); color: var(--mint-dim); font-style: normal; font-size: 1.8em; display: block; }
+
+.art-band {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--s2), var(--s1));
+  display: grid; place-items: center;
+}
+.band-set {
+  width: 76%; height: 60%;
+  position: relative;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 14px;
+}
+.band {
+  border-radius: 999px;
+  position: relative;
+  box-shadow: inset 0 -6px 0 rgba(0,0,0,0.18);
+}
+.band:nth-child(1) { background: var(--mint); }
+.band:nth-child(2) { background: var(--coral); }
+.band:nth-child(3) { background: var(--gold); }
+
+.art-journal {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--s2), var(--s1));
+  display: grid; place-items: center;
+}
+.journal-shape {
+  width: 60%; height: 82%;
+  background: var(--ink);
+  border-radius: 4px;
+  border: 1px solid var(--w20);
+  padding: 28px 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.journal-shape::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: var(--mint);
+}
+.journal-shape .label {
+  font-family: var(--font-d);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--mint);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.journal-shape .title-j {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--bone);
+  line-height: 0.95;
+}
+
+/* ─────────────────────────────── TESTIMONIALS ─────────────────────────────── */
+.testimonials {
+  background: linear-gradient(180deg, var(--black) 0%, var(--s1) 100%);
+  border-block: 1px solid var(--w10);
+}
+.test-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.test {
+  padding: 36px 32px;
+  background: var(--black);
+  border: 1px solid var(--w10);
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+}
+.test .stars { color: var(--mint); display: flex; gap: 2px; }
+.test blockquote {
+  font-family: var(--font-d);
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+.test blockquote::before { content: '"'; color: var(--mint); margin-right: 4px; }
+.test .person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--w10);
+  margin-top: auto;
+}
+.test .avatar {
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-d);
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 0.96rem;
+}
+.test .avatar.a1 { background: var(--mint); }
+.test .avatar.a2 { background: var(--coral); color: var(--white); }
+.test .avatar.a3 { background: var(--gold); }
+.test .person strong {
+  display: block;
+  font-family: var(--font-d);
+  font-size: 0.94rem;
+  font-weight: 600;
+}
+.test .person span {
+  font-size: 0.78rem;
+  color: var(--w60);
+}
+.test .lost {
+  position: absolute;
+  top: 36px;
+  right: 32px;
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--mint);
+  letter-spacing: -0.02em;
+}
+.test .lost small {
+  display: block;
+  font-family: var(--font-b);
+  font-size: 0.62rem;
+  color: var(--w60);
+  letter-spacing: 0.16em;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: right;
+  margin-top: 2px;
+}
+
+/* ─────────────────────────────── COACHING CTA ─────────────────────────────── */
+.coaching {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--w10);
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+}
+.coach-left {
+  background: var(--mint);
+  color: var(--ink);
+  padding: 64px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.coach-left::after {
+  content: '';
+  position: absolute;
+  right: -120px; bottom: -120px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  border: 1px dashed rgba(10,11,10,0.2);
+}
+.coach-left h2 {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 4.4vw, 4rem);
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+}
+.coach-left h2 em { font-family: var(--font-script); font-style: normal; }
+.coach-left p {
+  color: rgba(10,11,10,0.78);
+  font-size: 1.04rem;
+  max-width: 38ch;
+}
+.coach-feat {
+  display: grid;
+  gap: 12px;
+}
+.coach-feat li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-d);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+.coach-feat li::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--ink);
+  border-radius: 999px;
+}
+
+.coach-right {
+  background: var(--ink);
+  padding: 64px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  position: relative;
+}
+.coach-right::before {
+  content: '';
+  position: absolute;
+  left: -1px; top: 30%; bottom: 30%;
+  width: 2px;
+  background: var(--mint);
+}
+.coach-tier {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.coach-tier .price {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: 4rem;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.coach-tier .price-sub {
+  color: var(--w60);
+  font-size: 0.94rem;
+}
+.coach-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+.coach-form label {
+  font-family: var(--font-d);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--w60);
+  font-weight: 600;
+}
+.coach-form input, .coach-form select {
+  background: var(--s1);
+  border: 1px solid var(--w10);
+  color: var(--white);
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-family: var(--font-b);
+  font-size: 0.96rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.coach-form input:focus, .coach-form select:focus { border-color: var(--mint); }
+.coach-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* ─────────────────────────────── BLOG / JOURNAL ─────────────────────────────── */
+.journal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.post {
+  border: 1px solid var(--w10);
+  border-radius: 22px;
+  background: var(--s1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease), border-color 0.3s;
+}
+.post:hover { transform: translateY(-4px); border-color: var(--mint); }
+.post .img { height: 200px; position: relative; overflow: hidden; }
+.post .img::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7));
+  z-index: 1;
+}
+.post .img .tag {
+  position: absolute;
+  top: 16px; left: 16px;
+  z-index: 2;
+  background: var(--mint);
+  color: var(--ink);
+  font-family: var(--font-d);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 999px;
+}
+.post .img .gradient {
+  position: absolute;
+  inset: 0;
+}
+.post.p1 .img .gradient { background: linear-gradient(135deg, #1a4a3c, #0e2620); }
+.post.p2 .img .gradient { background: linear-gradient(135deg, var(--coral), #8c2a36); }
+.post.p3 .img .gradient { background: linear-gradient(135deg, var(--gold), #8c6b1e); }
+.post .img .deco {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  z-index: 1;
+  font-family: var(--font-script);
+  font-size: 4rem;
+  color: rgba(255,255,255,0.18);
+  font-weight: 700;
+}
+.post .body { padding: 26px 26px 30px; }
+.post .meta {
+  display: flex;
+  gap: 14px;
+  font-family: var(--font-d);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--w60);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.post h4 {
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 1.24rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.post p { color: var(--w60); font-size: 0.92rem; line-height: 1.55; }
+
+/* ─────────────────────────────── NEWSLETTER ─────────────────────────────── */
+.newsletter {
+  text-align: center;
+  padding: 130px 48px;
+  background:
+    radial-gradient(circle 600px at 50% 50%, var(--mint-glow), transparent 70%),
+    var(--black);
+  border-block: 1px solid var(--w10);
+}
+.newsletter h2 {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  max-width: 18ch;
+  margin: 0 auto 22px;
+}
+.newsletter h2 em { font-family: var(--font-script); font-style: normal; color: var(--mint); }
+.newsletter p {
+  color: var(--w80);
+  font-size: 1.08rem;
+  max-width: 52ch;
+  margin: 0 auto 40px;
+}
+.subscribe {
+  max-width: 540px;
+  margin: 0 auto;
+  background: var(--s1);
+  border: 1px solid var(--w20);
+  border-radius: 999px;
+  padding: 6px 6px 6px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.subscribe input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-family: var(--font-b);
+  font-size: 0.98rem;
+  outline: none;
+  padding: 12px 0;
+}
+.subscribe input::placeholder { color: var(--w40); }
+.subscribe button {
+  background: var(--mint);
+  color: var(--ink);
+  border: none;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 0.84rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.subscribe button:hover { transform: scale(1.04); }
+.news-tags {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.news-tags span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  color: var(--w60);
+}
+.news-tags span::before {
+  content: '✓';
+  color: var(--mint);
+  font-weight: 700;
+}
+
+/* ─────────────────────────────── FOOTER ─────────────────────────────── */
+footer {
+  background: var(--black-deep);
+  padding: 90px 48px 32px;
+  border-top: 1px solid var(--w10);
+}
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+.foot-brand .logo { margin-bottom: 22px; }
+.foot-brand p {
+  color: var(--w60);
+  font-size: 0.96rem;
+  max-width: 36ch;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.socials { display: flex; gap: 10px; }
+.socials a {
+  width: 40px; height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--w20);
+  display: grid; place-items: center;
+  color: var(--white);
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.socials a:hover { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+.foot-col h5 {
+  font-family: var(--font-d);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-bottom: 20px;
+}
+.foot-col ul { list-style: none; display: grid; gap: 12px; }
+.foot-col a {
+  color: var(--w80);
+  text-decoration: none;
+  font-size: 0.94rem;
+  transition: color 0.2s;
+}
+.foot-col a:hover { color: var(--mint); }
+.foot-base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 28px;
+  border-top: 1px solid var(--w10);
+  font-size: 0.84rem;
+  color: var(--w40);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.foot-base nav {
+  position: static;
+  padding: 0;
+  background: none;
+  border: none;
+  backdrop-filter: none;
+  display: flex;
+  gap: 24px;
+}
+.foot-base a { color: var(--w60); text-decoration: none; font-size: 0.84rem; }
+.foot-base a:hover { color: var(--mint); }
+
+/* ─────────────────────────────── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 1100px) {
+  .hero { grid-template-columns: 1fr; }
+  .about, .book, .coaching { grid-template-columns: 1fr; gap: 48px; }
+  .merch-grid { grid-template-columns: repeat(3, 1fr); }
+  .prog-grid, .test-grid, .journal-grid { grid-template-columns: 1fr 1fr; }
+  .pillar-grid { grid-template-columns: 1fr; }
+  .pillar { border-right: none; border-bottom: 1px solid var(--w10); }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  nav, section { padding-left: 22px; padding-right: 22px; }
+  .nav-links { display: none; }
+  .merch-grid { grid-template-columns: 1fr 1fr; }
+  .prog-grid, .test-grid, .journal-grid { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; gap: 36px; }
+  .chip-1, .chip-2 { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── MARQUEE ── -->
+<div class="topbar">
+  <div class="marquee">
+    <span><i></i> Free shipping over $75</span>
+    <span><i></i> New Book "Water Exercise" — signed copies available</span>
+    <span><i></i> 1:1 coaching slots open for fall</span>
+    <span><i></i> Train · Lifestyle · Nutrition</span>
+    <span><i></i> Free shipping over $75</span>
+    <span><i></i> New Book "Water Exercise" — signed copies available</span>
+    <span><i></i> 1:1 coaching slots open for fall</span>
+    <span><i></i> Train · Lifestyle · Nutrition</span>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav data-screen-label="Nav">
+  <a href="#" class="logo">
+    <span class="mark">JS</span>
+    <span class="name">JODI&nbsp;STOKES<small>Fitness · Lifestyle · Nutrition</small></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#book">The Book</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#coaching">Coaching</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="icon-btn" aria-label="Search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    </button>
+    <button class="icon-btn" aria-label="Cart">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="bubble">3</span>
+    </button>
+    <a href="#coaching" class="btn-primary">
+      Book a call
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero" data-screen-label="Hero">
+  <div>
+    <div class="hero-tag">
+      <span class="dot"></span>
+      Coaching · Lifestyle · Nutrition — Est. 2009
+    </div>
+    <h1>
+      That's it,<br>
+      <span class="script">be&nbsp;fitt.</span><br>
+      Train with <span class="accent">Jodi.</span>
+    </h1>
+    <p class="lead">
+      Sustainable fitness, smart nutrition, and a lifestyle you'll actually keep.
+      15 years of coaching boiled down into programs, products, and one good book.
+    </p>
+    <div class="hero-cta">
+      <a href="#programs" class="btn-primary">
+        Start training
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+      </a>
+      <a href="#book" class="btn-ghost">
+        Read "Water Exercise"
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>15<span style="color:var(--mint)">+</span></strong><span>Years coaching</span></div>
+      <div class="hero-stat"><strong>2,400</strong><span>Clients trained</span></div>
+      <div class="hero-stat"><strong>4.9<span style="color:var(--mint)">★</span></strong><span>Avg. rating</span></div>
+    </div>
+  </div>
+
+  <div class="hero-photo">
+    <div class="badge"><span style="width:6px;height:6px;border-radius:999px;background:var(--ink);"></span> Now coaching</div>
+    <img src="assets/jodi-portrait.jpg" alt="Jodi Stokes">
+    <div class="caption">
+      <div>
+        <h4>Meet Jodi</h4>
+        <p>NASM-CPT · Precision Nutrition L2</p>
+      </div>
+      <button class="play-btn" aria-label="Play intro">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8V4z"/></svg>
+      </button>
+    </div>
+
+    <div class="float-chip chip-1">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6.5 6.5h11M6.5 17.5h11M3.5 9.5v5M20.5 9.5v5M8 9.5v5M16 9.5v5"/></svg>
+      </div>
+      <div>
+        <strong>+12 lbs lean</strong>
+        <span>Client · 16 wks</span>
+      </div>
+    </div>
+    <div class="float-chip chip-2">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      </div>
+      <div>
+        <strong>Sleep · Stress · Plate</strong>
+        <span>The full method</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── PILLARS ── -->
+<section class="pillars" id="about" data-screen-label="Pillars">
+  <div class="pillar-grid">
+    <div class="pillar">
+      <span class="num">01 / Trainer</span>
+      <h3>Move <em style="color:var(--mint);font-style:italic">smarter.</em></h3>
+      <p>Strength-first programming that builds the body you'll have at 70 — not just next summer.</p>
+      <div class="arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+      </div>
+    </div>
+    <div class="pillar">
+      <span class="num">02 / Lifestyle</span>
+      <h3>Live <em style="color:var(--mint);font-style:italic">grounded.</em></h3>
+      <p>Habits, mindset, recovery, and the rituals that hold it all together when life gets loud.</p>
+      <div class="arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+      </div>
+    </div>
+    <div class="pillar">
+      <span class="num">03 / Nutrition</span>
+      <h3>Eat <em style="color:var(--mint);font-style:italic">honest.</em></h3>
+      <p>No fads, no apps to obsess over. Whole-food protocols that you can run on autopilot.</p>
+      <div class="arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="about" data-screen-label="About">
+  <div class="about-photo">
+    <div class="glow"></div>
+    <img src="assets/jodi-leadership.png" alt="Jodi Stokes at her studio">
+    <div class="about-signature">
+      Jodi
+      <small>· founder</small>
+    </div>
+  </div>
+  <div class="about-content">
+    <span class="eyebrow">About Jodi</span>
+    <h2>Strong at any age — that's the <span class="accent">whole point.</span></h2>
+    <p>
+      I started coaching in 2009 because the industry was selling the wrong things to the wrong people. Bootcamps that broke knees. Diets that broke trust. I built something different — a method rooted in strength, sleep, real food, and the long game.
+    </p>
+    <p>
+      Whether you train with me 1:1, follow a program, or just read the book — the rules are the same. Show up. Lift heavy. Eat enough. Sleep more than you think you should. <em>That's it, be fitt.</em>
+    </p>
+    <div class="about-credentials">
+      <div class="cred">
+        <span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="m5 12 5 5L20 7"/></svg></span>
+        <div><strong>NASM-CPT</strong><span>Certified Personal Trainer</span></div>
+      </div>
+      <div class="cred">
+        <span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="m5 12 5 5L20 7"/></svg></span>
+        <div><strong>PN Level 2</strong><span>Precision Nutrition</span></div>
+      </div>
+      <div class="cred">
+        <span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="m5 12 5 5L20 7"/></svg></span>
+        <div><strong>FMS Lvl 1</strong><span>Functional Movement</span></div>
+      </div>
+      <div class="cred">
+        <span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="m5 12 5 5L20 7"/></svg></span>
+        <div><strong>Author</strong><span>"That's it, Be Fitt" · 2025</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROGRAMS ── -->
+<section class="programs" id="programs" data-screen-label="Programs">
+  <div class="section-intro">
+    <div>
+      <span class="eyebrow">Train with Jodi</span>
+      <h2 class="section-title">Programs that <span class="accent">actually</span> end somewhere.</h2>
+    </div>
+    <p>Three signature builds — six, twelve, or sixteen weeks. Each comes with full video library, weekly check-in templates, and a printable training journal.</p>
+  </div>
+
+  <div class="prog-grid">
+    <div class="prog-card feat">
+      <div class="media" style="background:#0e2620;">
+        <img src="assets/jodi-plank.png" alt="Jodi side plank outdoors" style="width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(1.1);">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,11,10,0.05) 0%,rgba(10,11,10,0.65) 100%);"></div>
+        <div style="position:absolute;left:24px;bottom:22px;font-family:var(--font-script);font-size:3.4rem;color:var(--mint);text-shadow:0 4px 30px var(--mint-glow);transform:rotate(-3deg);line-height:0.85;">Strong<br>Foundations</div>
+      </div>
+      <div class="body">
+        <div class="tags">
+          <span class="tag mint">Most popular</span>
+          <span class="tag">16 weeks</span>
+          <span class="tag">All levels</span>
+        </div>
+        <h3>Strong Foundations</h3>
+        <p>The full method, start to finish. Strength block, mobility, nutrition habits, sleep audit, and weekly mini-courses. Includes printable journal + private community.</p>
+        <div class="footer">
+          <div class="price">$249<small>/ full program</small></div>
+          <button class="add" aria-label="Add to cart">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prog-card">
+      <div class="media" style="background:linear-gradient(135deg,var(--coral),#7a2530);">
+        <div style="position:absolute;inset:0;display:grid;place-items:center;">
+          <div style="font-family:var(--font-d);font-weight:800;font-size:3rem;color:var(--white);letter-spacing:-0.03em;text-align:center;line-height:0.9;">LEAN<br>&amp;<br>LIFTED</div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="tags">
+          <span class="tag">12 weeks</span>
+          <span class="tag">Intermediate</span>
+        </div>
+        <h3>Lean &amp; Lifted</h3>
+        <p>Body recomp block — hypertrophy + nutrition. For people who already lift.</p>
+        <div class="footer">
+          <div class="price">$189</div>
+          <button class="add" aria-label="Add to cart">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prog-card">
+      <div class="media" style="background:linear-gradient(135deg,var(--gold),#a07415);">
+        <div style="position:absolute;inset:0;display:grid;place-items:center;">
+          <div style="font-family:var(--font-d);font-weight:800;font-size:2.6rem;color:var(--ink);letter-spacing:-0.03em;text-align:center;line-height:0.9;">RESET<br>·<br>6 WK</div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="tags">
+          <span class="tag">6 weeks</span>
+          <span class="tag">Beginner</span>
+        </div>
+        <h3>The Reset</h3>
+        <p>Six-week kickstart. Habits, basics, and a confidence-building block.</p>
+        <div class="footer">
+          <div class="price">$99</div>
+          <button class="add" aria-label="Add to cart">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOK ── -->
+<section class="book" id="book" data-screen-label="Book">
+  <div class="book-cover">
+    <div class="book-3d">
+      <div class="book-glow"></div>
+      <div class="book-spine"></div>
+      <div class="book-front book-front-img">
+        <img src="assets/book-water-exercise.png" alt="Water Exercise by Jodi Books-Stokes">
+      </div>
+    </div>
+  </div>
+  <div class="book-content">
+    <span class="eyebrow">The Book — Out Now</span>
+    <h2 class="section-title">A complete guide to <span class="accent">water exercise.</span></h2>
+    <p style="color:var(--w80);font-size:1.05rem;margin-bottom:20px;max-width:52ch;">
+      <em style="font-family:var(--font-script);font-style:normal;color:var(--mint);font-size:1.25rem;">water exercise</em> — for enthusiasts, teachers/trainers, and health support. Jodi's full pool-based method: low-impact strength, rehab-friendly conditioning, and class plans that actually work for every age and ability.
+    </p>
+
+    <div class="price-row">
+      <span class="now">$32</span>
+      <span class="was">$42</span>
+      <span class="off">— 24% off · Signed copies</span>
+    </div>
+
+    <ul class="book-features">
+      <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5L20 7"/></svg> 60+ pool exercises</li>
+      <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5L20 7"/></svg> Class &amp; lesson plans</li>
+      <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5L20 7"/></svg> Low-impact for joints</li>
+      <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5L20 7"/></svg> Rehab modifications</li>
+      <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5L20 7"/></svg> Trainer-ready scripts</li>
+      <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5L20 7"/></svg> Signed by Jodi</li>
+    </ul>
+
+    <div class="cta-row">
+      <a href="#" class="btn-primary">
+        Buy the book
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+      </a>
+      <a href="#" class="btn-ghost">eBook · $14</a>
+      <a href="#" class="btn-ghost">Bulk · trainers</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── SHOP / MERCH ── -->
+<section id="shop" data-screen-label="Shop" style="background:var(--black-deep);">
+  <div class="section-intro">
+    <div>
+      <span class="eyebrow">The Shop</span>
+      <h2 class="section-title">Wear it. Carry <span class="accent">it.</span> Train in it.</h2>
+    </div>
+    <p>Small drops, made well. Every piece tested in the studio before it shows up here. Free shipping over $75.</p>
+  </div>
+
+  <div class="shop-bar">
+    <button class="chip active">All</button>
+    <button class="chip">Apparel</button>
+    <button class="chip">Gear</button>
+    <button class="chip">Hydration</button>
+    <button class="chip">Journals</button>
+    <button class="chip">Bundles</button>
+  </div>
+
+  <div class="merch-grid">
+    <!-- 1 -->
+    <article class="merch">
+      <div class="img">
+        <span class="badge">New</span>
+        <button class="heart" aria-label="Save">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </button>
+        <div class="art-tee">
+          <div class="tee-shape">
+            <div class="tee-print">THAT'S IT,<em>be fitt</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="cat">Apparel · Tee</div>
+        <h4>That's It Tee — Bone</h4>
+        <div class="row">
+          <span class="price">$38</span>
+          <div class="colors"><i style="background:var(--bone)"></i><i style="background:var(--ink)"></i><i style="background:var(--mint)"></i><i style="background:var(--coral)"></i></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2 -->
+    <article class="merch">
+      <div class="img">
+        <span class="badge coral">Bestseller</span>
+        <button class="heart" aria-label="Save">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </button>
+        <div class="art-bottle">
+          <div class="bottle-shape">
+            <span class="bottle-label">BE FITT · 28OZ</span>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="cat">Hydration</div>
+        <h4>Stainless Bottle 28oz</h4>
+        <div class="row">
+          <span class="price">$42</span>
+          <div class="colors"><i style="background:var(--mint)"></i><i style="background:var(--ink)"></i><i style="background:var(--bone)"></i></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3 -->
+    <article class="merch">
+      <div class="img">
+        <button class="heart" aria-label="Save">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </button>
+        <div class="art-mat"><div class="mat-roll"></div></div>
+      </div>
+      <div class="body">
+        <div class="cat">Gear</div>
+        <h4>Studio Mat — 6mm</h4>
+        <div class="row">
+          <span class="price">$58</span>
+          <div class="colors"><i style="background:var(--coral)"></i><i style="background:var(--ink)"></i><i style="background:var(--mint)"></i></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4 -->
+    <article class="merch">
+      <div class="img">
+        <span class="badge">Limited</span>
+        <button class="heart" aria-label="Save">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </button>
+        <div class="art-cap"><div class="cap-shape"><span class="cap-logo">BE FITT</span></div></div>
+      </div>
+      <div class="body">
+        <div class="cat">Apparel · Cap</div>
+        <h4>Studio Cap</h4>
+        <div class="row">
+          <span class="price">$32</span>
+          <div class="colors"><i style="background:var(--ink)"></i><i style="background:var(--mint)"></i><i style="background:var(--bone)"></i></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5 -->
+    <article class="merch">
+      <div class="img">
+        <button class="heart" aria-label="Save">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </button>
+        <div class="art-tee">
+          <div class="tee-shape coral">
+            <div class="tee-print">STRONG<em>for life</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="cat">Apparel · Crew</div>
+        <h4>Strong For Life Crew</h4>
+        <div class="row">
+          <span class="price">$62</span>
+          <div class="colors"><i style="background:var(--coral)"></i><i style="background:var(--ink)"></i><i style="background:var(--bone)"></i></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article class="merch">
+      <div class="img">
+        <button class="heart" aria-label="Save">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </button>
+        <div class="art-band">
+          <div class="band-set">
+            <div class="band"></div>
+            <div class="band"></div>
+            <div class="band"></div>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="cat">Gear</div>
+        <h4>Resistance Band Set</h4>
+        <div class="row">
+          <span class="price">$28</span>
+          <div class="colors"><i style="background:var(--mint)"></i><i style="background:var(--coral)"></i><i style="background:var(--gold)"></i></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 7 -->
+    <article class="merch">
+      <div class="img">
+        <button class="heart" aria-label="Save">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </button>
+        <div class="art-journal">
+          <div class="journal-shape">
+            <span class="label">Be Fitt · 90 days</span>
+            <span class="title-j">Training<br>Journal</span>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="cat">Journals</div>
+        <h4>90-Day Training Journal</h4>
+        <div class="row">
+          <span class="price">$24</span>
+          <div class="colors"><i style="background:var(--ink)"></i><i style="background:var(--bone)"></i></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 8 -->
+    <article class="merch">
+      <div class="img">
+        <span class="badge">Bundle</span>
+        <button class="heart" aria-label="Save">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </button>
+        <div class="art-bag">
+          <div class="bag-shape">
+            <div class="bag-print">THAT'S IT,<em>be fitt</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="cat">Bundle</div>
+        <h4>Studio Tote + Journal</h4>
+        <div class="row">
+          <span class="price">$48 <small style="text-decoration:line-through;color:var(--w40);font-weight:400;font-size:0.86rem;margin-left:6px;">$58</small></span>
+          <div class="colors"><i style="background:var(--bone)"></i><i style="background:var(--ink)"></i></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials" data-screen-label="Testimonials">
+  <div class="section-intro">
+    <div>
+      <span class="eyebrow">Client stories</span>
+      <h2 class="section-title">Real people. Real <span class="accent">results.</span></h2>
+    </div>
+    <p>The kind that stick. Each story is from a client who's been with Jodi for at least 12 months — because anyone can lose 10 pounds in a month; the question is whether you're still there in year three.</p>
+  </div>
+
+  <div class="test-grid">
+    <div class="test">
+      <div class="stars">★★★★★</div>
+      <blockquote>I came to Jodi for the body. I stayed for the brain. Three years in I sleep better, lift heavier, and stress about food half as much.</blockquote>
+      <div class="lost">−28 lb<small>· 18 months</small></div>
+      <div class="person">
+        <div class="avatar a1">MR</div>
+        <div><strong>Margaret R.</strong><span>Realtor · client since 2023</span></div>
+      </div>
+    </div>
+    <div class="test">
+      <div class="stars">★★★★★</div>
+      <blockquote>Jodi got me back under a barbell at 54 and I'm stronger than I was at 30. Her plans are stupidly simple, which is the whole point.</blockquote>
+      <div class="lost">+14 lb<small>· lean mass</small></div>
+      <div class="person">
+        <div class="avatar a2">DK</div>
+        <div><strong>Daniel K.</strong><span>Architect · client since 2022</span></div>
+      </div>
+    </div>
+    <div class="test">
+      <div class="stars">★★★★★</div>
+      <blockquote>Six other programs and a divorce later, this is the one that finally clicked. Nutrition felt boring before — now it's automatic.</blockquote>
+      <div class="lost">−42 lb<small>· 24 months</small></div>
+      <div class="person">
+        <div class="avatar a3">SP</div>
+        <div><strong>Sasha P.</strong><span>Surgeon · client since 2021</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COACHING ── -->
+<section id="coaching" data-screen-label="Coaching">
+  <div class="section-intro">
+    <div>
+      <span class="eyebrow">1:1 coaching</span>
+      <h2 class="section-title">Work directly <span class="accent">with Jodi.</span></h2>
+    </div>
+    <p>Twelve weeks, eight clients per cohort, zero copy-paste. You get the program, the food plan, the weekly call, and Jodi's phone for the in-between moments.</p>
+  </div>
+
+  <div class="coaching">
+    <div class="coach-left">
+      <div>
+        <h2>The <em>full</em> method.<br>Twelve weeks. Eight clients.</h2>
+      </div>
+      <ul class="coach-feat">
+        <li>Weekly 1:1 video call</li>
+        <li>Custom training + nutrition plan</li>
+        <li>Daily WhatsApp access</li>
+        <li>Quarterly bloodwork review</li>
+        <li>Private cohort community</li>
+        <li>Signed copy of the book</li>
+      </ul>
+      <div>
+        <div style="font-family:var(--font-d);font-size:0.74rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;opacity:0.7;">Next cohort starts</div>
+        <div style="font-family:var(--font-d);font-size:1.6rem;font-weight:800;letter-spacing:-0.02em;margin-top:4px;">Sep 8, 2026 · 3 seats left</div>
+      </div>
+    </div>
+    <div class="coach-right">
+      <div>
+        <span class="eyebrow">Investment</span>
+        <div class="coach-tier">
+          <div class="price">$2,400</div>
+          <div class="price-sub">/ 12 weeks · or 3× $850</div>
+        </div>
+      </div>
+      <div class="coach-form">
+        <div>
+          <label>Your name</label>
+          <input type="text" placeholder="Full name">
+        </div>
+        <div class="row">
+          <div>
+            <label>Email</label>
+            <input type="email" placeholder="you@hi.com">
+          </div>
+          <div>
+            <label>Phone</label>
+            <input type="tel" placeholder="+1">
+          </div>
+        </div>
+        <div>
+          <label>Main goal</label>
+          <select>
+            <option>Body recomposition</option>
+            <option>Strength + longevity</option>
+            <option>Sustainable habits</option>
+            <option>Post-injury return</option>
+          </select>
+        </div>
+        <button class="btn-primary" style="justify-content:center;padding:16px;margin-top:8px;">
+          Apply for fall cohort
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── JOURNAL ── -->
+<section id="journal" data-screen-label="Journal" style="background:var(--s1);border-block:1px solid var(--w10);">
+  <div class="section-intro">
+    <div>
+      <span class="eyebrow">The Journal</span>
+      <h2 class="section-title">Field notes from <span class="accent">the studio.</span></h2>
+    </div>
+    <p>Short, useful, free. Read it with your coffee.</p>
+  </div>
+  <div class="journal-grid">
+    <article class="post p1">
+      <div class="img">
+        <div class="gradient"></div>
+        <span class="tag">Training</span>
+        <div class="deco">Lift</div>
+      </div>
+      <div class="body">
+        <div class="meta"><span>04 min read</span><span>· May 18</span></div>
+        <h4>The only three lifts you actually need.</h4>
+        <p>Why a hinge, a squat and a push will outperform 40 fancy variations — for the next 30 years.</p>
+      </div>
+    </article>
+    <article class="post p2">
+      <div class="img">
+        <div class="gradient"></div>
+        <span class="tag">Nutrition</span>
+        <div class="deco">Plate</div>
+      </div>
+      <div class="body">
+        <div class="meta"><span>06 min read</span><span>· May 11</span></div>
+        <h4>Protein, in plain English.</h4>
+        <p>How much you actually need, how to hit it without an app, and why everyone's wrong about the upper limit.</p>
+      </div>
+    </article>
+    <article class="post p3">
+      <div class="img">
+        <div class="gradient"></div>
+        <span class="tag">Lifestyle</span>
+        <div class="deco">Rest</div>
+      </div>
+      <div class="body">
+        <div class="meta"><span>05 min read</span><span>· May 04</span></div>
+        <h4>The sleep audit I run every Sunday.</h4>
+        <p>Ten questions, three minutes. The single highest-ROI habit I've ever taught a client.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ── NEWSLETTER ── -->
+<section class="newsletter" data-screen-label="Newsletter">
+  <h2>Get the <em>Monday Note</em><br>from Jodi.</h2>
+  <p>One short email every Monday morning. A workout, a recipe, and one thing to think about for the week. No fluff. No upsells. Free.</p>
+  <form class="subscribe" onsubmit="event.preventDefault(); this.querySelector('button').textContent='You\u2019re in ✓';">
+    <input type="email" placeholder="you@email.com" required>
+    <button type="submit">Subscribe</button>
+  </form>
+  <div class="news-tags">
+    <span>Free forever</span>
+    <span>Unsubscribe anytime</span>
+    <span>Joined by 12,000+</span>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer data-screen-label="Footer">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <a href="#" class="logo">
+        <span class="mark">JS</span>
+        <span class="name">JODI&nbsp;STOKES<small>Fitness · Lifestyle · Nutrition</small></span>
+      </a>
+      <p>Sustainable fitness, smart nutrition, and a lifestyle you'll actually keep. Coaching since 2009, online since 2014, in your inbox every Monday.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4Z"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.7A5.4 5.4 0 0 1 16 4h-3v12.3a2.7 2.7 0 1 1-2.7-2.7c.27 0 .5 0 .77.1V10.6a6 6 0 0 0-.77-.05A5.7 5.7 0 1 0 16 16.3V9.5a8.4 8.4 0 0 0 4.8 1.5V8a5.3 5.3 0 0 1-1.2-1.3Z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.5 7.2a2.7 2.7 0 0 0-1.9-1.9C18.9 4.8 12 4.8 12 4.8s-6.9 0-8.6.5A2.7 2.7 0 0 0 1.5 7.2 28 28 0 0 0 1 12a28 28 0 0 0 .5 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 8.6.5 8.6.5s6.9 0 8.6-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 23 12a28 28 0 0 0-.5-4.8Zm-12.8 7.7V9.1l5.7 2.9Z"/></svg></a>
+        <a href="#" aria-label="Spotify"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.8a10.2 10.2 0 1 0 0 20.4 10.2 10.2 0 0 0 0-20.4Zm4.7 14.7a.64.64 0 0 1-.88.21c-2.4-1.47-5.42-1.8-8.98-1a.64.64 0 0 1-.28-1.25c3.9-.88 7.24-.5 9.93 1.15.3.19.4.59.21.89Zm1.25-2.8a.8.8 0 0 1-1.1.27c-2.74-1.69-6.92-2.18-10.17-1.2a.8.8 0 0 1-1-.54.8.8 0 0 1 .53-1c3.71-1.13 8.31-.58 11.46 1.36.38.23.5.73.28 1.1Zm.11-2.91c-3.29-1.95-8.71-2.13-11.85-1.18a.96.96 0 0 1-.56-1.84c3.6-1.1 9.59-.88 13.38 1.36a.96.96 0 0 1-.97 1.66Z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="foot-col">
+      <h5>Shop</h5>
+      <ul>
+        <li><a href="#shop">Apparel</a></li>
+        <li><a href="#shop">Hydration</a></li>
+        <li><a href="#shop">Gear</a></li>
+        <li><a href="#shop">Journals</a></li>
+        <li><a href="#shop">Bundles</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Train</h5>
+      <ul>
+        <li><a href="#programs">Strong Foundations</a></li>
+        <li><a href="#programs">Lean &amp; Lifted</a></li>
+        <li><a href="#programs">The Reset</a></li>
+        <li><a href="#coaching">1:1 Coaching</a></li>
+        <li><a href="#book">The Book</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Studio</h5>
+      <ul>
+        <li><a href="#about">About Jodi</a></li>
+        <li><a href="#journal">Journal</a></li>
+        <li><a href="#">Press kit</a></li>
+        <li><a href="#">Affiliates</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-base">
+    <div>© 2026 Jodi Stokes Fitness. All rights reserved.</div>
+    <nav>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+      <a href="#">Returns</a>
+      <a href="#">Accessibility</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
