@@ -169,6 +169,7 @@
   }
   html {
     @apply font-sans;
+    scroll-padding-top: 112px;
   }
   img {
     @apply block max-w-full;
@@ -224,10 +225,212 @@
   }
 
   .icon-btn {
-    @apply relative grid size-10 place-items-center rounded-full border border-white/20 bg-transparent text-white transition;
+    @apply relative grid size-10 cursor-pointer place-items-center rounded-full border border-white/20 bg-transparent text-white transition;
   }
 
   .icon-btn:hover {
     @apply border-white bg-white text-ink;
+  }
+
+  .topbar {
+    @apply relative z-[90] overflow-hidden whitespace-nowrap bg-mint py-2 font-display text-[0.78rem] font-bold uppercase tracking-[0.16em] text-ink;
+  }
+
+  .topbar__marquee {
+    display: inline-flex;
+    gap: 48px;
+    padding-left: 48px;
+    animation: marquee-scroll 32s linear infinite;
+  }
+
+  .topbar__marquee span {
+    @apply inline-flex items-center gap-4;
+  }
+
+  .topbar__marquee i {
+    @apply block size-1.5 rounded-full bg-ink;
+  }
+
+  .site-header {
+    @apply sticky top-0 z-[80] flex items-center justify-between gap-6 border-b border-white/10 px-12 py-[18px];
+    background: rgb(10 11 10 / 75%);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .brand-logo {
+    @apply inline-flex items-center gap-3 font-display text-[1.05rem] font-extrabold tracking-[0.02em] text-white no-underline;
+  }
+
+  .brand-logo__mark {
+    @apply grid size-[30px] place-items-center rounded-full bg-mint text-xs font-extrabold text-ink;
+    background: linear-gradient(135deg, var(--mint) 0%, var(--mint-dim) 100%);
+    box-shadow: 0 0 22px var(--mint-glow);
+  }
+
+  .brand-logo__name {
+    @apply leading-none;
+  }
+
+  .brand-logo__name small {
+    @apply mt-1 block font-body text-[0.62rem] font-medium uppercase tracking-[0.24em] text-white/60;
+  }
+
+  .site-header__nav {
+    @apply hidden items-center gap-9;
+  }
+
+  .site-header__nav a {
+    @apply text-sm font-medium text-white/80 no-underline transition-colors;
+  }
+
+  .site-header__nav a:hover {
+    @apply text-mint;
+  }
+
+  .site-header__actions {
+    @apply flex items-center gap-3.5;
+  }
+
+  .cart-bubble {
+    @apply absolute -right-1 -top-1 grid size-4 place-items-center rounded-full bg-coral font-body text-[0.62rem] font-bold text-white;
+  }
+
+  .mobile-menu-button {
+    @apply hidden size-[42px] shrink-0 cursor-pointer place-items-center rounded-[10px] border border-white/20 bg-transparent text-white transition;
+  }
+
+  .mobile-menu-button:hover {
+    @apply border-white bg-white text-ink;
+  }
+
+  .mobile-nav {
+    @apply fixed inset-0 z-[70] flex flex-col overflow-y-auto px-7 pb-12 pt-[100px] transition;
+    background: rgb(5 6 5 / 97%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    transform: translateX(100%);
+    transition-duration: 0.4s;
+    transition-timing-function: var(--ease);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .mobile-nav[data-open="true"] {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .mobile-nav ul {
+    @apply flex list-none flex-col;
+  }
+
+  .mobile-nav li a {
+    @apply block border-b border-white/10 py-4 font-display text-[2.2rem] font-extrabold leading-tight tracking-[-0.03em] text-white no-underline transition-colors;
+  }
+
+  .mobile-nav li:last-child a {
+    @apply border-b-0;
+  }
+
+  .mobile-nav li a:hover {
+    @apply text-mint;
+  }
+
+  .mobile-nav__cta {
+    @apply mt-9 flex flex-col gap-3;
+  }
+
+  .mobile-nav__cta .btn-primary,
+  .mobile-nav__cta .btn-ghost {
+    @apply justify-center px-6 py-4;
+  }
+
+  .mobile-nav__socials {
+    @apply flex gap-3 pt-6;
+  }
+
+  .mobile-nav__socials a {
+    @apply grid size-11 place-items-center rounded-full border border-white/20 font-display text-xs font-bold text-white no-underline transition;
+  }
+
+  .mobile-nav__socials a:hover {
+    @apply border-mint bg-mint text-ink;
+  }
+
+  .site-header a:focus-visible,
+  .site-header button:focus-visible,
+  .mobile-nav a:focus-visible {
+    @apply outline-2 outline-offset-4 outline-mint;
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topbar__marquee {
+    animation: none;
+  }
+}
+
+@media (min-width: 721px) {
+  .site-header__nav {
+    @apply flex;
+  }
+}
+
+@media (max-width: 720px) {
+  html {
+    scroll-padding-top: 96px;
+  }
+
+  .site-header {
+    @apply px-5 py-3.5;
+  }
+
+  .site-header__nav {
+    @apply hidden;
+  }
+
+  .site-header__cta {
+    @apply hidden;
+  }
+
+  .mobile-menu-button {
+    @apply grid;
+  }
+
+  .brand-logo__name small {
+    @apply tracking-[0.16em];
+  }
+}
+
+@media (max-width: 420px) {
+  .site-header__actions {
+    @apply gap-2;
+  }
+
+  .site-header__actions .icon-btn {
+    @apply size-9;
+  }
+
+  .brand-logo {
+    @apply gap-2 text-[0.95rem];
+  }
+
+  .brand-logo__mark {
+    @apply size-7 text-[0.7rem];
+  }
+
+  .brand-logo__name small {
+    @apply text-[0.55rem] tracking-[0.12em];
   }
 }

@@ -71,7 +71,7 @@ public/
 | # | Task | Status | Depends On | Frontend Build | Completion Evidence |
 |---:|---|---|---|---|---|
 | 0 | [Initialize Structure, Globals, Assets](./0.%20Initialize%20Structure%20Globals%20Assets.md) | Completed | None | Passed | Created the public route-group home page, removed starter root page ownership, copied four canonical Jodi assets to `public/images/jodi/`, configured mock fonts/metadata/global brand tokens, and verified with `npm run lint` plus `npm run build`. |
-| 1 | [Public Layout, Header, Mobile Navigation](./1.%20Public%20Layout%20Header%20Mobile%20Navigation.md) | Not Started | Task 0 | Not Run | Add evidence in Task 1. |
+| 1 | [Public Layout, Header, Mobile Navigation](./1.%20Public%20Layout%20Header%20Mobile%20Navigation.md) | Completed | Task 0 | Passed | Added the public route layout, shared brand logo/topbar/site header/mobile nav components, sticky translucent header styling, mobile menu state/ARIA/scroll locking, and placeholder markers for fake search/cart/social behavior; `npm run lint` and `npm run build` passed. |
 | 2 | [Home Page Composition and Content Map](./2.%20Home%20Page%20Composition%20and%20Content%20Map.md) | Not Started | Task 0 | Not Run | Add evidence in Task 2. |
 | 3 | [Hero, Pillars, and About Sections](./3.%20Hero%20Pillars%20and%20About%20Sections.md) | Not Started | Tasks 0-2 | Not Run | Add evidence in Task 3. |
 | 4 | [Programs and Book Sections](./4.%20Programs%20and%20Book%20Sections.md) | Not Started | Tasks 0-2 | Not Run | Add evidence in Task 4. |
