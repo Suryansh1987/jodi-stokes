@@ -1,5 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Project Notes
+
+Implementation planning lives in [`initializeTodo/taskTracker.md`](./initializeTodo/taskTracker.md). Future agents should read [`AGENTS.md`](./AGENTS.md) and the relevant numbered task before changing code.
+
+Search markers used during implementation:
+
+- `[PLACEHOLDER]` marks temporary mock content, fake links, visual-only actions, or local-only form behavior.
+- `[TODO]` marks deferred future work such as checkout, CMS, newsletter API, coaching form submission, analytics, real search, or admin integration.
+
+Public pages should live under `app/(public)/`. Page files should compose sections only; section code belongs in `components/sections/<route-name>/`, with shared public sections in `components/section/shared/`.
+
 ## Getting Started
 
 First, run the development server:
