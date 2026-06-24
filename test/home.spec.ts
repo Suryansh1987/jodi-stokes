@@ -1,0 +1,127 @@
+import { expect, test } from "@playwright/test";
+
+import {
+  expectImageLoaded,
+  expectNoHorizontalOverflow,
+  expectNotOverlapping,
+} from "./support/assertions";
+
+test.describe("public home page", () => {
+  test("renders the desktop hero, pillars, and about sections", async ({
+    isMobile,
+    page,
+  }) => {
+    test.skip(isMobile, "Desktop-only layout and floating chip checks.");
+
+    await page.goto("/");
+
+    await expect(page).toHaveTitle(/Jodi Stokes Fitness/);
+    await expect(
+      page.getByRole("heading", {
+        level: 1,
+        name: /That's it,\s*be fitt\.\s*Train with Jodi\./,
+      }),
+    ).toBeVisible();
+
+    await expect(page.getByText("Now coaching")).toBeVisible();
+    await expect(page.getByText("+12 lbs lean")).toBeVisible();
+    await expect(page.getByText("Sleep · Stress · Plate")).toBeVisible();
+    await expect(page.getByText("15+")).toBeVisible();
+    await expect(page.getByText("2,400")).toBeVisible();
+    await expect(page.getByText("4.9★")).toBeVisible();
+
+    await expectImageLoaded(
+      page.getByRole("img", { exact: true, name: "Jodi Stokes" }),
+    );
+    await expectImageLoaded(
+      page.getByRole("img", { name: "Jodi Stokes at her studio" }),
+    );
+
+    await expect(page.locator("#about")).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /Move smarter\./ }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /Live grounded\./ }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /Eat honest\./ }),
+    ).toBeVisible();
+
+    await expect(
+      page.getByRole("heading", { name: /Strong at any age/ }),
+    ).toBeVisible();
+    const credentials = page.locator(".about-credentials");
+    await expect(credentials.getByText("NASM-CPT", { exact: true })).toBeVisible();
+    await expect(credentials.getByText("PN Level 2", { exact: true })).toBeVisible();
+    await expect(credentials.getByText("FMS Lvl 1", { exact: true })).toBeVisible();
+    await expect(credentials.getByText("Author", { exact: true })).toBeVisible();
+
+    await expectNoHorizontalOverflow(page);
+    await expectNotOverlapping(
+      page.locator(".hero__content"),
+      page.locator(".chip-1"),
+    );
+    await expectNotOverlapping(
+      page.locator(".hero__content"),
+      page.locator(".chip-2"),
+    );
+  });
+
+  test("keeps primary desktop anchors navigable", async ({
+    isMobile,
+    page,
+  }) => {
+    test.skip(isMobile, "Desktop primary navigation is hidden on mobile.");
+
+    await page.goto("/");
+
+    await page.getByRole("link", { name: "Start training" }).click();
+    await expect(page).toHaveURL(/#programs$/);
+    await expect(page.locator("#programs")).toBeInViewport();
+
+    await page.getByRole("link", { name: 'Read "Water Exercise"' }).click();
+    await expect(page).toHaveURL(/#book$/);
+    await expect(page.locator("#book")).toBeInViewport();
+
+    await page
+      .locator(".site-header__nav")
+      .getByRole("link", { name: "Shop" })
+      .click();
+    await expect(page).toHaveURL(/#shop$/);
+    await expect(page.locator("#shop")).toBeInViewport();
+  });
+
+  test("opens, locks, and closes mobile navigation", async ({
+    isMobile,
+    page,
+  }) => {
+    test.skip(!isMobile, "Mobile navigation is hidden on desktop.");
+
+    await page.goto("/");
+
+    await expect(page.locator(".chip-1")).toBeHidden();
+    await expect(page.locator(".chip-2")).toBeHidden();
+
+    const openMenu = page.getByRole("button", { name: "Open menu" });
+    const menuButton = page.locator(".mobile-menu-button");
+    const mobileDialog = page.locator(".mobile-nav");
+
+    await expect(openMenu).toBeVisible();
+    await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+    await openMenu.click({ force: true });
+
+    await expect(menuButton).toHaveAttribute("aria-expanded", "true");
+    await expect(mobileDialog).toHaveAttribute("data-open", "true");
+    await expect(mobileDialog).toHaveAttribute("aria-hidden", "false");
+    await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
+
+    await mobileDialog.getByRole("link", { name: "Programs" }).click();
+
+    await expect(page).toHaveURL(/#programs$/);
+    await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+    await expect(mobileDialog).toHaveAttribute("data-open", "false");
+    await expect(mobileDialog).toHaveAttribute("aria-hidden", "true");
+    await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
+  });
+});
