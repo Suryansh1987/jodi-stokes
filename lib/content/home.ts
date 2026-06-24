@@ -84,8 +84,8 @@ export const navLinks: NavLink[] = [
   { href: "#programs", label: "Programs" },
   { href: "#book", label: "The Book" },
   { href: "#shop", label: "Shop" },
-  { href: "#journal", label: "Journal" },
   { href: "#coaching", label: "Coaching" },
+  { href: "#journal", label: "Journal" },
 ];
 
 export const marqueeMessages = [
