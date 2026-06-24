@@ -4,20 +4,11 @@ import { ArrowRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 
-type NavLink = {
-  href: string;
-  label: string;
-};
+import { mobileSocialLinks, type NavLink } from "@/lib/content/home";
 
 type MobileNavProps = {
   links: NavLink[];
 };
-
-const socialLinks = [
-  { href: "#", label: "Instagram", shortLabel: "IG" },
-  { href: "#", label: "TikTok", shortLabel: "TT" },
-  { href: "#", label: "YouTube", shortLabel: "YT" },
-];
 
 export function MobileNav({ links }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,14 +77,13 @@ export function MobileNav({ links }: MobileNavProps) {
         </div>
 
         <div className="mobile-nav__socials" aria-label="Social links">
-          {socialLinks.map((link) => (
+          {mobileSocialLinks.map((link) => (
             <Link
               key={link.label}
               href={link.href}
               aria-label={link.label}
               onClick={closeMenu}
             >
-              {/* [PLACEHOLDER] Social URLs are temporary. [TODO] Replace with real profiles. */}
               <span aria-hidden="true">{link.shortLabel}</span>
             </Link>
           ))}

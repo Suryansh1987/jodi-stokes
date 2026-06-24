@@ -1,17 +1,27 @@
+import { AboutSection } from "@/components/sections/home/about-section";
+import { BookSection } from "@/components/sections/home/book-section";
+import { CoachingSection } from "@/components/sections/home/coaching-section";
+import { HeroSection } from "@/components/sections/home/hero-section";
+import { JournalSection } from "@/components/sections/home/journal-section";
+import { NewsletterSection } from "@/components/sections/home/newsletter-section";
+import { PillarsSection } from "@/components/sections/home/pillars-section";
+import { ProgramsSection } from "@/components/sections/home/programs-section";
+import { ShopSection } from "@/components/sections/home/shop-section";
+import { TestimonialsSection } from "@/components/sections/home/testimonials-section";
+
 export default function HomePage() {
   return (
-    <main className="section-shell min-h-screen">
-      <section className="mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-center py-24">
-        {/* [PLACEHOLDER] Task 0 only prepares the route and design foundation. */}
-        <p className="eyebrow">Jodi Stokes Fitness</p>
-        <h1 className="max-w-4xl font-display text-5xl font-extrabold leading-none tracking-tight text-white md:text-7xl">
-          That&apos;s it, <span className="font-script text-mint">be fitt.</span>
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg text-white/70">
-          Public home sections will be composed here in the next implementation
-          tasks.
-        </p>
-      </section>
-    </main>
+    <>
+      <HeroSection />
+      <PillarsSection />
+      <AboutSection />
+      <ProgramsSection />
+      <BookSection />
+      <ShopSection />
+      <TestimonialsSection />
+      <CoachingSection />
+      <JournalSection />
+      <NewsletterSection />
+    </>
   );
 }

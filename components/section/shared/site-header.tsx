@@ -3,15 +3,7 @@ import Link from "next/link";
 
 import { BrandLogo } from "@/components/section/shared/brand-logo";
 import { MobileNav } from "@/components/section/shared/mobile-nav";
-
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#programs", label: "Programs" },
-  { href: "#book", label: "The Book" },
-  { href: "#shop", label: "Shop" },
-  { href: "#journal", label: "Journal" },
-  { href: "#coaching", label: "Coaching" },
-];
+import { navLinks } from "@/lib/content/home";
 
 export function SiteHeader() {
   return (

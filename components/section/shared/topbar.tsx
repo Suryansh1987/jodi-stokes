@@ -1,9 +1,4 @@
-const marqueeMessages = [
-  "Free shipping over $75",
-  'New Book "Water Exercise" - signed copies available',
-  "1:1 coaching slots open for fall",
-  "Train · Lifestyle · Nutrition",
-];
+import { marqueeMessages } from "@/lib/content/home";
 
 export function Topbar() {
   const repeatedMessages = [...marqueeMessages, ...marqueeMessages];

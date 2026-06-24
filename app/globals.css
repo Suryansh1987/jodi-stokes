@@ -364,6 +364,289 @@
   .mobile-nav a:focus-visible {
     @apply outline-2 outline-offset-4 outline-mint;
   }
+
+  .hero {
+    @apply grid min-h-[calc(100vh-90px)] items-center gap-14 overflow-hidden py-16 md:grid-cols-[1.15fr_1fr] md:py-[72px];
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle 600px at 18% 30%, var(--mint-glow), transparent 70%),
+      radial-gradient(circle 500px at 80% 80%, rgb(255 77 94 / 8%), transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero__content,
+  .hero-photo {
+    @apply relative z-10;
+  }
+
+  .hero-tag {
+    @apply mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-white/10 bg-white/6 py-[7px] pl-2 pr-4 font-display text-xs font-medium uppercase tracking-[0.06em] text-white/80;
+  }
+
+  .hero-tag__dot {
+    @apply size-2 rounded-full bg-mint;
+    animation: pulse-dot 1.8s ease-in-out infinite;
+    box-shadow: 0 0 12px var(--mint);
+  }
+
+  .hero h1 {
+    @apply mb-7 font-display text-[clamp(3.6rem,8.4vw,9rem)] font-extrabold text-white;
+    line-height: 0.86;
+    letter-spacing: 0;
+  }
+
+  .hero__accent {
+    @apply text-mint italic;
+  }
+
+  .hero__script {
+    @apply inline-block font-script font-bold text-mint;
+    font-size: 0.86em;
+    line-height: 0.9;
+    letter-spacing: 0;
+    text-shadow:
+      0 0 26px var(--mint-glow),
+      0 0 60px var(--mint-glow);
+    transform: rotate(-2deg);
+  }
+
+  .hero__lead {
+    @apply mb-9 max-w-[480px] text-[1.12rem] leading-[1.6] text-white/80;
+  }
+
+  .hero-cta {
+    @apply mb-14 flex flex-wrap gap-3.5;
+  }
+
+  .hero-stats {
+    @apply flex flex-wrap gap-9;
+  }
+
+  .hero-stat {
+    @apply border-l border-white/20 pl-4;
+  }
+
+  .hero-stat strong {
+    @apply block font-display text-3xl font-bold text-white;
+    letter-spacing: 0;
+  }
+
+  .hero-stat strong span {
+    @apply text-mint;
+  }
+
+  .hero-stat small {
+    @apply block font-display text-xs font-medium uppercase tracking-[0.14em] text-white/60;
+  }
+
+  .hero-photo {
+    @apply aspect-[4/5] overflow-hidden rounded-[28px];
+    box-shadow:
+      0 40px 100px rgb(0 0 0 / 50%),
+      0 0 0 1px var(--w10);
+    isolation: isolate;
+  }
+
+  .hero-photo::after {
+    content: "";
+    @apply absolute inset-0 z-[1];
+    background: linear-gradient(180deg, transparent 40%, rgb(0 0 0 / 55%) 100%);
+    pointer-events: none;
+  }
+
+  .hero-photo__image {
+    object-fit: cover;
+    object-position: center 18%;
+    filter: saturate(1.05) contrast(1.02);
+  }
+
+  .hero-photo__badge {
+    @apply absolute left-5 top-5 z-[2] inline-flex items-center gap-2 rounded-full bg-mint px-3.5 py-2 font-display text-xs font-bold uppercase tracking-[0.16em] text-ink;
+  }
+
+  .hero-photo__badge span {
+    @apply size-1.5 rounded-full bg-ink;
+  }
+
+  .hero-photo__caption {
+    @apply absolute bottom-5 left-5 right-5 z-[2] flex items-end justify-between gap-4;
+  }
+
+  .hero-photo__caption h2 {
+    @apply font-display text-xl font-bold text-white;
+    letter-spacing: 0;
+  }
+
+  .hero-photo__caption p {
+    @apply mt-1 text-sm text-white/80;
+  }
+
+  .play-btn {
+    @apply grid size-14 shrink-0 cursor-pointer place-items-center rounded-full border-0 bg-white text-ink transition-transform;
+  }
+
+  .play-btn:hover {
+    transform: scale(1.08);
+  }
+
+  .play-btn:focus-visible {
+    @apply outline-2 outline-offset-4 outline-mint;
+  }
+
+  .float-chip {
+    @apply absolute z-[3] flex items-center gap-3 rounded-2xl border border-transparent bg-white px-4 py-3 text-ink;
+    box-shadow: 0 18px 50px rgb(0 0 0 / 28%);
+  }
+
+  .float-chip__icon {
+    @apply grid size-9 shrink-0 place-items-center rounded-xl bg-mint text-ink;
+  }
+
+  .float-chip strong {
+    @apply block font-display text-sm font-bold;
+  }
+
+  .float-chip small {
+    @apply block text-xs text-black/60;
+  }
+
+  .chip-1 {
+    @apply left-[-36px] top-[36%];
+  }
+
+  .chip-2 {
+    @apply bottom-[14%] right-[-28px] border-white/20 bg-ink text-white;
+  }
+
+  .chip-2 .float-chip__icon {
+    @apply bg-coral text-white;
+  }
+
+  .chip-2 small {
+    @apply text-white/60;
+  }
+
+  .pillars {
+    @apply border-y border-white/10;
+    background:
+      linear-gradient(180deg, transparent 0%, rgb(20 232 176 / 4%) 50%, transparent 100%),
+      var(--black);
+  }
+
+  .pillar-grid {
+    @apply grid border-y border-white/10 md:grid-cols-3;
+  }
+
+  .pillar {
+    @apply relative flex flex-col gap-[18px] border-white/10 px-5 py-9 transition-colors md:border-r md:px-11 md:py-14;
+    transition-timing-function: var(--ease);
+  }
+
+  .pillar:last-child {
+    @apply border-r-0;
+  }
+
+  .pillar:hover {
+    background: var(--s1);
+  }
+
+  .pillar__num {
+    @apply font-display text-xs font-semibold uppercase tracking-[0.18em] text-mint;
+  }
+
+  .pillar h2 {
+    @apply font-display text-[clamp(2rem,3vw,2.8rem)] font-bold text-white;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .pillar h2 em {
+    @apply text-mint;
+  }
+
+  .pillar p {
+    @apply max-w-[32ch] text-[0.96rem] text-white/60;
+  }
+
+  .pillar__arrow {
+    @apply mt-4 grid size-11 place-items-center rounded-full border border-white/20 text-white transition;
+    transition-timing-function: var(--ease);
+  }
+
+  .pillar:hover .pillar__arrow {
+    @apply border-mint bg-mint text-ink;
+    transform: rotate(-45deg);
+  }
+
+  .about {
+    @apply grid items-center gap-12 py-24 md:grid-cols-[1.1fr_1fr] md:gap-20;
+  }
+
+  .about-photo {
+    @apply relative aspect-[5/6] overflow-hidden rounded-3xl;
+    box-shadow: 0 30px 80px rgb(0 0 0 / 45%);
+  }
+
+  .about-photo__glow {
+    @apply absolute -inset-8;
+    background: radial-gradient(circle at 50% 50%, var(--mint-glow), transparent 70%);
+    z-index: -1;
+  }
+
+  .about-photo__image {
+    object-fit: cover;
+    object-position: 30% 12%;
+  }
+
+  .about-signature {
+    @apply absolute bottom-[-22px] right-[-22px] z-[2] rounded-[18px] bg-mint px-5 py-4 font-script text-[2.4rem] font-bold text-ink;
+    box-shadow: 0 18px 40px rgb(20 232 176 / 30%);
+    line-height: 0.9;
+    transform: rotate(-4deg);
+  }
+
+  .about-signature small {
+    @apply mt-0.5 block font-display text-[0.68rem] font-bold uppercase tracking-[0.22em] opacity-70;
+  }
+
+  .about-content h2 {
+    @apply mb-6 font-display text-[clamp(2.2rem,4.4vw,3.8rem)] font-extrabold text-white;
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+
+  .about-content h2 span {
+    @apply text-mint;
+  }
+
+  .about-content__copy p {
+    @apply mb-[18px] text-[1.04rem] leading-[1.7] text-white/80;
+  }
+
+  .about-credentials {
+    @apply mt-8 grid gap-x-7 gap-y-4 rounded-[20px] border border-white/10 bg-surface-1 p-7 md:grid-cols-2;
+  }
+
+  .cred {
+    @apply flex items-start gap-3;
+  }
+
+  .cred__tick {
+    @apply mt-0.5 grid size-[22px] shrink-0 place-items-center rounded-full bg-mint text-ink;
+  }
+
+  .cred strong {
+    @apply block font-display text-sm font-bold uppercase tracking-[0.12em] text-white;
+  }
+
+  .cred span:not(.cred__tick) {
+    @apply text-sm text-white/60;
+  }
 }
 
 @keyframes marquee-scroll {
@@ -375,8 +658,21 @@
   }
 }
 
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.18);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .topbar__marquee {
+  .topbar__marquee,
+  .hero-tag__dot {
     animation: none;
   }
 }
@@ -384,6 +680,32 @@
 @media (min-width: 721px) {
   .site-header__nav {
     @apply flex;
+  }
+}
+
+@media (max-width: 1100px) {
+  .hero {
+    @apply grid-cols-1;
+  }
+
+  .pillar-grid {
+    @apply grid-cols-1;
+  }
+
+  .pillar {
+    @apply border-b border-r-0;
+  }
+
+  .pillar:last-child {
+    @apply border-b-0;
+  }
+
+  .about {
+    @apply grid-cols-1 gap-12;
+  }
+
+  .about-signature {
+    @apply bottom-[-14px] right-0;
   }
 }
 
@@ -410,6 +732,56 @@
 
   .brand-logo__name small {
     @apply tracking-[0.16em];
+  }
+
+  .hero {
+    @apply min-h-0 gap-9 px-5 py-10 pb-14;
+  }
+
+  .hero h1 {
+    @apply text-[clamp(2.8rem,13vw,4.2rem)];
+  }
+
+  .hero__lead {
+    @apply text-base;
+  }
+
+  .hero-cta {
+    @apply flex-col gap-2.5;
+  }
+
+  .hero-cta .btn-primary,
+  .hero-cta .btn-ghost {
+    @apply justify-center text-center;
+  }
+
+  .hero-stats {
+    @apply gap-4;
+  }
+
+  .hero-stat {
+    @apply pl-3;
+  }
+
+  .hero-stat strong {
+    @apply text-2xl;
+  }
+
+  .chip-1,
+  .chip-2 {
+    @apply hidden;
+  }
+
+  .about {
+    @apply px-5 py-16;
+  }
+
+  .about-signature {
+    @apply hidden;
+  }
+
+  .about-credentials {
+    @apply grid-cols-1;
   }
 }
 
