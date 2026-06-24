@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/components/section/shared/site-header";
+import { SiteFooter } from "@/components/section/shared/site-footer";
 import { Topbar } from "@/components/section/shared/topbar";
 
 export default function PublicLayout({
@@ -8,9 +9,13 @@ export default function PublicLayout({
 }>) {
   return (
     <>
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
       <Topbar />
       <SiteHeader />
-      {children}
+      <main id="main-content">{children}</main>
+      <SiteFooter />
     </>
   );
 }

@@ -372,4 +372,88 @@ test.describe("public home page", () => {
 
     await expectNoHorizontalOverflow(page);
   });
+
+  test("renders footer, metadata, and public shell polish", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page).toHaveTitle(
+      "Jodi Stokes Fitness - Train. Lifestyle. Nutrition.",
+    );
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+      "content",
+      /Sustainable fitness, smart nutrition, lifestyle coaching/,
+    );
+    await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
+      "content",
+      "#050605",
+    );
+
+    const skipLink = page.getByRole("link", { name: "Skip to main content" });
+    await expect(skipLink).toHaveAttribute("href", "#main-content");
+    await expect(page.locator("main#main-content")).toBeVisible();
+
+    const footer = page.locator('[data-screen-label="Footer"]');
+    await footer.scrollIntoViewIfNeeded();
+    await expect(footer).toBeVisible();
+    await expect(
+      footer.getByRole("link", { name: "Jodi Stokes Fitness home" }),
+    ).toBeVisible();
+    await expect(
+      footer.getByText(
+        "Sustainable fitness, smart nutrition, and a lifestyle you'll actually keep.",
+      ),
+    ).toBeVisible();
+
+    for (const social of ["Instagram", "TikTok", "YouTube", "Spotify"]) {
+      await expect(footer.getByRole("link", { name: social })).toHaveAttribute(
+        "href",
+        "#",
+      );
+    }
+
+    for (const group of ["Shop", "Train", "Studio"]) {
+      await expect(
+        footer.getByRole("navigation", { name: group }).getByRole("heading", {
+          name: group,
+        }),
+      ).toBeVisible();
+    }
+
+    await expect(footer.getByRole("link", { name: "Apparel" })).toHaveAttribute(
+      "href",
+      "#shop",
+    );
+    await expect(
+      footer.getByRole("link", { name: "Strong Foundations" }),
+    ).toHaveAttribute("href", "#programs");
+    await expect(
+      footer.getByRole("link", { name: "1:1 Coaching" }),
+    ).toHaveAttribute("href", "#coaching");
+    await expect(footer.getByRole("link", { name: "About Jodi" })).toHaveAttribute(
+      "href",
+      "#about",
+    );
+
+    const legal = footer.getByRole("navigation", { name: "Legal" });
+    for (const link of ["Terms", "Privacy", "Returns", "Accessibility"]) {
+      await expect(legal.getByRole("link", { name: link })).toHaveAttribute(
+        "href",
+        "#",
+      );
+    }
+    await expect(
+      footer.getByText("© 2026 Jodi Stokes Fitness. All rights reserved."),
+    ).toBeVisible();
+
+    const hashLinks = await page
+      .locator('a[href^="#"]:not([href="#"])')
+      .evaluateAll((links) =>
+        links.map((link) => link.getAttribute("href")).filter(Boolean),
+      );
+    for (const href of new Set(hashLinks)) {
+      await expect(page.locator(href as string)).toHaveCount(1);
+    }
+
+    await expectNoHorizontalOverflow(page);
+  });
 });

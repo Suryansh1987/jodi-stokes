@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Caveat, DM_Sans, Syne } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -24,7 +24,36 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   title: "Jodi Stokes Fitness - Train. Lifestyle. Nutrition.",
   description:
-    "Sustainable fitness, smart nutrition, and lifestyle coaching from Jodi Stokes.",
+    "Sustainable fitness, smart nutrition, lifestyle coaching, training programs, shop drops, and the Monday Note from Jodi Stokes.",
+  applicationName: "Jodi Stokes Fitness",
+  authors: [{ name: "Jodi Stokes" }],
+  creator: "Jodi Stokes",
+  publisher: "Jodi Stokes Fitness",
+  keywords: [
+    "Jodi Stokes",
+    "fitness coaching",
+    "strength training",
+    "nutrition coaching",
+    "lifestyle coaching",
+    "water exercise",
+  ],
+  openGraph: {
+    title: "Jodi Stokes Fitness - Train. Lifestyle. Nutrition.",
+    description:
+      "Sustainable fitness, smart nutrition, and lifestyle coaching from Jodi Stokes.",
+    siteName: "Jodi Stokes Fitness",
+    type: "website",
+    locale: "en_US",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#050605",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
