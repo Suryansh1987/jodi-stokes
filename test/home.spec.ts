@@ -190,4 +190,84 @@ test.describe("public home page", () => {
 
     await expectNoHorizontalOverflow(page);
   });
+
+  test("renders shop categories and mock product cards", async ({ page }) => {
+    await page.goto("/");
+
+    const shopSection = page.locator("#shop");
+    await shopSection.scrollIntoViewIfNeeded();
+    await expect(shopSection).toBeVisible();
+
+    await expect(
+      shopSection.getByRole("heading", {
+        level: 2,
+        name: /Wear it\. Carry it\. Train in it\./,
+      }),
+    ).toBeVisible();
+
+    for (const category of [
+      "All",
+      "Apparel",
+      "Gear",
+      "Hydration",
+      "Journals",
+      "Bundles",
+    ]) {
+      await expect(
+        shopSection.getByRole("button", {
+          name: `Show ${category} products`,
+        }),
+      ).toBeVisible();
+    }
+
+    await expect(
+      shopSection.getByRole("button", { name: "Show All products" }),
+    ).toHaveAttribute("aria-pressed", "true");
+
+    for (const product of [
+      "That's It Tee - Bone",
+      "Stainless Bottle 28oz",
+      "Studio Mat - 6mm",
+      "Studio Cap",
+      "Strong For Life Crew",
+      "Resistance Band Set",
+      "90-Day Training Journal",
+      "Studio Tote + Journal",
+    ]) {
+      await expect(
+        shopSection.getByRole("heading", { level: 3, name: product }),
+      ).toBeVisible();
+      await expect(
+        shopSection.getByRole("button", { name: `Save ${product}` }),
+      ).toBeVisible();
+    }
+
+    const badges = shopSection.locator(".merch-badge");
+    await expect(badges.getByText("New", { exact: true })).toBeVisible();
+    await expect(badges.getByText("Bestseller", { exact: true })).toBeVisible();
+    await expect(badges.getByText("Limited", { exact: true })).toBeVisible();
+    await expect(badges.getByText("Bundle", { exact: true })).toBeVisible();
+    await expect(shopSection.getByText("$38")).toBeVisible();
+    await expect(shopSection.getByText("$48")).toBeVisible();
+    await expect(
+      shopSection.locator(".merch-card__price").filter({ hasText: "$58" }),
+    ).toHaveCount(2);
+    await expect(
+      shopSection.getByLabel("That's It Tee - Bone color mint"),
+    ).toBeVisible();
+    await expect(
+      shopSection.getByLabel("Studio Tote + Journal color bone"),
+    ).toBeVisible();
+
+    await expect(shopSection.locator(".art-tee")).toHaveCount(2);
+    await expect(shopSection.locator(".art-bottle")).toHaveCount(1);
+    await expect(shopSection.locator(".art-mat")).toHaveCount(1);
+    await expect(shopSection.locator(".art-cap")).toHaveCount(1);
+    await expect(shopSection.locator(".art-band")).toHaveCount(1);
+    await expect(shopSection.locator(".art-journal")).toHaveCount(1);
+    await expect(shopSection.locator(".art-bag")).toHaveCount(1);
+    await expect(shopSection.locator(".merch-save")).toHaveCount(8);
+
+    await expectNoHorizontalOverflow(page);
+  });
 });
