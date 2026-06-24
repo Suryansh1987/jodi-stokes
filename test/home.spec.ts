@@ -124,4 +124,70 @@ test.describe("public home page", () => {
     await expect(mobileDialog).toHaveAttribute("aria-hidden", "true");
     await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
   });
+
+  test("renders programs and book commerce surfaces", async ({ page }) => {
+    await page.goto("/");
+
+    const programsSection = page.locator("#programs");
+    const bookSection = page.locator("#book");
+
+    await programsSection.scrollIntoViewIfNeeded();
+    await expect(programsSection).toBeVisible();
+    await expect(
+      programsSection.getByRole("heading", {
+        level: 2,
+        name: /Programs that actually end somewhere\./,
+      }),
+    ).toBeVisible();
+    await expect(
+      programsSection.getByRole("heading", { name: "Strong Foundations" }),
+    ).toBeVisible();
+    await expect(
+      programsSection.getByRole("heading", { name: "Lean & Lifted" }),
+    ).toBeVisible();
+    await expect(
+      programsSection.getByRole("heading", { name: "The Reset" }),
+    ).toBeVisible();
+    await expect(programsSection.getByText("Most popular")).toBeVisible();
+    await expect(programsSection.getByText("$249")).toBeVisible();
+    await expect(programsSection.getByText("$189")).toBeVisible();
+    await expect(programsSection.getByText("$99")).toBeVisible();
+    await expectImageLoaded(
+      programsSection.getByRole("img", { name: "Jodi side plank outdoors" }),
+    );
+    await expect(
+      programsSection.getByRole("button", { name: /Add .* to cart/ }),
+    ).toHaveCount(3);
+
+    await bookSection.scrollIntoViewIfNeeded();
+    await expect(bookSection).toBeVisible();
+    await expect(
+      bookSection.getByRole("heading", {
+        level: 2,
+        name: /A complete guide to water exercise\./,
+      }),
+    ).toBeVisible();
+    await expectImageLoaded(
+      bookSection.getByRole("img", { name: "Water Exercise by Jodi Books-Stokes" }),
+    );
+    await expect(bookSection.getByText("$32")).toBeVisible();
+    await expect(bookSection.getByText("$42")).toBeVisible();
+    await expect(bookSection.getByText("24% off · Signed copies")).toBeVisible();
+    await expect(bookSection.getByText("60+ pool exercises")).toBeVisible();
+    await expect(bookSection.getByText("Trainer-ready scripts")).toBeVisible();
+    await expect(bookSection.getByRole("link", { name: /Buy the book/ })).toHaveAttribute(
+      "href",
+      "#",
+    );
+    await expect(bookSection.getByRole("link", { name: "eBook · $14" })).toHaveAttribute(
+      "href",
+      "#",
+    );
+    await expect(bookSection.getByRole("link", { name: "Bulk · trainers" })).toHaveAttribute(
+      "href",
+      "#",
+    );
+
+    await expectNoHorizontalOverflow(page);
+  });
 });

@@ -17,7 +17,7 @@ export function AboutSection() {
         />
         <div className="about-signature">
           {aboutContent.signature}
-          <small>- {aboutContent.signatureLabel}</small>
+          <small>· {aboutContent.signatureLabel}</small>
         </div>
       </div>
 
