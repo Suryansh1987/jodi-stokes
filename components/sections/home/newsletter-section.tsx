@@ -1,21 +1,46 @@
+"use client";
+
+import { type FormEvent, useState } from "react";
+
 import { newsletterContent } from "@/lib/content/home";
 
 export function NewsletterSection() {
+  const [status, setStatus] = useState("");
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    // [PLACEHOLDER] Local-only newsletter confirmation. [TODO] Wire newsletter signup provider.
+    setStatus("You're in.");
+  }
+
   return (
-    <section className="section-shell py-24 text-center" data-screen-label="Newsletter">
-      {/* [PLACEHOLDER] Final newsletter form behavior is implemented in Task 6. */}
+    <section className="newsletter section-shell" data-screen-label="Newsletter">
       <div className="mx-auto max-w-4xl">
-        <h2 className="font-display text-4xl font-extrabold leading-none text-white md:text-6xl">
-          {newsletterContent.title}
+        <h2>
+          Get the <em>Monday Note</em>
+          <br />
+          from Jodi.
         </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-white/70">
-          {newsletterContent.description}
+        <p>{newsletterContent.description}</p>
+        <form className="subscribe" onSubmit={handleSubmit}>
+          <label className="sr-only" htmlFor="newsletter-email">
+            Email address
+          </label>
+          <input
+            id="newsletter-email"
+            name="email"
+            type="email"
+            placeholder="you@email.com"
+            required
+          />
+          <button type="submit">{status ? "You're in" : "Subscribe"}</button>
+        </form>
+        <p className="form-status newsletter__status" aria-live="polite">
+          {status}
         </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-2">
+        <div className="news-tags">
           {newsletterContent.tags.map((tag) => (
-            <span key={tag} className="rounded-full border border-white/10 px-4 py-2 text-sm text-white/60">
-              {tag}
-            </span>
+            <span key={tag}>{tag}</span>
           ))}
         </div>
       </div>

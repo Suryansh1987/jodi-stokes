@@ -14,6 +14,7 @@ test.describe("public home page", () => {
     test.skip(isMobile, "Desktop-only layout and floating chip checks.");
 
     await page.goto("/");
+    const heroSection = page.locator(".hero");
 
     await expect(page).toHaveTitle(/Jodi Stokes Fitness/);
     await expect(
@@ -23,12 +24,12 @@ test.describe("public home page", () => {
       }),
     ).toBeVisible();
 
-    await expect(page.getByText("Now coaching")).toBeVisible();
-    await expect(page.getByText("+12 lbs lean")).toBeVisible();
-    await expect(page.getByText("Sleep · Stress · Plate")).toBeVisible();
-    await expect(page.getByText("15+")).toBeVisible();
-    await expect(page.getByText("2,400")).toBeVisible();
-    await expect(page.getByText("4.9★")).toBeVisible();
+    await expect(heroSection.getByText("Now coaching")).toBeVisible();
+    await expect(heroSection.getByText("+12 lbs lean")).toBeVisible();
+    await expect(heroSection.getByText("Sleep · Stress · Plate")).toBeVisible();
+    await expect(heroSection.getByText("15+")).toBeVisible();
+    await expect(heroSection.getByText("2,400")).toBeVisible();
+    await expect(heroSection.getByText("4.9★")).toBeVisible();
 
     await expectImageLoaded(
       page.getByRole("img", { exact: true, name: "Jodi Stokes" }),
@@ -267,6 +268,107 @@ test.describe("public home page", () => {
     await expect(shopSection.locator(".art-journal")).toHaveCount(1);
     await expect(shopSection.locator(".art-bag")).toHaveCount(1);
     await expect(shopSection.locator(".merch-save")).toHaveCount(8);
+
+    await expectNoHorizontalOverflow(page);
+  });
+
+  test("renders testimonials, coaching, journal, and newsletter sections", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const testimonialsSection = page.locator('[data-screen-label="Testimonials"]');
+    await testimonialsSection.scrollIntoViewIfNeeded();
+    await expect(testimonialsSection).toBeVisible();
+    await expect(
+      testimonialsSection.getByRole("heading", {
+        level: 2,
+        name: /Real people\. Real results\./,
+      }),
+    ).toBeVisible();
+    await expect(testimonialsSection.getByText("★★★★★")).toHaveCount(3);
+    await expect(testimonialsSection.getByText("-28 lb")).toBeVisible();
+    await expect(testimonialsSection.getByText("+14 lb")).toBeVisible();
+    await expect(testimonialsSection.getByText("-42 lb")).toBeVisible();
+    await expect(testimonialsSection.getByText("Margaret R.")).toBeVisible();
+    await expect(testimonialsSection.getByText("Daniel K.")).toBeVisible();
+    await expect(testimonialsSection.getByText("Sasha P.")).toBeVisible();
+
+    const coachingSection = page.locator("#coaching");
+    await coachingSection.scrollIntoViewIfNeeded();
+    await expect(coachingSection).toBeVisible();
+    await expect(
+      coachingSection.getByRole("heading", {
+        level: 2,
+        name: /Work directly with Jodi\./,
+      }),
+    ).toBeVisible();
+    await expect(coachingSection.getByText("Weekly 1:1 video call")).toBeVisible();
+    await expect(coachingSection.getByText("Sep 8, 2026 · 3 seats left")).toBeVisible();
+    await expect(coachingSection.getByText("$2,400")).toBeVisible();
+    await expect(coachingSection.getByLabel("Your name")).toBeVisible();
+    await expect(coachingSection.getByLabel("Email")).toBeVisible();
+    await expect(coachingSection.getByLabel("Phone")).toBeVisible();
+    await expect(coachingSection.getByLabel("Main goal")).toBeVisible();
+    await coachingSection.getByLabel("Your name").fill("Avery Client");
+    await coachingSection.getByLabel("Email").fill("avery@example.com");
+    await coachingSection.getByLabel("Phone").fill("+15551234567");
+    await coachingSection
+      .getByLabel("Main goal")
+      .selectOption("Strength + longevity");
+    await coachingSection.getByRole("button", { name: /Apply for fall cohort/ }).click();
+    await expect(
+      coachingSection.getByText("Application received. Jodi's team will follow up."),
+    ).toBeVisible();
+
+    const journalSection = page.locator("#journal");
+    await journalSection.scrollIntoViewIfNeeded();
+    await expect(journalSection).toBeVisible();
+    await expect(
+      journalSection.getByRole("heading", {
+        level: 2,
+        name: /Field notes from the studio\./,
+      }),
+    ).toBeVisible();
+    await expect(
+      journalSection.getByRole("heading", {
+        level: 3,
+        name: "The only three lifts you actually need.",
+      }),
+    ).toBeVisible();
+    await expect(
+      journalSection.getByRole("heading", {
+        level: 3,
+        name: "Protein, in plain English.",
+      }),
+    ).toBeVisible();
+    await expect(
+      journalSection.getByRole("heading", {
+        level: 3,
+        name: "The sleep audit I run every Sunday.",
+      }),
+    ).toBeVisible();
+    await expect(journalSection.getByText("Training")).toBeVisible();
+    await expect(journalSection.getByText("06 min read")).toBeVisible();
+    await expect(journalSection.locator(".post-card__deco")).toHaveCount(3);
+
+    const newsletterSection = page.locator('[data-screen-label="Newsletter"]');
+    await newsletterSection.scrollIntoViewIfNeeded();
+    await expect(newsletterSection).toBeVisible();
+    await expect(
+      newsletterSection.getByRole("heading", {
+        level: 2,
+        name: /Get the Monday Note from Jodi\./,
+      }),
+    ).toBeVisible();
+    await expect(newsletterSection.getByLabel("Email address")).toBeVisible();
+    await expect(newsletterSection.getByText("Free forever")).toBeVisible();
+    await expect(newsletterSection.getByText("Unsubscribe anytime")).toBeVisible();
+    await expect(newsletterSection.getByText("Joined by 12,000+")).toBeVisible();
+    await newsletterSection.getByLabel("Email address").fill("avery@example.com");
+    await newsletterSection.getByRole("button", { name: "Subscribe" }).click();
+    await expect(newsletterSection.getByRole("button", { name: "You're in" })).toBeVisible();
+    await expect(newsletterSection.getByText("You're in.")).toBeVisible();
 
     await expectNoHorizontalOverflow(page);
   });
