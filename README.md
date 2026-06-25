@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Project Notes
 
-Implementation planning lives in [`initializeTodo/taskTracker.md`](./initializeTodo/taskTracker.md). Future agents should read [`AGENTS.md`](./AGENTS.md) and the relevant numbered task before changing code.
+Implementation planning live in [`initializeTodo/taskTracker.md`](./initializeTodo/taskTracker.md). Future agents should read [`AGENTS.md`](./AGENTS.md) and the relevant numbered task before changing code.
 
 Search markers used during implementation:
 
