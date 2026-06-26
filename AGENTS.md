@@ -33,9 +33,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Workflow
 
-- Before implementing any numbered task, read `initializeTodo/taskTracker.md`.
-- Before changing code for a numbered task, read the specific numbered task file from `initializeTodo/`.
-- After each numbered task, update both the task file completion evidence and `initializeTodo/taskTracker.md`.
+- Before implementing any numbered task, read reference folder's `taskTracker.md`.
+- Before changing code for a numbered task, read the specific numbered task file from reference folder.
+- After each numbered task, update both the task file completion evidence and `taskTracker.md`.
 - For frontend tasks, run `npm run lint` and `npm run build` when feasible.
 - Record exact verification commands and results in the task evidence block.
 

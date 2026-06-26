@@ -232,6 +232,10 @@
     @apply border-white bg-white text-ink;
   }
 
+  .theme-toggle svg {
+    @apply size-4;
+  }
+
   .topbar {
     @apply relative z-[90] overflow-hidden whitespace-nowrap bg-mint py-2 font-display text-[0.78rem] font-bold uppercase tracking-[0.16em] text-ink;
   }
@@ -340,6 +344,10 @@
 
   .mobile-nav__cta {
     @apply mt-9 flex flex-col gap-3;
+  }
+
+  .mobile-nav__theme {
+    @apply flex items-center justify-between rounded-2xl border border-white/10 bg-white/6 px-4 py-3 font-display text-xs font-bold uppercase tracking-[0.16em] text-white/70;
   }
 
   .mobile-nav__cta .btn-primary,
@@ -1684,6 +1692,10 @@
     @apply hidden;
   }
 
+  .theme-toggle--desktop {
+    @apply hidden;
+  }
+
   .mobile-menu-button {
     @apply grid;
   }
@@ -1908,4 +1920,9 @@
   .brand-logo__name small {
     @apply text-[0.55rem] tracking-[0.12em];
   }
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }
