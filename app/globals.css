@@ -915,9 +915,17 @@
   }
 
   .prog-card {
-    @apply min-h-[460px] gap-0 overflow-hidden rounded-3xl border border-white/10 bg-black-deep py-0 text-white transition md:min-h-[460px];
+    @apply relative min-h-[520px] gap-0 overflow-hidden rounded-3xl border border-white/10 bg-black-deep py-0 text-white transition md:min-h-[520px];
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 4%), transparent 42%),
+      var(--black-deep);
     transition-duration: 0.4s;
     transition-timing-function: var(--ease);
+  }
+
+  .prog-card--featured {
+    @apply border-mint/45;
+    box-shadow: 0 28px 85px rgb(20 232 176 / 12%);
   }
 
   .prog-card:hover {
@@ -925,13 +933,17 @@
     transform: translateY(-6px);
   }
 
+  .prog-card__pricing {
+    @apply order-2 flex flex-1 flex-col;
+  }
+
   .prog-card__media {
-    @apply relative h-[220px] overflow-hidden;
+    @apply relative order-1 h-[170px] overflow-hidden;
     background: linear-gradient(135deg, var(--s2), var(--s3));
   }
 
   .prog-card--featured .prog-card__media {
-    @apply h-[300px];
+    @apply h-[250px];
   }
 
   .prog-card__image {
@@ -980,7 +992,18 @@
   }
 
   .prog-card__header {
-    @apply gap-3 px-7 pt-7 pb-0;
+    @apply gap-4 rounded-[22px] border border-white/10 bg-white/5 px-5 pt-5 pb-5 md:m-2 md:px-6 md:pt-6 md:pb-6;
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 7%), transparent 100%),
+      rgb(255 255 255 / 4%);
+  }
+
+  .prog-card__plan {
+    @apply flex items-start justify-between gap-4;
+  }
+
+  .prog-card__badge {
+    @apply shrink-0 rounded-full border border-mint/40 bg-mint px-3 py-1 font-display text-[0.66rem] font-bold uppercase tracking-[0.14em] text-ink;
   }
 
   .prog-card__tags {
@@ -1006,33 +1029,45 @@
   }
 
   .prog-card__body {
-    @apply flex-1 px-7 pt-3 pb-0;
+    @apply flex-1 px-6 pt-5 pb-0;
   }
 
   .prog-card__body p {
     @apply text-[0.94rem] leading-[1.55] text-white/60;
   }
 
+  .prog-card__features {
+    @apply mt-6 grid gap-3;
+  }
+
+  .prog-card__features li {
+    @apply flex items-start gap-3 text-sm leading-snug text-white/72;
+  }
+
+  .prog-card__features svg {
+    @apply mt-0.5 shrink-0 text-mint;
+  }
+
   .prog-card__footer {
-    @apply mx-7 mt-auto flex items-center justify-between gap-3.5 border-t border-white/10 px-0 pt-[18px] pb-7;
+    @apply mt-auto px-6 pt-6 pb-6;
   }
 
   .prog-card__price {
-    @apply font-display text-2xl font-bold text-white;
+    @apply flex items-end gap-1 font-display text-[clamp(2rem,4vw,3rem)] font-bold text-white;
     letter-spacing: 0;
   }
 
   .prog-card__price small {
-    @apply ml-1 text-xs font-medium uppercase tracking-[0.08em] text-white/60;
+    @apply pb-1 text-xs font-medium uppercase tracking-[0.08em] text-white/60;
   }
 
   .prog-card__add {
-    @apply grid size-[42px] shrink-0 cursor-pointer place-items-center rounded-full border-0 bg-white text-ink transition;
+    @apply inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-white px-5 py-3.5 font-display text-[0.74rem] font-extrabold uppercase tracking-[0.14em] text-ink transition;
   }
 
   .prog-card__add:hover {
     @apply bg-mint;
-    transform: scale(1.06);
+    transform: translateY(-2px);
   }
 
   .prog-card__add:focus-visible {

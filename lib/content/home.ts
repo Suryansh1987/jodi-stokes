@@ -57,6 +57,7 @@ export type Program = {
   title: string;
   description: string;
   tags: string[];
+  features: string[];
   price: string;
   priceNote?: string;
   featured?: boolean;
@@ -250,6 +251,14 @@ export const programs: Program[] = [
     description:
       "The full method, start to finish. Strength block, mobility, nutrition habits, sleep audit, and weekly mini-courses. Includes printable journal + private community.",
     tags: ["Most popular", "16 weeks", "All levels"],
+    features: [
+      "Strength block",
+      "Mobility",
+      "Nutrition habits",
+      "Sleep audit",
+      "Printable journal",
+      "Private community",
+    ],
     price: "$249",
     priceNote: "/ full program",
     featured: true,
@@ -263,6 +272,12 @@ export const programs: Program[] = [
     description:
       "Body recomp block - hypertrophy + nutrition. For people who already lift.",
     tags: ["12 weeks", "Intermediate"],
+    features: [
+      "Hypertrophy focus",
+      "Body recomp nutrition",
+      "Progressive lifting",
+      "Intermediate pacing",
+    ],
     price: "$189",
     artLabel: "LEAN & LIFTED",
   },
@@ -271,6 +286,12 @@ export const programs: Program[] = [
     description:
       "Six-week kickstart. Habits, basics, and a confidence-building block.",
     tags: ["6 weeks", "Beginner"],
+    features: [
+      "Six-week kickstart",
+      "Habit basics",
+      "Confidence block",
+      "Beginner-friendly structure",
+    ],
     price: "$99",
     artLabel: "RESET · 6 WK",
   },

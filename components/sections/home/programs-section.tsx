@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Plus } from "lucide-react";
+import { CheckCircle2, Plus } from "lucide-react";
 
 import { SectionIntro } from "@/components/section/shared/section-intro";
 import {
@@ -29,8 +29,65 @@ export function ProgramsSection() {
           {programs.map((program) => (
             <Card
               key={program.title}
-              className={program.featured ? "prog-card prog-card--featured" : "prog-card"}
+              className={
+                program.featured ? "prog-card prog-card--featured" : "prog-card"
+              }
             >
+              <div className="prog-card__pricing">
+                <CardHeader className="prog-card__header">
+                  <div className="prog-card__plan">
+                    <h3 className="prog-card__title">{program.title}</h3>
+                    {program.featured ? (
+                      <span className="prog-card__badge">Best value</span>
+                    ) : null}
+                  </div>
+
+                  <div className="prog-card__tags">
+                    {program.tags.map((tag, index) => (
+                      <span
+                        key={tag}
+                        className={
+                          index === 0 && program.featured
+                            ? "prog-tag prog-tag--mint"
+                            : "prog-tag"
+                        }
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="prog-card__price">
+                    {program.price}
+                    {program.priceNote ? <small>{program.priceNote}</small> : null}
+                  </div>
+                </CardHeader>
+
+                <CardContent className="prog-card__body">
+                  <p>{program.description}</p>
+                  <ul className="prog-card__features">
+                    {program.features.map((feature) => (
+                      <li key={feature}>
+                        <CheckCircle2 size={15} strokeWidth={2.2} aria-hidden="true" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+
+                <CardFooter className="prog-card__footer">
+                  {/* [PLACEHOLDER] Visual-only add-to-cart action. [TODO] Wire program product details, cart state, and checkout. */}
+                  <button
+                    className="prog-card__add"
+                    type="button"
+                    aria-label={`Add ${program.title} to cart`}
+                  >
+                    Add program
+                    <Plus size={16} strokeWidth={2.4} aria-hidden="true" />
+                  </button>
+                </CardFooter>
+              </div>
+
               <div
                 className={
                   program.featured
@@ -63,41 +120,6 @@ export function ProgramsSection() {
                   </div>
                 )}
               </div>
-
-              <CardHeader className="prog-card__header">
-                <div className="prog-card__tags">
-                  {program.tags.map((tag, index) => (
-                    <span
-                      key={tag}
-                      className={index === 0 && program.featured ? "prog-tag prog-tag--mint" : "prog-tag"}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <h3 className="prog-card__title">
-                  {program.title}
-                </h3>
-              </CardHeader>
-
-              <CardContent className="prog-card__body">
-                <p>{program.description}</p>
-              </CardContent>
-
-              <CardFooter className="prog-card__footer">
-                <div className="prog-card__price">
-                  {program.price}
-                  {program.priceNote ? <small>{program.priceNote}</small> : null}
-                </div>
-                {/* [PLACEHOLDER] Visual-only add-to-cart action. [TODO] Wire program product details, cart state, and checkout. */}
-                <button
-                  className="prog-card__add"
-                  type="button"
-                  aria-label={`Add ${program.title} to cart`}
-                >
-                  <Plus size={16} strokeWidth={2.4} aria-hidden="true" />
-                </button>
-              </CardFooter>
             </Card>
           ))}
         </div>

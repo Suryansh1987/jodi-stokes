@@ -179,9 +179,20 @@ test.describe("public home page", () => {
       programsSection.getByRole("heading", { name: "The Reset" }),
     ).toBeVisible();
     await expect(programsSection.getByText("Most popular")).toBeVisible();
+    await expect(programsSection.locator(".prog-card")).toHaveCount(3);
+    await expect(programsSection.locator(".prog-card--featured")).toHaveCount(1);
     await expect(programsSection.getByText("$249")).toBeVisible();
     await expect(programsSection.getByText("$189")).toBeVisible();
     await expect(programsSection.getByText("$99")).toBeVisible();
+    await expect(
+      programsSection.getByText("Printable journal", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      programsSection.getByText("Hypertrophy focus", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      programsSection.getByText("Six-week kickstart", { exact: true }),
+    ).toBeVisible();
     await expectImageLoaded(
       programsSection.getByRole("img", { name: "Jodi side plank outdoors" }),
     );
