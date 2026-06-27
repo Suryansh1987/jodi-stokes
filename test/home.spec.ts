@@ -70,6 +70,16 @@ test.describe("public home page", () => {
     await expect(
       page.getByRole("heading", { name: /Strong at any age/ }),
     ).toBeVisible();
+    await expectImageLoaded(
+      page.getByRole("img", { name: "Jodi Stokes coaching portrait" }),
+    );
+    const aboutSection = page.locator(".about");
+    await expect(aboutSection.getByText("15+")).toBeVisible();
+    await expect(aboutSection.getByText("Years coaching")).toBeVisible();
+    await expect(aboutSection.getByText("4.9★")).toBeVisible();
+    await expect(
+      aboutSection.getByRole("link", { name: "Train with Jodi" }),
+    ).toHaveAttribute("href", "#coaching");
     const credentials = page.locator(".about-credentials");
     await expect(credentials.getByText("NASM-CPT", { exact: true })).toBeVisible();
     await expect(credentials.getByText("PN Level 2", { exact: true })).toBeVisible();

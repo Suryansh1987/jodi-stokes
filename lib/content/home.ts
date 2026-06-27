@@ -42,6 +42,17 @@ export type Credential = {
   description: string;
 };
 
+export type AboutStat = {
+  value: string;
+  label: string;
+};
+
+export type AboutBreakout = {
+  title: string;
+  description: string;
+  cta: NavLink;
+};
+
 export type Program = {
   title: string;
   description: string;
@@ -202,8 +213,24 @@ export const aboutContent = {
     src: "/images/jodi/jodi-leadership.png",
     alt: "Jodi Stokes at her studio",
   },
+  secondaryImage: {
+    src: "/images/jodi/jodi-portrait.jpg",
+    alt: "Jodi Stokes coaching portrait",
+  },
   signature: "Jodi",
   signatureLabel: "founder",
+  breakout: {
+    title: "The full method",
+    description:
+      "Strength, sleep, food, and recovery are coached together so progress lasts outside the gym.",
+    cta: { href: "#coaching", label: "Train with Jodi" },
+  } satisfies AboutBreakout,
+  stats: [
+    { value: "15+", label: "Years coaching" },
+    { value: "2,400", label: "Clients trained" },
+    { value: "4.9★", label: "Average rating" },
+    { value: "4", label: "Credentials" },
+  ] satisfies AboutStat[],
   paragraphs: [
     "I started coaching in 2009 because the industry was selling the wrong things to the wrong people. Bootcamps that broke knees. Diets that broke trust. I built something different - a method rooted in strength, sleep, real food, and the long game.",
     "Whether you train with me 1:1, follow a program, or just read the book - the rules are the same. Show up. Lift heavy. Eat enough. Sleep more than you think you should. That's it, be fitt.",

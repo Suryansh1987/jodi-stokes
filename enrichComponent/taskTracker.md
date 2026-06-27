@@ -43,7 +43,7 @@ This tracker documents future UI enrichment work discovered through Magic UI and
 | 0 | [Shared Header Topbar Navigation](./0.%20Shared%20Header%20Topbar%20Navigation.md) | Header / topbar / mobile nav | `Resizable Navbar` | `magic` | Completed | High |
 | 1 | [Hero Section](./1.%20Hero%20Section.md) | Hero | `PulseFit hero` | `magic` | Completed | High |
 | 2 | [Pillars Section](./2.%20Pillars%20Section.md) | Pillars | `Features 10` | `magic` | Completed | Medium |
-| 3 | [About Section](./3.%20About%20Section.md) | About | `About 3` | `magic` | Not Started | Medium |
+| 3 | [About Section](./3.%20About%20Section.md) | About | `About 3` | `magic` | Completed | Medium |
 | 4 | [Programs Section](./4.%20Programs%20Section.md) | Programs | `Pricing Card` | `magic` | Not Started | Medium |
 | 5 | [Book Section](./5.%20Book%20Section.md) | Book | `Feature Showcase` | `magic` | Not Started | High |
 | 6 | [Shop Section Product Cards](./6.%20Shop%20Section%20Product%20Cards.md) | Shop | `Product Card` | `magic` | Not Started | High |
@@ -58,6 +58,7 @@ This tracker documents future UI enrichment work discovered through Magic UI and
 - Task 0: Implemented the shared header/topbar/navigation enrichment with a registry-adapted `Resizable Navbar` primitive, preserving deterministic topbar announcements and existing placeholder actions. Verified with `npm run lint`, `npm run build`, and `npm run test:e2e` (11 passed, 3 skipped).
 - Task 1: Implemented the enriched home hero with a PulseFit-inspired coaching card stack, preserved priority Jodi portrait, and an accessible placeholder intro dialog. Verified with `npm run lint`, `npm run build`, and `PORT=3001 PLAYWRIGHT_BASE_URL=http://127.0.0.1:3001 npm run test:e2e` after default port 3000 was occupied (11 passed, 3 skipped).
 - Task 2: Implemented the enriched Pillars section with a `Features 10`-inspired shadcn Card grid, deterministic lucide role icons, responsive single-column cards, and updated Playwright pillar-card coverage. Verified with `npm run lint`, `npm run build`, and `npm run test:e2e` (11 passed, 3 skipped).
+- Task 3: Implemented the enriched About section with an `About 3`-inspired local-image editorial layout, breakout coaching CTA, proof stats, preserved credentials, and updated Playwright coverage. Verified with `npm run lint`, `npm run build`, and `npm run test:e2e` (11 passed, 3 skipped).
 
 ## Global Dependency Notes
 
