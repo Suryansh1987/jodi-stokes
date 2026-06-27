@@ -214,8 +214,23 @@ test.describe("public home page", () => {
     await expect(bookSection.getByText("$32")).toBeVisible();
     await expect(bookSection.getByText("$42")).toBeVisible();
     await expect(bookSection.getByText("24% off · Signed copies")).toBeVisible();
+    await expect(bookSection.getByText("60+ exercises")).toBeVisible();
+    await expect(bookSection.getByText("All ages")).toBeVisible();
+    await expect(bookSection.getByText("Trainer-ready", { exact: true })).toBeVisible();
     await expect(bookSection.getByText("60+ pool exercises")).toBeVisible();
     await expect(bookSection.getByText("Trainer-ready scripts")).toBeVisible();
+    await expect(
+      bookSection.getByRole("heading", { level: 3, name: "Pool strength" }),
+    ).toBeVisible();
+    await expect(
+      bookSection.getByRole("heading", { level: 3, name: "Class planning" }),
+    ).toBeVisible();
+    await expect(
+      bookSection.getByRole("heading", {
+        level: 3,
+        name: "Joint-friendly modifications",
+      }),
+    ).toBeVisible();
     await expect(bookSection.getByRole("link", { name: /Buy the book/ })).toHaveAttribute(
       "href",
       "#",

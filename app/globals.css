@@ -1075,15 +1075,48 @@
   }
 
   .book {
-    @apply grid items-center gap-12 py-24 md:grid-cols-[1fr_1.05fr] md:gap-20;
+    @apply grid items-center gap-12 py-24 md:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] md:gap-16;
   }
 
   .book-cover {
     @apply relative flex justify-center;
   }
 
+  .book-showcase {
+    @apply relative flex min-h-[620px] w-full max-w-[480px] flex-col justify-between overflow-hidden rounded-lg border border-white/10 bg-[#0b1714] p-6 ring-1 ring-mint/15;
+    box-shadow: 0 34px 80px rgb(0 0 0 / 42%);
+  }
+
+  .book-showcase::before {
+    content: "";
+    @apply absolute inset-0;
+    background:
+      linear-gradient(135deg, rgb(183 244 216 / 12%), transparent 42%),
+      radial-gradient(circle at 78% 18%, rgb(255 111 89 / 16%), transparent 30%),
+      linear-gradient(180deg, transparent, rgb(0 0 0 / 36%));
+    pointer-events: none;
+  }
+
+  .book-showcase__meta,
+  .book-showcase__footer {
+    @apply relative z-[2] flex items-center justify-between gap-3;
+  }
+
+  .book-showcase__meta span,
+  .book-showcase__footer span {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-2 font-display text-[0.68rem] font-bold uppercase tracking-[0.12em] text-white/70;
+  }
+
+  .book-showcase__footer {
+    @apply flex-wrap;
+  }
+
+  .book-showcase__footer svg {
+    @apply text-mint;
+  }
+
   .book-3d {
-    @apply relative aspect-[3/4] w-80 transition-transform;
+    @apply relative z-[1] mx-auto aspect-[3/4] w-80 transition-transform;
     filter: drop-shadow(20px 30px 50px rgb(0 0 0 / 55%));
     transform: perspective(1200px) rotateY(-22deg) rotateX(4deg);
     transform-style: preserve-3d;
@@ -1134,8 +1167,16 @@
     @apply max-w-[52ch] text-[1.05rem] text-white/80;
   }
 
+  .book-stats {
+    @apply mb-5 flex flex-wrap gap-2;
+  }
+
+  .book-stats span {
+    @apply rounded-full border border-mint/30 bg-mint/10 px-3 py-1.5 font-display text-[0.72rem] font-bold uppercase tracking-[0.12em] text-mint;
+  }
+
   .price-row {
-    @apply mb-6 flex items-baseline gap-4;
+    @apply mb-6 flex flex-wrap items-baseline gap-4;
   }
 
   .price-row__now {
@@ -1161,6 +1202,26 @@
 
   .book-features svg {
     @apply mt-1 shrink-0 text-mint;
+  }
+
+  .book-detail-stack {
+    @apply mb-8 grid gap-3;
+  }
+
+  .book-detail {
+    @apply grid grid-cols-[auto_1fr] gap-4 rounded-lg border border-white/10 bg-white/[0.04] p-4;
+  }
+
+  .book-detail__number {
+    @apply flex size-9 items-center justify-center rounded-full bg-gold font-display text-xs font-extrabold text-ink;
+  }
+
+  .book-detail h3 {
+    @apply font-display text-base font-extrabold uppercase tracking-[0.06em] text-white;
+  }
+
+  .book-detail p {
+    @apply mt-1 max-w-[54ch] text-sm leading-6 text-white/65;
   }
 
   .cta-row {
@@ -1979,6 +2040,10 @@
     @apply grid-cols-1 gap-12;
   }
 
+  .book-showcase {
+    @apply min-h-[560px] max-w-[560px];
+  }
+
   .book-3d {
     @apply w-[260px];
   }
@@ -2121,8 +2186,21 @@
     transform: perspective(900px) rotateY(-12deg) rotateX(2deg);
   }
 
+  .book-showcase {
+    @apply min-h-[430px] p-4;
+  }
+
+  .book-showcase__meta,
+  .book-showcase__footer {
+    @apply justify-center;
+  }
+
   .book-features {
     @apply grid-cols-1 gap-2.5;
+  }
+
+  .book-detail {
+    @apply grid-cols-1 gap-3;
   }
 
   .cta-row {

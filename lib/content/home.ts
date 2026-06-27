@@ -310,6 +310,7 @@ export const bookContent = {
   price: "$32",
   compareAtPrice: "$42",
   offer: "24% off · Signed copies",
+  stats: ["60+ exercises", "All ages", "Trainer-ready"],
   features: [
     "60+ pool exercises",
     "Class & lesson plans",
@@ -317,6 +318,23 @@ export const bookContent = {
     "Rehab modifications",
     "Trainer-ready scripts",
     "Signed by Jodi",
+  ],
+  details: [
+    {
+      title: "Pool strength",
+      description:
+        "Low-impact strength sequences for building control, balance, and confidence in the water.",
+    },
+    {
+      title: "Class planning",
+      description:
+        "Ready-to-teach lesson structures for trainers, teachers, and health support teams.",
+    },
+    {
+      title: "Joint-friendly modifications",
+      description:
+        "Regression and progression notes for mixed ages, rehab needs, and changing ability levels.",
+    },
   ],
   // [PLACEHOLDER] Book CTAs are static. [TODO] Wire book checkout/download/bulk inquiry.
   ctas: [
