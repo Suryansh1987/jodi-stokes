@@ -1,4 +1,4 @@
-import { Heart } from "lucide-react";
+import { Heart, ShoppingCart } from "lucide-react";
 
 import { SectionIntro } from "@/components/section/shared/section-intro";
 import {
@@ -75,27 +75,49 @@ function ProductCard({ product }: { product: ShopProduct }) {
           <ProductArt product={product} />
         </CardHeader>
         <CardContent className="merch-card__body">
-          <p className="merch-card__category">{product.category}</p>
+          <div className="merch-card__meta">
+            <p className="merch-card__category">{product.category}</p>
+            {product.availability ? (
+              <span className="merch-card__availability">
+                {product.availability}
+              </span>
+            ) : null}
+          </div>
           <h3 className="merch-card__title">{product.name}</h3>
+          <div className="merch-card__notes">
+            {product.quickNote ? <span>{product.quickNote}</span> : null}
+            {product.shippingNote ? <span>{product.shippingNote}</span> : null}
+          </div>
         </CardContent>
         <CardFooter className="merch-card__footer">
-          <p className="merch-card__price">
-            {product.price}
-            {product.compareAtPrice ? (
-              <span>{product.compareAtPrice}</span>
-            ) : null}
-          </p>
-          <div className="merch-colors" aria-label={`${product.name} colors`}>
-            {product.colors.map((color) => (
-              <span
-                key={color}
-                className="merch-color"
-                data-color={color}
-                aria-label={`${product.name} color ${color}`}
-                role="img"
-              />
-            ))}
+          <div className="merch-card__purchase">
+            <p className="merch-card__price">
+              {product.price}
+              {product.compareAtPrice ? (
+                <span>{product.compareAtPrice}</span>
+              ) : null}
+            </p>
+            <div className="merch-colors" aria-label={`${product.name} colors`}>
+              {product.colors.map((color) => (
+                <span
+                  key={color}
+                  className="merch-color"
+                  data-color={color}
+                  aria-label={`${product.name} color ${color}`}
+                  role="img"
+                />
+              ))}
+            </div>
           </div>
+          {/* [PLACEHOLDER] Add-to-cart button is visual-only. [TODO] Wire cart state, variant selection, and checkout. */}
+          <button
+            type="button"
+            className="merch-add"
+            aria-label={`Add ${product.name} to cart`}
+          >
+            <ShoppingCart size={15} strokeWidth={2.4} aria-hidden="true" />
+            Add to cart
+          </button>
         </CardFooter>
       </Card>
     </article>

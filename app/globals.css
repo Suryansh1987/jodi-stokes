@@ -1250,22 +1250,23 @@
   }
 
   .merch-grid {
-    @apply grid gap-[22px] lg:grid-cols-4;
+    @apply grid gap-[22px] md:grid-cols-2 lg:grid-cols-4;
   }
 
   .merch-card {
-    @apply h-full gap-0 overflow-hidden rounded-[22px] border border-white/10 bg-surface-1 py-0 text-white shadow-none transition;
+    @apply h-full min-h-[520px] gap-0 overflow-hidden rounded-lg border border-white/10 bg-surface-1 py-0 text-white shadow-none transition;
     transition-duration: 0.4s;
     transition-timing-function: var(--ease);
   }
 
   .merch-card:hover {
-    @apply border-mint;
+    @apply border-mint shadow-[0_22px_60px_rgb(0_0_0_/_0.32)];
     transform: translateY(-6px);
   }
 
   .merch-card__media {
-    @apply relative aspect-square overflow-hidden rounded-none px-0;
+    @apply relative min-h-[230px] overflow-hidden rounded-none px-0;
+    aspect-ratio: 1 / 0.96;
   }
 
   .merch-badge {
@@ -1292,11 +1293,19 @@
   }
 
   .merch-card__body {
-    @apply flex flex-col gap-1.5 px-[22px] pb-0 pt-5;
+    @apply flex flex-col gap-3 px-[22px] pb-0 pt-5;
+  }
+
+  .merch-card__meta {
+    @apply flex items-start justify-between gap-3;
   }
 
   .merch-card__category {
     @apply font-display text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-mint;
+  }
+
+  .merch-card__availability {
+    @apply shrink-0 rounded-full border border-white/10 bg-white/[0.06] px-2 py-1 font-display text-[0.62rem] font-bold uppercase tracking-[0.12em] text-white/60;
   }
 
   .merch-card__title {
@@ -1305,8 +1314,20 @@
     letter-spacing: 0;
   }
 
+  .merch-card__notes {
+    @apply flex flex-wrap gap-1.5 text-xs text-white/60;
+  }
+
+  .merch-card__notes span {
+    @apply rounded-md bg-black/20 px-2 py-1;
+  }
+
   .merch-card__footer {
-    @apply mt-auto flex items-center justify-between gap-3 px-[22px] pb-6 pt-4;
+    @apply mt-auto flex flex-col gap-4 px-[22px] pb-6 pt-5;
+  }
+
+  .merch-card__purchase {
+    @apply flex w-full items-center justify-between gap-3;
   }
 
   .merch-card__price {
@@ -1324,6 +1345,19 @@
 
   .merch-color {
     @apply size-3.5 rounded-full border border-white/20;
+  }
+
+  .merch-add {
+    @apply inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-white/10 bg-white px-4 py-3 font-display text-[0.72rem] font-extrabold uppercase tracking-[0.14em] text-ink transition;
+  }
+
+  .merch-add:hover {
+    @apply border-mint bg-mint;
+    transform: translateY(-2px);
+  }
+
+  .merch-add:focus-visible {
+    @apply outline-2 outline-offset-4 outline-mint;
   }
 
   .merch-color[data-color="bone"] {
@@ -2229,7 +2263,11 @@
   }
 
   .merch-card__footer {
-    @apply flex-col items-start gap-2 px-4 pb-4 pt-3;
+    @apply gap-3 px-4 pb-4 pt-3;
+  }
+
+  .merch-card__purchase {
+    @apply flex-col items-start gap-2;
   }
 
   .merch-card__title {

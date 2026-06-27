@@ -77,6 +77,9 @@ export type ShopProduct = {
   badgeTone?: "mint" | "coral";
   art: "tee" | "bottle" | "mat" | "cap" | "crew" | "bands" | "journal" | "bag";
   colors: string[];
+  availability?: string;
+  shippingNote?: string;
+  quickNote?: string;
 };
 
 export type Testimonial = {
@@ -361,6 +364,9 @@ export const shopProducts: ShopProduct[] = [
     badge: "New",
     art: "tee",
     colors: ["bone", "ink", "mint", "coral"],
+    availability: "In stock",
+    shippingNote: "Ships in 2 days",
+    quickNote: "Studio cotton",
   },
   {
     name: "Stainless Bottle 28oz",
@@ -370,6 +376,9 @@ export const shopProducts: ShopProduct[] = [
     badgeTone: "coral",
     art: "bottle",
     colors: ["mint", "ink", "bone"],
+    availability: "Low stock",
+    shippingNote: "Free ship over $75",
+    quickNote: "Cold 24 hours",
   },
   {
     name: "Studio Mat - 6mm",
@@ -377,6 +386,9 @@ export const shopProducts: ShopProduct[] = [
     price: "$58",
     art: "mat",
     colors: ["coral", "ink", "mint"],
+    availability: "In stock",
+    shippingNote: "Oversize shipping",
+    quickNote: "Joint-friendly grip",
   },
   {
     name: "Studio Cap",
@@ -385,6 +397,9 @@ export const shopProducts: ShopProduct[] = [
     badge: "Limited",
     art: "cap",
     colors: ["ink", "mint", "bone"],
+    availability: "Limited run",
+    shippingNote: "Ships in 2 days",
+    quickNote: "Adjustable fit",
   },
   {
     name: "Strong For Life Crew",
@@ -392,6 +407,9 @@ export const shopProducts: ShopProduct[] = [
     price: "$62",
     art: "crew",
     colors: ["coral", "ink", "bone"],
+    availability: "In stock",
+    shippingNote: "Free ship over $75",
+    quickNote: "Midweight fleece",
   },
   {
     name: "Resistance Band Set",
@@ -399,6 +417,9 @@ export const shopProducts: ShopProduct[] = [
     price: "$28",
     art: "bands",
     colors: ["mint", "coral", "gold"],
+    availability: "In stock",
+    shippingNote: "Ships in 2 days",
+    quickNote: "Three tensions",
   },
   {
     name: "90-Day Training Journal",
@@ -406,6 +427,9 @@ export const shopProducts: ShopProduct[] = [
     price: "$24",
     art: "journal",
     colors: ["ink", "bone"],
+    availability: "In stock",
+    shippingNote: "Ships in 2 days",
+    quickNote: "Daily tracking",
   },
   {
     name: "Studio Tote + Journal",
@@ -415,6 +439,9 @@ export const shopProducts: ShopProduct[] = [
     badge: "Bundle",
     art: "bag",
     colors: ["bone", "ink"],
+    availability: "Bundle deal",
+    shippingNote: "Free ship over $75",
+    quickNote: "Save $10",
   },
 ];
 

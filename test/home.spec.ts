@@ -279,6 +279,7 @@ test.describe("public home page", () => {
     await expect(
       shopSection.getByRole("button", { name: "Show All products" }),
     ).toHaveAttribute("aria-pressed", "true");
+    await expect(shopSection.locator(".merch-card")).toHaveCount(8);
 
     for (const product of [
       "That's It Tee - Bone",
@@ -296,6 +297,9 @@ test.describe("public home page", () => {
       await expect(
         shopSection.getByRole("button", { name: `Save ${product}` }),
       ).toBeVisible();
+      await expect(
+        shopSection.getByRole("button", { name: `Add ${product} to cart` }),
+      ).toBeVisible();
     }
 
     const badges = shopSection.locator(".merch-badge");
@@ -305,6 +309,11 @@ test.describe("public home page", () => {
     await expect(badges.getByText("Bundle", { exact: true })).toBeVisible();
     await expect(shopSection.getByText("$38")).toBeVisible();
     await expect(shopSection.getByText("$48")).toBeVisible();
+    await expect(shopSection.getByText("Studio cotton")).toBeVisible();
+    await expect(shopSection.getByText("Low stock")).toBeVisible();
+    await expect(shopSection.getByText("Free ship over $75").first()).toBeVisible();
+    await expect(shopSection.getByText("Joint-friendly grip")).toBeVisible();
+    await expect(shopSection.getByText("Save $10")).toBeVisible();
     await expect(
       shopSection.locator(".merch-card__price").filter({ hasText: "$58" }),
     ).toHaveCount(2);
@@ -323,6 +332,7 @@ test.describe("public home page", () => {
     await expect(shopSection.locator(".art-journal")).toHaveCount(1);
     await expect(shopSection.locator(".art-bag")).toHaveCount(1);
     await expect(shopSection.locator(".merch-save")).toHaveCount(8);
+    await expect(shopSection.locator(".merch-add")).toHaveCount(8);
 
     await expectNoHorizontalOverflow(page);
   });
