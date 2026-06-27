@@ -65,6 +65,7 @@ test.describe("public home page", () => {
     await expect(
       page.getByRole("heading", { name: /Eat honest\./ }),
     ).toBeVisible();
+    await expect(page.locator(".pillar-card")).toHaveCount(3);
 
     await expect(
       page.getByRole("heading", { name: /Strong at any age/ }),
@@ -75,6 +76,7 @@ test.describe("public home page", () => {
     await expect(credentials.getByText("FMS Lvl 1", { exact: true })).toBeVisible();
     await expect(credentials.getByText("Author", { exact: true })).toBeVisible();
 
+    await heroSection.scrollIntoViewIfNeeded();
     await expectNoHorizontalOverflow(page);
     await expectNotOverlapping(
       page.locator(".hero__content"),
