@@ -2,14 +2,27 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Project Notes
 
-Implementation planning live in [`initializeTodo/taskTracker.md`](./initializeTodo/taskTracker.md). Future agents should read [`AGENTS.md`](./AGENTS.md) and the relevant numbered task before changing code.
+Project documentation, implementation plans, architecture notes, and other reference material live in the `<reference>/` directory.
 
-Search markers used during implementation:
+Before making changes:
+
+- Read [`AGENTS.md`](./AGENTS.md) for project-wide development guidelines.
+- Review any relevant documentation or task specifications in the `<reference>/` folder.
+
+### Search Markers
+
+The following markers are used throughout the codebase:
 
 - `[PLACEHOLDER]` marks temporary mock content, fake links, visual-only actions, or local-only form behavior.
-- `[TODO]` marks deferred future work such as checkout, CMS, newsletter API, coaching form submission, analytics, real search, or admin integration.
+- `[TODO]` marks deferred future work such as backend integrations, API connections, CMS implementation, analytics, authentication, search, admin functionality, or other planned enhancements.
 
-Public pages should live under `app/(public)/`. Page files should compose sections only; section code belongs in `components/sections/<route-name>/`, with shared public sections in `components/section/shared/`.
+## Project Structure
+
+Public pages should live under `app/(public)/`.
+
+- Route files (`page.tsx`) should compose sections only.
+- Route-specific sections belong in `components/sections/<route-name>/`.
+- Shared sections belong in `components/sections/shared/`.
 
 ## Getting Started
 
@@ -23,25 +36,27 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
+````
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the application by modifying the appropriate files under the `app/` directory. Changes are reflected automatically during development.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to optimize and load fonts.
 
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* [Next.js Documentation](https://nextjs.org/docs) – Learn about Next.js features and APIs.
+* [Learn Next.js](https://nextjs.org/learn) – An interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+You can also explore the [Next.js GitHub repository](https://github.com/vercel/next.js).
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The recommended deployment platform for Next.js applications is [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for additional deployment options and guidance.
+
+```
