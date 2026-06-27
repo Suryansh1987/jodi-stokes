@@ -38,6 +38,23 @@ test.describe("public home page", () => {
       page.getByRole("img", { name: "Jodi Stokes at her studio" }),
     );
 
+    await page.getByRole("button", { name: "Play intro" }).click();
+    const introDialog = page.getByRole("dialog", { name: "Intro preview" });
+    await expect(introDialog).toBeVisible();
+    await expect(
+      introDialog.getByText("Coaching video", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      introDialog.getByText(/real coaching video will live here/i),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Close intro preview" }).last(),
+    ).toBeFocused();
+    await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
+    await page.keyboard.press("Escape");
+    await expect(introDialog).toBeHidden();
+    await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
+
     await expect(page.locator("#about")).toBeVisible();
     await expect(
       page.getByRole("heading", { name: /Move smarter\./ }),

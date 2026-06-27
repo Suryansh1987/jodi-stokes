@@ -18,6 +18,17 @@ export type HeroChip = {
   label: string;
 };
 
+export type HeroProgramCard = {
+  eyebrow: string;
+  title: string;
+  detail: string;
+};
+
+export type HeroVideoPreview = {
+  title: string;
+  description: string;
+};
+
 export type Pillar = {
   number: string;
   role: string;
@@ -132,6 +143,28 @@ export const heroContent = {
     { title: "+12 lbs lean", label: "Client · 16 wks" },
     { title: "Sleep · Stress · Plate", label: "The full method" },
   ] satisfies HeroChip[],
+  programCards: [
+    {
+      eyebrow: "01 · Strength",
+      title: "Lift for life",
+      detail: "Progressive sessions built around joints, sleep, and momentum.",
+    },
+    {
+      eyebrow: "02 · Lifestyle",
+      title: "Recover hard",
+      detail: "Weekly rhythm checks that keep stress, food, and training aligned.",
+    },
+    {
+      eyebrow: "03 · Nutrition",
+      title: "Eat enough",
+      detail: "Simple plate rules for energy, lean mass, and consistency.",
+    },
+  ] satisfies HeroProgramCard[],
+  videoPreview: {
+    title: "Intro preview",
+    description:
+      "A real coaching video will live here once Jodi's media library is connected.",
+  } satisfies HeroVideoPreview,
 };
 
 export const pillars: Pillar[] = [

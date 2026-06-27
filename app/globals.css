@@ -401,8 +401,13 @@
   }
 
   .hero__content,
+  .hero-visual,
   .hero-photo {
     @apply relative z-10;
+  }
+
+  .hero__content {
+    animation: hero-rise 0.7s var(--ease-out) both;
   }
 
   .hero-tag {
@@ -471,6 +476,11 @@
       0 40px 100px rgb(0 0 0 / 50%),
       0 0 0 1px var(--w10);
     isolation: isolate;
+    animation: hero-rise 0.8s var(--ease-out) 0.08s both;
+  }
+
+  .hero-visual {
+    @apply grid w-full max-w-[600px] justify-self-end gap-4;
   }
 
   .hero-photo::after {
@@ -550,6 +560,85 @@
 
   .chip-2 small {
     @apply text-white/60;
+  }
+
+  .hero-program-stack {
+    @apply relative z-[4] grid gap-3 px-3 md:grid-cols-3;
+    animation: hero-rise 0.8s var(--ease-out) 0.16s both;
+  }
+
+  .hero-program-card {
+    @apply rounded-2xl border border-white/10 bg-white/6 p-4 backdrop-blur-xl transition;
+    box-shadow: 0 18px 50px rgb(0 0 0 / 18%);
+  }
+
+  .hero-program-card:hover {
+    @apply border-mint/40 bg-white/10;
+    transform: translateY(-3px);
+  }
+
+  .hero-program-card span {
+    @apply mb-3 block font-display text-[0.64rem] font-bold uppercase tracking-[0.18em] text-mint;
+  }
+
+  .hero-program-card h3 {
+    @apply mb-1.5 font-display text-base font-bold text-white;
+    letter-spacing: 0;
+  }
+
+  .hero-program-card p {
+    @apply text-sm leading-relaxed text-white/65;
+  }
+
+  .hero-dialog {
+    @apply fixed inset-0 z-[130] grid place-items-center px-5 py-8;
+  }
+
+  .hero-dialog__backdrop {
+    @apply absolute inset-0 cursor-pointer border-0 bg-black/75 backdrop-blur-md;
+  }
+
+  .hero-dialog__panel {
+    @apply relative z-[1] grid w-full max-w-3xl overflow-hidden rounded-[24px] border border-white/15 bg-surface-1 shadow-2xl shadow-black/70 md:grid-cols-[1.1fr_0.9fr];
+    animation: hero-dialog-in 0.32s var(--ease-out) both;
+  }
+
+  .hero-dialog__close {
+    @apply absolute right-4 top-4 z-[2] grid size-10 cursor-pointer place-items-center rounded-full border border-white/20 bg-black/50 text-white transition;
+  }
+
+  .hero-dialog__close:hover {
+    @apply border-white bg-white text-ink;
+  }
+
+  .hero-dialog__close:focus-visible {
+    @apply outline-2 outline-offset-4 outline-mint;
+  }
+
+  .hero-dialog__stage {
+    @apply grid min-h-[260px] place-items-center bg-ink text-mint;
+    background:
+      linear-gradient(145deg, rgb(20 232 176 / 18%), transparent 42%),
+      linear-gradient(320deg, rgb(255 77 94 / 14%), transparent 46%),
+      var(--ink);
+  }
+
+  .hero-dialog__stage svg {
+    @apply size-20 rounded-full border border-mint/40 bg-mint/10 p-5;
+    box-shadow: 0 0 60px var(--mint-glow);
+  }
+
+  .hero-dialog__content {
+    @apply flex flex-col justify-center p-7 md:p-10;
+  }
+
+  .hero-dialog__content h2 {
+    @apply mb-3 font-display text-4xl font-extrabold text-white;
+    letter-spacing: 0;
+  }
+
+  .hero-dialog__content p {
+    @apply text-base leading-relaxed text-white/72;
   }
 
   .pillars {
@@ -1620,10 +1709,41 @@
   }
 }
 
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .topbar__marquee,
-  .hero-tag__dot {
+  .hero-tag__dot,
+  .hero__content,
+  .hero-photo,
+  .hero-program-stack,
+  .hero-dialog__panel {
     animation: none;
+  }
+
+  .hero-program-card:hover,
+  .play-btn:hover {
+    transform: none;
   }
 }
 
@@ -1636,6 +1756,10 @@
 @media (max-width: 1100px) {
   .hero {
     @apply grid-cols-1;
+  }
+
+  .hero-visual {
+    @apply max-w-none justify-self-stretch;
   }
 
   .pillar-grid {
@@ -1748,6 +1872,10 @@
 
   .hero-stat strong {
     @apply text-2xl;
+  }
+
+  .hero-program-stack {
+    @apply px-0;
   }
 
   .chip-1,
