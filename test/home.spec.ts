@@ -399,21 +399,37 @@ test.describe("public home page", () => {
     ).toBeVisible();
     await expect(coachingSection.getByText("Weekly 1:1 video call")).toBeVisible();
     await expect(coachingSection.getByText("Sep 8, 2026 · 3 seats left")).toBeVisible();
+    await expect(coachingSection.getByText("Private application")).toBeVisible();
+    await expect(coachingSection.getByText("10-minute fit review")).toBeVisible();
+    await expect(coachingSection.getByText("48-hour response")).toBeVisible();
+    await expect(coachingSection.getByText("Limited to 8 clients")).toBeVisible();
+    await expect(
+      coachingSection.getByText("Apply for the next cohort"),
+    ).toBeVisible();
     await expect(coachingSection.getByText("$2,400")).toBeVisible();
     await expect(coachingSection.getByLabel("Your name")).toBeVisible();
     await expect(coachingSection.getByLabel("Email")).toBeVisible();
     await expect(coachingSection.getByLabel("Phone")).toBeVisible();
     await expect(coachingSection.getByLabel("Main goal")).toBeVisible();
+    await expect(
+      coachingSection.getByLabel(
+        "What do you want Jodi to know before the first call?",
+      ),
+    ).toBeVisible();
     await coachingSection.getByLabel("Your name").fill("Avery Client");
     await coachingSection.getByLabel("Email").fill("avery@example.com");
     await coachingSection.getByLabel("Phone").fill("+15551234567");
     await coachingSection
       .getByLabel("Main goal")
       .selectOption("Strength + longevity");
+    await coachingSection
+      .getByLabel("What do you want Jodi to know before the first call?")
+      .fill("I want a sustainable strength plan around travel.");
     await coachingSection.getByRole("button", { name: /Apply for fall cohort/ }).click();
     await expect(
       coachingSection.getByText("Application received. Jodi's team will follow up."),
     ).toBeVisible();
+    await expectNoHorizontalOverflow(page);
 
     const journalSection = page.locator("#journal");
     await journalSection.scrollIntoViewIfNeeded();

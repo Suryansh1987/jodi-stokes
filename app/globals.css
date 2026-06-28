@@ -1689,20 +1689,24 @@
   }
 
   .coaching {
-    @apply grid overflow-hidden rounded-[30px] border border-white/10 lg:grid-cols-2;
+    @apply grid overflow-hidden rounded-[30px] border border-white/10 bg-surface-1 shadow-[0_28px_80px_rgba(0,0,0,0.28)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)];
   }
 
   .coach-left {
-    @apply relative flex flex-col justify-between gap-12 overflow-hidden bg-mint px-14 py-16 text-ink;
+    @apply relative flex min-h-[680px] flex-col justify-between gap-12 overflow-hidden bg-mint px-14 py-16 text-ink;
   }
 
   .coach-left::after {
     content: "";
-    @apply absolute bottom-[-120px] right-[-120px] size-80 rounded-full border border-dashed border-ink/20;
+    @apply absolute bottom-[-150px] right-[-120px] size-96 rounded-full border border-dashed border-ink/20;
+  }
+
+  .coach-left__kicker {
+    @apply mb-5 inline-flex rounded-full border border-ink/15 bg-ink/10 px-3.5 py-2 font-display text-[0.68rem] font-bold uppercase tracking-[0.2em] text-ink/75;
   }
 
   .coach-left h2 {
-    @apply font-display text-[clamp(2.4rem,4.4vw,4rem)] font-extrabold text-ink;
+    @apply max-w-[9ch] font-display text-[clamp(2.4rem,4.4vw,4.25rem)] font-extrabold text-ink;
     line-height: 0.96;
     letter-spacing: 0;
   }
@@ -1712,17 +1716,16 @@
   }
 
   .coach-feat {
-    @apply grid list-none gap-3;
+    @apply relative z-[1] grid list-none gap-3;
   }
 
   .coach-feat li {
-    @apply flex items-center gap-3 font-display text-base font-semibold text-ink;
+    @apply flex items-center gap-3 rounded-2xl border border-ink/10 bg-white/[0.18] px-4 py-3 font-display text-base font-semibold text-ink shadow-[0_14px_30px_rgba(20,28,26,0.08)] backdrop-blur;
     letter-spacing: 0;
   }
 
-  .coach-feat li::before {
-    content: "";
-    @apply size-1.5 shrink-0 rounded-full bg-ink;
+  .coach-feat svg {
+    @apply shrink-0 text-ink;
   }
 
   .coach-left__label {
@@ -1734,17 +1737,42 @@
     letter-spacing: 0;
   }
 
+  .coach-left__footer {
+    @apply relative z-[1] grid gap-6;
+  }
+
+  .coach-detail-grid {
+    @apply grid gap-2 sm:grid-cols-3;
+  }
+
+  .coach-detail-grid span {
+    @apply rounded-2xl border border-ink/10 bg-ink/[0.08] px-3.5 py-3 font-display text-[0.72rem] font-bold uppercase tracking-[0.12em] text-ink/80;
+  }
+
   .coach-right {
     @apply relative flex flex-col justify-center gap-6 bg-ink px-14 py-16;
   }
 
   .coach-right::before {
     content: "";
-    @apply absolute bottom-[30%] left-[-1px] top-[30%] w-0.5 bg-mint;
+    @apply absolute bottom-[8%] left-[-1px] top-[8%] w-0.5 bg-mint;
+  }
+
+  .coach-card-head {
+    @apply flex items-center gap-4 rounded-3xl border border-white/10 bg-white/[0.035] p-4;
+  }
+
+  .coach-card-head__icon {
+    @apply grid size-12 shrink-0 place-items-center rounded-2xl bg-mint text-ink;
+  }
+
+  .coach-card-head__title {
+    @apply mt-1 font-display text-[1.1rem] font-bold text-white;
+    letter-spacing: 0;
   }
 
   .coach-tier {
-    @apply flex items-baseline gap-3.5;
+    @apply flex items-end justify-between gap-5 rounded-3xl border border-white/10 bg-surface-1 px-5 py-4;
   }
 
   .coach-tier__price {
@@ -1758,7 +1786,11 @@
   }
 
   .coach-form {
-    @apply mt-[18px] grid gap-3;
+    @apply grid gap-3 rounded-3xl border border-white/10 bg-white/[0.035] p-4;
+  }
+
+  .coach-form__field {
+    @apply min-w-0;
   }
 
   .coach-form label {
@@ -1766,16 +1798,23 @@
   }
 
   .coach-form input,
-  .coach-form select {
+  .coach-form select,
+  .coach-form textarea {
     @apply w-full rounded-xl border border-white/10 bg-surface-1 px-[18px] py-3.5 font-body text-[0.96rem] text-white outline-none transition;
   }
 
-  .coach-form input::placeholder {
+  .coach-form textarea {
+    @apply min-h-28 resize-y;
+  }
+
+  .coach-form input::placeholder,
+  .coach-form textarea::placeholder {
     @apply text-white/40;
   }
 
   .coach-form input:focus,
-  .coach-form select:focus {
+  .coach-form select:focus,
+  .coach-form textarea:focus {
     @apply border-mint;
   }
 
@@ -1784,7 +1823,7 @@
   }
 
   .coach-form__submit {
-    @apply mt-2 w-full py-4;
+    @apply mt-1 w-full py-4;
   }
 
   .form-status {
@@ -2003,6 +2042,7 @@
   .site-footer button:focus-visible,
   .coach-form input:focus-visible,
   .coach-form select:focus-visible,
+  .coach-form textarea:focus-visible,
   .btn-primary:focus-visible,
   .btn-ghost:focus-visible {
     @apply outline-2 outline-offset-4 outline-mint;
@@ -2367,16 +2407,24 @@
     @apply px-6 py-9;
   }
 
+  .coach-left {
+    @apply min-h-0;
+  }
+
   .coach-right::before {
     @apply hidden;
   }
 
   .coach-tier {
-    @apply flex-col items-start gap-1;
+    @apply flex-col items-start gap-1 rounded-2xl;
   }
 
   .coach-tier__price {
     @apply text-[2.8rem];
+  }
+
+  .coach-form {
+    @apply rounded-2xl p-3;
   }
 
   .coach-form__row {

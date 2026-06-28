@@ -502,6 +502,13 @@ export const coachingContent = {
   nextCohort: "Sep 8, 2026 · 3 seats left",
   investment: "$2,400",
   investmentNote: "/ 12 weeks · or 3× $850",
+  applicationKicker: "Private application",
+  applicationDetails: [
+    "10-minute fit review",
+    "48-hour response",
+    "Limited to 8 clients",
+  ],
+  messagePrompt: "What do you want Jodi to know before the first call?",
   // [PLACEHOLDER] Form options are static. [TODO] Wire coaching application to CRM/backend.
   goalOptions: [
     "Body recomposition",
