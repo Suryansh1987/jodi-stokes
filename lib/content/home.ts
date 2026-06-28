@@ -89,6 +89,8 @@ export type Testimonial = {
   initials: string;
   name: string;
   detail: string;
+  tenure?: string;
+  focus?: string;
 };
 
 export type JournalPost = {
@@ -455,6 +457,8 @@ export const testimonials: Testimonial[] = [
     initials: "MR",
     name: "Margaret R.",
     detail: "Realtor · client since 2023",
+    tenure: "3 years",
+    focus: "Sleep · strength · food trust",
   },
   {
     quote:
@@ -464,6 +468,8 @@ export const testimonials: Testimonial[] = [
     initials: "DK",
     name: "Daniel K.",
     detail: "Architect · client since 2022",
+    tenure: "4 years",
+    focus: "Strength after 50",
   },
   {
     quote:
@@ -473,6 +479,8 @@ export const testimonials: Testimonial[] = [
     initials: "SP",
     name: "Sasha P.",
     detail: "Surgeon · client since 2021",
+    tenure: "5 years",
+    focus: "Nutrition consistency",
   },
 ];
 

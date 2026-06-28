@@ -351,13 +351,42 @@ test.describe("public home page", () => {
         name: /Real people\. Real results\./,
       }),
     ).toBeVisible();
+    await expect(testimonialsSection.locator(".test-card")).toHaveCount(3);
+    await expect(
+      testimonialsSection.locator('.test-card[data-featured="true"]'),
+    ).toHaveCount(1);
     await expect(testimonialsSection.getByText("★★★★★")).toHaveCount(3);
+    await expect(
+      testimonialsSection.getByText(
+        "I came to Jodi for the body. I stayed for the brain. Three years in I sleep better, lift heavier, and stress about food half as much.",
+      ),
+    ).toBeVisible();
+    await expect(
+      testimonialsSection.getByText(
+        "Jodi got me back under a barbell at 54 and I'm stronger than I was at 30. Her plans are stupidly simple, which is the whole point.",
+      ),
+    ).toBeVisible();
+    await expect(
+      testimonialsSection.getByText(
+        "Six other programs and a divorce later, this is the one that finally clicked. Nutrition felt boring before - now it's automatic.",
+      ),
+    ).toBeVisible();
     await expect(testimonialsSection.getByText("-28 lb")).toBeVisible();
     await expect(testimonialsSection.getByText("+14 lb")).toBeVisible();
     await expect(testimonialsSection.getByText("-42 lb")).toBeVisible();
+    await expect(testimonialsSection.getByText("3 years")).toBeVisible();
+    await expect(testimonialsSection.getByText("Strength after 50")).toBeVisible();
+    await expect(testimonialsSection.getByText("Nutrition consistency")).toBeVisible();
+    await expect(testimonialsSection.getByText("MR")).toBeVisible();
+    await expect(testimonialsSection.getByText("DK")).toBeVisible();
+    await expect(testimonialsSection.getByText("SP")).toBeVisible();
     await expect(testimonialsSection.getByText("Margaret R.")).toBeVisible();
     await expect(testimonialsSection.getByText("Daniel K.")).toBeVisible();
     await expect(testimonialsSection.getByText("Sasha P.")).toBeVisible();
+    await expect(testimonialsSection.getByText("Realtor · client since 2023")).toBeVisible();
+    await expect(testimonialsSection.getByText("Architect · client since 2022")).toBeVisible();
+    await expect(testimonialsSection.getByText("Surgeon · client since 2021")).toBeVisible();
+    await expectNoHorizontalOverflow(page);
 
     const coachingSection = page.locator("#coaching");
     await coachingSection.scrollIntoViewIfNeeded();
