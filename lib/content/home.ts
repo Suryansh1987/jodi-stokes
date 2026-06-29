@@ -573,6 +573,9 @@ export const newsletterContent = {
 };
 
 export const footerContent = {
+  brandName: "Jodi Stokes Fitness",
+  largeName: "Jodi Stokes Fitness",
+  kicker: "Train · Lifestyle · Nutrition",
   description:
     "Sustainable fitness, smart nutrition, and a lifestyle you'll actually keep. Coaching since 2009, online since 2014, in your inbox every Monday.",
   copyright: "© 2026 Jodi Stokes Fitness. All rights reserved.",

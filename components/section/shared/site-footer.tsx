@@ -14,43 +14,50 @@ const socialLinks = [
 export function SiteFooter() {
   return (
     <footer className="site-footer" data-screen-label="Footer">
-      <div className="foot-grid">
-        <div className="foot-brand">
-          <BrandLogo className="foot-brand__logo" />
-          <p>{footerContent.description}</p>
-          <div className="socials" aria-label="Social links">
-            {socialLinks.map((link) => (
-              <Link key={link.label} href={link.href} aria-label={link.label}>
-                <span aria-hidden="true">{link.icon}</span>
-              </Link>
+      <div className="site-footer__inner">
+        <div className="footer-large-name">{footerContent.largeName}</div>
+
+        <div className="foot-panel">
+          <div className="foot-brand">
+            <p className="foot-kicker">{footerContent.kicker}</p>
+            <BrandLogo className="foot-brand__logo" />
+            <p>{footerContent.description}</p>
+            <div className="socials" aria-label="Social links">
+              {socialLinks.map((link) => (
+                <Link key={link.label} href={link.href} aria-label={link.label}>
+                  <span aria-hidden="true">{link.icon}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="foot-grid">
+            {footerContent.linkGroups.map((group) => (
+              <nav key={group.title} className="foot-col" aria-label={group.title}>
+                <h2>{group.title}</h2>
+                <ul>
+                  {group.links.map((link) => (
+                    <li key={`${group.title}-${link.label}`}>
+                      <Link href={link.href}>{link.label}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
             ))}
           </div>
         </div>
 
-        {footerContent.linkGroups.map((group) => (
-          <nav key={group.title} className="foot-col" aria-label={group.title}>
-            <h2>{group.title}</h2>
-            <ul>
-              {group.links.map((link) => (
-                <li key={`${group.title}-${link.label}`}>
-                  <Link href={link.href}>{link.label}</Link>
-                </li>
-              ))}
-            </ul>
+        <div className="foot-base">
+          <p>{footerContent.copyright}</p>
+          {/* [PLACEHOLDER] Legal links are temporary. [TODO] Replace with real policy routes. */}
+          <nav aria-label="Legal">
+            {footerContent.legalLinks.map((link) => (
+              <Link key={link.label} href={link.href}>
+                {link.label}
+              </Link>
+            ))}
           </nav>
-        ))}
-      </div>
-
-      <div className="foot-base">
-        <p>{footerContent.copyright}</p>
-        {/* [PLACEHOLDER] Legal links are temporary. [TODO] Replace with real policy routes. */}
-        <nav aria-label="Legal">
-          {footerContent.legalLinks.map((link) => (
-            <Link key={link.label} href={link.href}>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        </div>
       </div>
     </footer>
   );

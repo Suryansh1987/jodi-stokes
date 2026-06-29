@@ -559,6 +559,12 @@ test.describe("public home page", () => {
         "Sustainable fitness, smart nutrition, and a lifestyle you'll actually keep.",
       ),
     ).toBeVisible();
+    await expect(footer.locator(".footer-large-name")).toHaveText(
+      "Jodi Stokes Fitness",
+    );
+    await expect(footer.getByText("Train · Lifestyle · Nutrition")).toBeVisible();
+    await expect(footer.locator(".socials a")).toHaveCount(4);
+    await expect(footer.locator(".foot-col")).toHaveCount(3);
 
     for (const social of ["Instagram", "TikTok", "YouTube", "Spotify"]) {
       await expect(footer.getByRole("link", { name: social })).toHaveAttribute(
