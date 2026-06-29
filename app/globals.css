@@ -1835,11 +1835,11 @@
   }
 
   .journal-grid {
-    @apply grid gap-[22px] lg:grid-cols-3;
+    @apply grid gap-8;
   }
 
   .post-card {
-    @apply gap-0 overflow-hidden rounded-[22px] border border-white/10 bg-surface-1 py-0 text-white shadow-none transition;
+    @apply grid gap-0 overflow-hidden rounded-[22px] border border-white/10 bg-ink py-0 text-white shadow-none transition md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)];
     transition-duration: 0.4s;
     transition-timing-function: var(--ease);
   }
@@ -1850,13 +1850,17 @@
   }
 
   .post-card__image {
-    @apply relative h-[200px] overflow-hidden rounded-none px-0;
+    @apply relative min-h-[250px] overflow-hidden rounded-none px-0;
   }
 
   .post-card__image::before {
     content: "";
-    @apply absolute inset-0 z-[1];
-    background: linear-gradient(180deg, transparent 40%, rgb(0 0 0 / 70%));
+    @apply pointer-events-none absolute inset-0 z-[1];
+    background: linear-gradient(90deg, transparent 42%, rgb(0 0 0 / 64%));
+  }
+
+  .post-card__image-link {
+    @apply relative block h-full min-h-[250px] overflow-hidden;
   }
 
   .post-card__gradient {
@@ -1876,29 +1880,73 @@
   }
 
   .post-card__tag {
-    @apply absolute left-4 top-4 z-[2] rounded-full bg-mint px-[11px] py-1.5 font-display text-[0.68rem] font-bold uppercase tracking-[0.16em] text-ink;
+    @apply absolute left-5 top-5 z-[2] rounded-full bg-mint px-[11px] py-1.5 font-display text-[0.68rem] font-bold uppercase tracking-[0.16em] text-ink;
   }
 
   .post-card__deco {
-    @apply absolute inset-0 z-[1] grid place-items-center font-script text-[4rem] font-bold text-white/20;
+    @apply absolute inset-0 z-[1] grid place-items-center font-script text-[clamp(4rem,9vw,7rem)] font-bold text-white/20;
   }
 
   .post-card__body {
-    @apply px-[26px] pb-[30px] pt-[26px];
+    @apply flex flex-col justify-center px-6 py-8 md:px-10 md:py-11;
+  }
+
+  .post-card__tags {
+    @apply mb-5 flex flex-wrap gap-2.5;
+  }
+
+  .post-card__tags span {
+    @apply rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 font-display text-[0.68rem] font-bold uppercase tracking-[0.14em] text-coral;
   }
 
   .post-card__meta {
-    @apply mb-3 flex gap-3.5 font-display text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white/60;
+    @apply flex flex-wrap gap-x-3 gap-y-1 font-display text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white/60;
+  }
+
+  .post-card__meta span:not(:last-child)::after {
+    content: "/";
+    @apply ml-3 text-white/20;
   }
 
   .post-card__body h3 {
-    @apply mb-2 font-display text-[1.24rem] font-bold text-white;
-    line-height: 1.15;
+    @apply max-w-[18ch] font-display text-[clamp(1.7rem,3vw,2.7rem)] font-bold text-white;
+    line-height: 1.02;
     letter-spacing: 0;
   }
 
-  .post-card__body p:not(.post-card__meta) {
-    @apply text-[0.92rem] leading-[1.55] text-white/60;
+  .post-card__body h3 a {
+    @apply text-white no-underline transition-colors;
+  }
+
+  .post-card__body h3 a:hover,
+  .post-card__body h3 a:focus-visible {
+    @apply text-mint;
+  }
+
+  .post-card__description {
+    @apply mt-5 max-w-[58ch] text-[0.96rem] leading-[1.65] text-white/62;
+  }
+
+  .post-card__footer {
+    @apply mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-5;
+  }
+
+  .post-card__link {
+    @apply inline-flex items-center gap-2 font-display text-[0.78rem] font-bold uppercase tracking-[0.14em] text-mint no-underline transition-colors;
+  }
+
+  .post-card__link svg {
+    @apply transition-transform;
+  }
+
+  .post-card__link:hover,
+  .post-card__link:focus-visible {
+    @apply text-white;
+  }
+
+  .post-card__link:hover svg,
+  .post-card__link:focus-visible svg {
+    transform: translateX(3px);
   }
 
   .newsletter {
@@ -2169,10 +2217,6 @@
     @apply grid-cols-3;
   }
 
-  .journal-grid {
-    @apply grid-cols-2;
-  }
-
   .test-grid {
     @apply grid-cols-1;
   }
@@ -2380,6 +2424,31 @@
   .test-grid,
   .journal-grid {
     @apply grid-cols-1;
+  }
+
+  .post-card {
+    @apply grid-cols-1;
+  }
+
+  .post-card__image,
+  .post-card__image-link {
+    @apply min-h-[220px];
+  }
+
+  .post-card__image::before {
+    background: linear-gradient(180deg, transparent 36%, rgb(0 0 0 / 68%));
+  }
+
+  .post-card__body {
+    @apply px-5 py-7;
+  }
+
+  .post-card__body h3 {
+    @apply max-w-none;
+  }
+
+  .post-card__footer {
+    @apply items-start;
   }
 
   .test-card__content {

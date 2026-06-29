@@ -458,9 +458,41 @@ test.describe("public home page", () => {
         name: "The sleep audit I run every Sunday.",
       }),
     ).toBeVisible();
+    await expect(journalSection.locator(".post-card")).toHaveCount(3);
     await expect(journalSection.getByText("Training")).toBeVisible();
+    await expect(journalSection.getByText("Nutrition")).toBeVisible();
+    await expect(journalSection.getByText("Lifestyle")).toBeVisible();
+    await expect(journalSection.getByText("May 18")).toBeVisible();
+    await expect(journalSection.getByText("May 11")).toBeVisible();
+    await expect(journalSection.getByText("May 04")).toBeVisible();
+    await expect(journalSection.getByText("04 min read")).toBeVisible();
     await expect(journalSection.getByText("06 min read")).toBeVisible();
+    await expect(journalSection.getByText("05 min read")).toBeVisible();
+    await expect(
+      journalSection.getByText(
+        "Why a hinge, a squat and a push will outperform 40 fancy variations - for the next 30 years.",
+      ),
+    ).toBeVisible();
+    await expect(
+      journalSection.getByText(
+        "How much you actually need, how to hit it without an app, and why everyone's wrong about the upper limit.",
+      ),
+    ).toBeVisible();
+    await expect(
+      journalSection.getByText(
+        "Ten questions, three minutes. The single highest-ROI habit I've ever taught a client.",
+      ),
+    ).toBeVisible();
+    await expect(journalSection.getByText("Jodi Stokes").first()).toBeVisible();
+    await expect(journalSection.getByText("Strength", { exact: true })).toBeVisible();
+    await expect(journalSection.getByText("Protein", { exact: true })).toBeVisible();
+    await expect(journalSection.getByText("Recovery", { exact: true })).toBeVisible();
+    await expect(journalSection.getByRole("link", { name: "Read note" })).toHaveCount(3);
+    for (const link of await journalSection.getByRole("link", { name: "Read note" }).all()) {
+      await expect(link).toHaveAttribute("href", "#");
+    }
     await expect(journalSection.locator(".post-card__deco")).toHaveCount(3);
+    await expectNoHorizontalOverflow(page);
 
     const newsletterSection = page.locator('[data-screen-label="Newsletter"]');
     await newsletterSection.scrollIntoViewIfNeeded();

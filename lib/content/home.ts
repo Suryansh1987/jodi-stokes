@@ -100,6 +100,9 @@ export type JournalPost = {
   title: string;
   description: string;
   deco: string;
+  author: string;
+  tags: string[];
+  href: string;
 };
 
 export type FooterLinkGroup = {
@@ -528,6 +531,9 @@ export const journalPosts: JournalPost[] = [
     description:
       "Why a hinge, a squat and a push will outperform 40 fancy variations - for the next 30 years.",
     deco: "Lift",
+    author: "Jodi Stokes",
+    tags: ["Strength", "Programming"],
+    href: "#",
   },
   {
     category: "Nutrition",
@@ -537,6 +543,9 @@ export const journalPosts: JournalPost[] = [
     description:
       "How much you actually need, how to hit it without an app, and why everyone's wrong about the upper limit.",
     deco: "Plate",
+    author: "Jodi Stokes",
+    tags: ["Protein", "Habits"],
+    href: "#",
   },
   {
     category: "Lifestyle",
@@ -546,6 +555,9 @@ export const journalPosts: JournalPost[] = [
     description:
       "Ten questions, three minutes. The single highest-ROI habit I've ever taught a client.",
     deco: "Rest",
+    author: "Jodi Stokes",
+    tags: ["Recovery", "Rituals"],
+    href: "#",
   },
 ];
 
