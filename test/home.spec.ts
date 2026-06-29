@@ -503,11 +503,25 @@ test.describe("public home page", () => {
         name: /Get the Monday Note from Jodi\./,
       }),
     ).toBeVisible();
-    await expect(newsletterSection.getByLabel("Email address")).toBeVisible();
+    await expect(newsletterSection.locator(".newsletter-card")).toHaveCount(1);
+    await expect(newsletterSection.locator(".subscribe")).toHaveCount(1);
+    await expect(newsletterSection.locator(".newsletter-card__eyebrow")).toHaveText(
+      "Monday Note",
+    );
+    await expect(newsletterSection.getByText("Workout, recipe, reset.")).toBeVisible();
+    await expect(
+      newsletterSection.getByText(
+        "No spam. No launch funnels. Just the weekly note.",
+      ),
+    ).toBeVisible();
+    const newsletterEmail = newsletterSection.getByLabel("Email address");
+    await expect(newsletterEmail).toBeVisible();
+    await expect(newsletterEmail).toHaveAttribute("type", "email");
+    await expect(newsletterEmail).toHaveAttribute("required", "");
     await expect(newsletterSection.getByText("Free forever")).toBeVisible();
     await expect(newsletterSection.getByText("Unsubscribe anytime")).toBeVisible();
     await expect(newsletterSection.getByText("Joined by 12,000+")).toBeVisible();
-    await newsletterSection.getByLabel("Email address").fill("avery@example.com");
+    await newsletterEmail.fill("avery@example.com");
     await newsletterSection.getByRole("button", { name: "Subscribe" }).click();
     await expect(newsletterSection.getByRole("button", { name: "You're in" })).toBeVisible();
     await expect(newsletterSection.getByText("You're in.")).toBeVisible();

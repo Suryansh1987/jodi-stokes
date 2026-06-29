@@ -562,9 +562,12 @@ export const journalPosts: JournalPost[] = [
 ];
 
 export const newsletterContent = {
+  eyebrow: "Monday Note",
   title: "Get the Monday Note from Jodi.",
+  subtitle: "Workout, recipe, reset.",
   description:
     "One short email every Monday morning. A workout, a recipe, and one thing to think about for the week. No fluff. No upsells. Free.",
+  privacyNote: "No spam. No launch funnels. Just the weekly note.",
   // [PLACEHOLDER] Newsletter form is local-only. [TODO] Wire newsletter signup provider.
   tags: ["Free forever", "Unsubscribe anytime", "Joined by 12,000+"],
 };

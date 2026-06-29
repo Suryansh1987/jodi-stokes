@@ -50,7 +50,7 @@ This tracker documents future UI enrichment work discovered through Magic UI and
 | 7 | [Testimonials Section](./7.%20Testimonials%20Section.md) | Testimonials | `Testimonials` | `magic` | Completed | Medium |
 | 8 | [Coaching Section](./8.%20Coaching%20Section.md) | Coaching | `Contact Form` | `magic` | Completed | Medium |
 | 9 | [Journal Section](./9.%20Journal%20Section.md) | Journal | `Blog 8` | `magic` | Completed | Medium |
-| 10 | [Newsletter Section](./10.%20Newsletter%20Section.md) | Newsletter | `Newsletter Card` | `magic` | Not Started | Medium |
+| 10 | [Newsletter Section](./10.%20Newsletter%20Section.md) | Newsletter | `Newsletter Card` | `magic` | Completed | Medium |
 | 11 | [Footer Section](./11.%20Footer%20Section.md) | Footer | `Large Name Footer` | `magic` | Not Started | Medium |
 
 ## Completed Task Evidence
@@ -65,6 +65,7 @@ This tracker documents future UI enrichment work discovered through Magic UI and
 - Task 7: Implemented the enriched Testimonials section with a static `Testimonials`-inspired editorial proof layout, featured first testimonial, supporting story stack, preserved quote/name/detail/rating/result content, deterministic tenure/focus metadata, and updated Playwright coverage. Verified with `npm run lint`, `npm run build`, and `PORT=3001 PLAYWRIGHT_BASE_URL=http://127.0.0.1:3001 npm run test:e2e` after default port 3000 was occupied (11 passed, 3 skipped).
 - Task 8: Implemented the enriched Coaching section with a static `Contact Form`-inspired application surface, preserved the coaching offer, investment summary, required fields, goal select, and placeholder submit feedback, added deterministic application details plus a required message textarea, and updated Playwright coverage. Verified with `npm run lint`, `npm run build`, and `PORT=3001 PLAYWRIGHT_BASE_URL=http://127.0.0.1:3001 npm run test:e2e` after default port 3000 was occupied (11 passed, 3 skipped).
 - Task 9: Implemented the enriched Journal section with a static `Blog 8`-inspired editorial article list, preserved existing post content and CSS art, added deterministic author/tag/link metadata, placeholder CMS/blog links, and updated Playwright coverage. Verified with `npm run lint`, `npm run build`, and `PORT=3001 PLAYWRIGHT_BASE_URL=http://127.0.0.1:3001 npm run test:e2e` after default port 3000 was occupied and one locator assertion was tightened (11 passed, 3 skipped).
+- Task 10: Implemented the enriched Newsletter section with a static `Newsletter Card`-inspired signup surface, preserved the email label, required email input, local-only submit confirmation, and provider TODO, added deterministic eyebrow/subtitle/privacy copy, and updated Playwright coverage. Verified with `npm run lint`, `npm run build`, and `PORT=3001 PLAYWRIGHT_BASE_URL=http://127.0.0.1:3001 npm run test:e2e` after default port 3000 was occupied and one locator assertion was tightened (11 passed, 3 skipped).
 
 ## Global Dependency Notes
 
