@@ -122,6 +122,31 @@ test.describe("public home page", () => {
     await expect(page.locator("#shop")).toBeInViewport();
   });
 
+  test("uses hamburger navigation below 1200px", async ({ page }) => {
+    await page.setViewportSize({ width: 1199, height: 900 });
+    await page.goto("/");
+
+    await expect(page.locator(".site-header__nav")).toBeHidden();
+    await expect(page.locator(".site-header__cta")).toBeHidden();
+
+    const menuButton = page.locator(".mobile-menu-button");
+    const mobileDialog = page.locator(".mobile-nav");
+
+    await expect(page.getByRole("button", { name: "Open menu" })).toBeVisible();
+    await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+    await menuButton.click();
+
+    await expect(menuButton).toHaveAttribute("aria-expanded", "true");
+    await expect(mobileDialog).toHaveAttribute("data-open", "true");
+    await expect(mobileDialog).toHaveAttribute("aria-hidden", "false");
+
+    await mobileDialog.getByRole("link", { name: "Journal" }).click();
+
+    await expect(page).toHaveURL(/#journal$/);
+    await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+    await expect(mobileDialog).toHaveAttribute("data-open", "false");
+  });
+
   test("opens, locks, and closes mobile navigation", async ({
     isMobile,
     page,
@@ -351,41 +376,58 @@ test.describe("public home page", () => {
         name: /Real people\. Real results\./,
       }),
     ).toBeVisible();
-    await expect(testimonialsSection.locator(".test-card")).toHaveCount(3);
+    const carousel = testimonialsSection.getByRole("region", {
+      name: "Testimonials",
+    });
+    await expect(carousel).toBeVisible();
+    await expect(testimonialsSection.locator(".scroll-reel__featured")).toHaveCount(3);
     await expect(
-      testimonialsSection.locator('.test-card[data-featured="true"]'),
-    ).toHaveCount(1);
-    await expect(testimonialsSection.getByText("★★★★★")).toHaveCount(3);
+      testimonialsSection.getByRole("button", { name: "Previous testimonial" }),
+    ).toBeDisabled();
     await expect(
-      testimonialsSection.getByText(
+      carousel.locator(".scroll-reel__text").getByText(
         "I came to Jodi for the body. I stayed for the brain. Three years in I sleep better, lift heavier, and stress about food half as much.",
       ),
     ).toBeVisible();
+    await expect(testimonialsSection.getByText("-28 lb")).toBeVisible();
+    await expect(testimonialsSection.getByText("3 years")).toBeVisible();
+    await expect(testimonialsSection.getByText("MR")).toBeVisible();
     await expect(
-      testimonialsSection.getByText(
+      carousel.locator(".scroll-reel__text").getByText("Margaret R."),
+    ).toBeVisible();
+    await expect(testimonialsSection.getByText("Realtor · client since 2023")).toBeVisible();
+
+    const nextTestimonial = testimonialsSection.getByRole("button", {
+      name: "Next testimonial",
+    });
+    await nextTestimonial.click();
+    await expect(
+      carousel.locator(".scroll-reel__text").getByText(
         "Jodi got me back under a barbell at 54 and I'm stronger than I was at 30. Her plans are stupidly simple, which is the whole point.",
       ),
     ).toBeVisible();
     await expect(
-      testimonialsSection.getByText(
+      carousel.locator(".scroll-reel__text").getByText("Daniel K."),
+    ).toBeVisible();
+    await expect(testimonialsSection.getByText("+14 lb")).toBeVisible();
+    await expect(testimonialsSection.getByText("Strength after 50")).toBeVisible();
+    await page.waitForTimeout(850);
+
+    await nextTestimonial.click();
+    await expect(
+      carousel.locator(".scroll-reel__text").getByText(
         "Six other programs and a divorce later, this is the one that finally clicked. Nutrition felt boring before - now it's automatic.",
       ),
     ).toBeVisible();
-    await expect(testimonialsSection.getByText("-28 lb")).toBeVisible();
-    await expect(testimonialsSection.getByText("+14 lb")).toBeVisible();
+    await expect(
+      carousel.locator(".scroll-reel__text").getByText("Sasha P."),
+    ).toBeVisible();
     await expect(testimonialsSection.getByText("-42 lb")).toBeVisible();
-    await expect(testimonialsSection.getByText("3 years")).toBeVisible();
-    await expect(testimonialsSection.getByText("Strength after 50")).toBeVisible();
     await expect(testimonialsSection.getByText("Nutrition consistency")).toBeVisible();
-    await expect(testimonialsSection.getByText("MR")).toBeVisible();
-    await expect(testimonialsSection.getByText("DK")).toBeVisible();
-    await expect(testimonialsSection.getByText("SP")).toBeVisible();
-    await expect(testimonialsSection.getByText("Margaret R.")).toBeVisible();
-    await expect(testimonialsSection.getByText("Daniel K.")).toBeVisible();
-    await expect(testimonialsSection.getByText("Sasha P.")).toBeVisible();
-    await expect(testimonialsSection.getByText("Realtor · client since 2023")).toBeVisible();
-    await expect(testimonialsSection.getByText("Architect · client since 2022")).toBeVisible();
-    await expect(testimonialsSection.getByText("Surgeon · client since 2021")).toBeVisible();
+    await expect(nextTestimonial).toBeDisabled();
+    await expect(
+      testimonialsSection.getByRole("button", { name: "Previous testimonial" }),
+    ).toBeEnabled();
     await expectNoHorizontalOverflow(page);
 
     const coachingSection = page.locator("#coaching");

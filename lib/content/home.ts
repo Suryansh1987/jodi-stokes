@@ -91,6 +91,8 @@ export type Testimonial = {
   detail: string;
   tenure?: string;
   focus?: string;
+  image: string;
+  imageAlt: string;
 };
 
 export type JournalPost = {
@@ -462,6 +464,9 @@ export const testimonials: Testimonial[] = [
     detail: "Realtor · client since 2023",
     tenure: "3 years",
     focus: "Sleep · strength · food trust",
+    // [PLACEHOLDER] Local Jodi images stand in for approved client portraits. [TODO] Replace with real testimonial imagery.
+    image: "/images/jodi/jodi-portrait.jpg",
+    imageAlt: "Jodi Stokes coaching portrait",
   },
   {
     quote:
@@ -473,6 +478,9 @@ export const testimonials: Testimonial[] = [
     detail: "Architect · client since 2022",
     tenure: "4 years",
     focus: "Strength after 50",
+    // [PLACEHOLDER] Local Jodi images stand in for approved client portraits. [TODO] Replace with real testimonial imagery.
+    image: "/images/jodi/jodi-leadership.png",
+    imageAlt: "Jodi Stokes at her studio",
   },
   {
     quote:
@@ -484,6 +492,9 @@ export const testimonials: Testimonial[] = [
     detail: "Surgeon · client since 2021",
     tenure: "5 years",
     focus: "Nutrition consistency",
+    // [PLACEHOLDER] Local Jodi images stand in for approved client portraits. [TODO] Replace with real testimonial imagery.
+    image: "/images/jodi/jodi-plank.png",
+    imageAlt: "Jodi side plank outdoors",
   },
 ];
 
