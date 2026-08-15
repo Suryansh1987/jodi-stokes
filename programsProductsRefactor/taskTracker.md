@@ -15,7 +15,7 @@ Allowed verification statuses: `Not Run`, `Passed`, `Failed`, `Blocked`, `N/A`.
 | Task | Description | Depends On | Status | Verification | Completion Evidence |
 |---:|---|---|---|---|---|
 | 1 | [Centralize approved program and product data](./1.%20Centralized%20Programs%20and%20Products%20Data.md) | None | Complete | Passed | Added JSON content source and typed adapter; see Task 1 evidence. |
-| 2 | [Replace Book and Shop with the real Products section](./2.%20Real%20Products%20Section.md) | Task 1 | Not Started | Not Run | Add evidence in Task 2. |
+| 2 | [Replace Book and Shop with the real Products section](./2.%20Real%20Products%20Section.md) | Task 1 | Complete | Passed | Added one centralized Products section and removed mock product commerce; see Task 2 evidence. |
 | 3 | [Refactor Programs and Coaching into registration](./3.%20Program%20and%20Registration%20Experience.md) | Task 1 | Not Started | Not Run | Add evidence in Task 3. |
 | 4 | [Add server-side registration email delivery](./4.%20Registration%20Email%20Delivery.md) | Task 3 | Not Started | Not Run | Add evidence in Task 4. |
 | 5 | [Remove stale storefront navigation and copy](./5.%20Navigation%20Content%20and%20SEO%20Cleanup.md) | Tasks 2-4 | Not Started | Not Run | Add evidence in Task 5. |
@@ -71,6 +71,8 @@ Allowed verification statuses: `Not Run`, `Passed`, `Failed`, `Blocked`, `N/A`.
 - Recommended content location: `lib/content/programs-products.json`, with a small TypeScript adapter/type module beside it. Do not fetch the JSON at runtime or place it under `public/`.
 - Task 1 implemented that content location with stable IDs, structured numeric program facts and explicit approximation flags. It exports read-only program/product collections, `getProgramById`, and HTTP(S)-only external URL narrowing from `lib/content/programs-products.ts`.
 - Task 1 retains `null` for every unconfirmed product price, description, merchandise image, and external URL. The Water Exercise Book is explicitly featured and is the only product with an existing local image reference.
+- Task 2 replaced the rendered Book and Shop sections with one `#products` section. It preserves the book-cover presentation, renders the other three products as shadcn cards, omits missing fields, and uses a plain `Purchase link unavailable` state until a validated HTTP(S) URL exists.
+- Task 2 removed the old Book/Shop components, mock product types/data, category/filter/favorite/cart UI, CSS merchandise art, inventory/shipping claims, and related tests. Site-wide Book/Shop navigation copy remains assigned to Task 5.
 - Keep older private-training prices as non-public source material unless the client explicitly approves a public services/policies use.
 - Recommended registration boundary: `app/api/program-registration/route.ts`. It fits the current client component, isolates the email secret, and lets Playwright mock the endpoint for loading/success/failure states.
 - Recommended email provider: Resend's server-side Node SDK, conditional on account/domain setup. Use a verified sender, send to the configured Jodi address, and set the registrant as `replyTo` rather than `from`.

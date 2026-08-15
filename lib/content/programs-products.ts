@@ -72,6 +72,16 @@ export function getProgramById(id: string): ProgramContent | undefined {
   return programs.find((program) => program.id === id);
 }
 
+export function formatMoney(money: Money): string {
+  const formatted = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: money.currency,
+    maximumFractionDigits: Number.isInteger(money.amount) ? 0 : 2,
+  }).format(money.amount);
+
+  return money.approximate ? `Approximately ${formatted}` : formatted;
+}
+
 export function getExternalProductUrl(product: ProductContent): string | null {
   if (!product.externalUrl) {
     return null;

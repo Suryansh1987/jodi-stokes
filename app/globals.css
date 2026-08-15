@@ -1074,8 +1074,12 @@
     @apply outline-2 outline-offset-4 outline-mint;
   }
 
-  .book {
-    @apply grid items-center gap-12 py-24 md:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] md:gap-16;
+  .products {
+    @apply bg-black-deep py-24;
+  }
+
+  .product-featured {
+    @apply mb-14 grid items-center gap-10 border-y border-white/10 py-12 md:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] md:gap-16;
   }
 
   .book-cover {
@@ -1083,36 +1087,17 @@
   }
 
   .book-showcase {
-    @apply relative flex min-h-[620px] w-full max-w-[480px] flex-col justify-between overflow-hidden rounded-lg border border-white/10 bg-[#0b1714] p-6 ring-1 ring-mint/15;
+    @apply relative flex min-h-[560px] w-full max-w-[480px] items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-[#0b1714] p-6 ring-1 ring-mint/15;
     box-shadow: 0 34px 80px rgb(0 0 0 / 42%);
   }
 
   .book-showcase::before {
     content: "";
-    @apply absolute inset-0;
+    @apply pointer-events-none absolute inset-0;
     background:
       linear-gradient(135deg, rgb(183 244 216 / 12%), transparent 42%),
       radial-gradient(circle at 78% 18%, rgb(255 111 89 / 16%), transparent 30%),
       linear-gradient(180deg, transparent, rgb(0 0 0 / 36%));
-    pointer-events: none;
-  }
-
-  .book-showcase__meta,
-  .book-showcase__footer {
-    @apply relative z-[2] flex items-center justify-between gap-3;
-  }
-
-  .book-showcase__meta span,
-  .book-showcase__footer span {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-2 font-display text-[0.68rem] font-bold uppercase tracking-[0.12em] text-white/70;
-  }
-
-  .book-showcase__footer {
-    @apply flex-wrap;
-  }
-
-  .book-showcase__footer svg {
-    @apply text-mint;
   }
 
   .book-3d {
@@ -1142,7 +1127,8 @@
     @apply bg-bone;
   }
 
-  .book-front__image {
+  .book-front__image,
+  .product-card__image {
     object-fit: cover;
   }
 
@@ -1159,421 +1145,87 @@
     z-index: -1;
   }
 
-  .book-content__intro {
-    @apply mb-5 grid-cols-1 gap-5;
+  .product-featured__content {
+    @apply flex min-w-0 flex-col items-start;
   }
 
-  .book-content__intro p {
-    @apply max-w-[52ch] text-[1.05rem] text-white/80;
+  .product-kicker {
+    @apply mb-4 font-display text-xs font-semibold uppercase tracking-[0.2em] text-coral;
   }
 
-  .book-stats {
-    @apply mb-5 flex flex-wrap gap-2;
-  }
-
-  .book-stats span {
-    @apply rounded-full border border-mint/30 bg-mint/10 px-3 py-1.5 font-display text-[0.72rem] font-bold uppercase tracking-[0.12em] text-mint;
-  }
-
-  .price-row {
-    @apply mb-6 flex flex-wrap items-baseline gap-4;
-  }
-
-  .price-row__now {
-    @apply font-display text-[2.4rem] font-extrabold text-mint;
+  .product-featured__content h3 {
+    @apply max-w-[14ch] font-display text-4xl font-extrabold leading-none text-white md:text-6xl;
     letter-spacing: 0;
   }
 
-  .price-row__was {
-    @apply text-xl text-white/40 line-through;
+  .product-description {
+    @apply mt-5 max-w-[54ch] text-base leading-7 text-white/70;
   }
 
-  .price-row__offer {
-    @apply rounded-md bg-coral px-2.5 py-1 font-display text-xs font-bold uppercase tracking-[0.12em] text-white;
-  }
-
-  .book-features {
-    @apply my-7 grid list-none gap-x-5 gap-y-3.5 md:grid-cols-2;
-  }
-
-  .book-features li {
-    @apply flex items-start gap-2.5 text-[0.94rem] text-white/80;
-  }
-
-  .book-features svg {
-    @apply mt-1 shrink-0 text-mint;
-  }
-
-  .book-detail-stack {
-    @apply mb-8 grid gap-3;
-  }
-
-  .book-detail {
-    @apply grid grid-cols-[auto_1fr] gap-4 rounded-lg border border-white/10 bg-white/[0.04] p-4;
-  }
-
-  .book-detail__number {
-    @apply flex size-9 items-center justify-center rounded-full bg-gold font-display text-xs font-extrabold text-ink;
-  }
-
-  .book-detail h3 {
-    @apply font-display text-base font-extrabold uppercase tracking-[0.06em] text-white;
-  }
-
-  .book-detail p {
-    @apply mt-1 max-w-[54ch] text-sm leading-6 text-white/65;
-  }
-
-  .cta-row {
-    @apply flex flex-wrap gap-3;
-  }
-
-  .shop {
-    @apply bg-black-deep py-24;
-  }
-
-  .shop-bar {
-    @apply mb-9 flex flex-wrap gap-2;
-  }
-
-  .shop-chip {
-    @apply cursor-pointer rounded-full border border-white/20 bg-transparent px-[18px] py-2.5 font-display text-[0.78rem] font-semibold uppercase tracking-[0.1em] text-white/80 transition;
-  }
-
-  .shop-chip:hover,
-  .shop-chip[aria-pressed="true"] {
-    @apply border-mint bg-mint text-ink;
-  }
-
-  .shop-chip:focus-visible {
-    @apply outline-2 outline-offset-4 outline-mint;
-  }
-
-  .merch-grid {
-    @apply grid gap-[22px] md:grid-cols-2 lg:grid-cols-4;
-  }
-
-  .merch-card {
-    @apply h-full min-h-[520px] gap-0 overflow-hidden rounded-lg border border-white/10 bg-surface-1 py-0 text-white shadow-none transition;
-    transition-duration: 0.4s;
-    transition-timing-function: var(--ease);
-  }
-
-  .merch-card:hover {
-    @apply border-mint shadow-[0_22px_60px_rgb(0_0_0_/_0.32)];
-    transform: translateY(-6px);
-  }
-
-  .merch-card__media {
-    @apply relative min-h-[230px] overflow-hidden rounded-none px-0;
-    aspect-ratio: 1 / 0.96;
-  }
-
-  .merch-badge {
-    @apply absolute left-3.5 top-3.5 z-[2] rounded-full border border-mint bg-ink px-2.5 py-1 font-display text-[0.68rem] font-bold uppercase tracking-[0.14em] text-mint;
-  }
-
-  .merch-badge[data-tone="coral"] {
-    @apply border-coral text-coral;
-  }
-
-  .merch-save {
-    @apply absolute right-3.5 top-3.5 z-[2] grid size-9 cursor-pointer place-items-center rounded-full border border-white/20 text-white transition;
-    background: rgb(10 11 10 / 60%);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-
-  .merch-save:hover {
-    @apply border-coral bg-coral;
-  }
-
-  .merch-save:focus-visible {
-    @apply outline-2 outline-offset-4 outline-mint;
-  }
-
-  .merch-card__body {
-    @apply flex flex-col gap-3 px-[22px] pb-0 pt-5;
-  }
-
-  .merch-card__meta {
-    @apply flex items-start justify-between gap-3;
-  }
-
-  .merch-card__category {
-    @apply font-display text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-mint;
-  }
-
-  .merch-card__availability {
-    @apply shrink-0 rounded-full border border-white/10 bg-white/[0.06] px-2 py-1 font-display text-[0.62rem] font-bold uppercase tracking-[0.12em] text-white/60;
-  }
-
-  .merch-card__title {
-    @apply font-display text-[1.08rem] font-bold text-white;
-    line-height: 1.18;
+  .product-price {
+    @apply mt-5 font-display text-2xl font-extrabold text-mint;
     letter-spacing: 0;
   }
 
-  .merch-card__notes {
-    @apply flex flex-wrap gap-1.5 text-xs text-white/60;
+  .product-action {
+    @apply mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3.5 font-display text-[0.74rem] font-extrabold uppercase tracking-[0.12em] text-ink transition;
   }
 
-  .merch-card__notes span {
-    @apply rounded-md bg-black/20 px-2 py-1;
-  }
-
-  .merch-card__footer {
-    @apply mt-auto flex flex-col gap-4 px-[22px] pb-6 pt-5;
-  }
-
-  .merch-card__purchase {
-    @apply flex w-full items-center justify-between gap-3;
-  }
-
-  .merch-card__price {
-    @apply whitespace-nowrap font-display text-[1.15rem] font-bold text-white;
-    letter-spacing: 0;
-  }
-
-  .merch-card__price span {
-    @apply ml-1.5 text-[0.86rem] font-normal text-white/40 line-through;
-  }
-
-  .merch-colors {
-    @apply flex shrink-0 gap-1.5;
-  }
-
-  .merch-color {
-    @apply size-3.5 rounded-full border border-white/20;
-  }
-
-  .merch-add {
-    @apply inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-white/10 bg-white px-4 py-3 font-display text-[0.72rem] font-extrabold uppercase tracking-[0.14em] text-ink transition;
-  }
-
-  .merch-add:hover {
-    @apply border-mint bg-mint;
+  .product-action:hover {
+    @apply bg-mint;
     transform: translateY(-2px);
   }
 
-  .merch-add:focus-visible {
+  .product-action:focus-visible {
     @apply outline-2 outline-offset-4 outline-mint;
   }
 
-  .merch-color[data-color="bone"] {
-    @apply bg-bone;
+  .product-unavailable {
+    @apply mt-7 border-l-2 border-gold pl-3 font-display text-[0.74rem] font-semibold uppercase tracking-[0.1em] text-white/65;
   }
 
-  .merch-color[data-color="ink"] {
-    @apply bg-ink;
+  .product-grid {
+    @apply grid gap-5 md:grid-cols-3;
   }
 
-  .merch-color[data-color="mint"] {
-    @apply bg-mint;
+  .product-card-shell {
+    @apply min-w-0;
   }
 
-  .merch-color[data-color="coral"] {
-    @apply bg-coral;
+  .product-card {
+    @apply h-full min-h-[220px] gap-0 rounded-lg border border-white/10 bg-surface-1 py-0 text-white shadow-none;
   }
 
-  .merch-color[data-color="gold"] {
-    @apply bg-gold;
+  .product-card__media {
+    @apply relative overflow-hidden border-b border-white/10;
+    aspect-ratio: 16 / 10;
   }
 
-  .art-tee,
-  .art-bottle,
-  .art-mat,
-  .art-cap,
-  .art-bag,
-  .art-band,
-  .art-journal {
-    @apply grid size-full place-items-center;
+  .product-card__header {
+    @apply px-6 pb-0 pt-6;
   }
 
-  .art-tee {
-    background: linear-gradient(180deg, var(--s2), var(--s1));
+  .product-card__header h3 {
+    @apply font-display text-xl font-bold leading-tight text-white;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
   }
 
-  .tee-shape {
-    @apply relative grid w-[70%] place-items-center bg-bone;
-    aspect-ratio: 1 / 1.05;
-    clip-path: polygon(
-      20% 18%,
-      32% 8%,
-      38% 14%,
-      50% 16%,
-      62% 14%,
-      68% 8%,
-      80% 18%,
-      96% 28%,
-      88% 42%,
-      76% 36%,
-      76% 95%,
-      24% 95%,
-      24% 36%,
-      12% 42%,
-      4% 28%
-    );
+  .product-card__content {
+    @apply flex flex-col gap-3 px-6 pt-4 text-sm leading-6 text-white/70;
   }
 
-  .tee-shape--coral {
-    @apply bg-coral;
+  .product-card__content .product-price {
+    @apply mt-0 text-xl;
   }
 
-  .tee-print {
-    @apply mt-[24%] px-4 text-center font-display text-[0.88rem] font-extrabold uppercase tracking-[0.08em] text-ink;
-    line-height: 1.05;
+  .product-card__footer {
+    @apply mt-auto px-6 pb-6 pt-5;
   }
 
-  .tee-shape--coral .tee-print {
-    @apply text-white;
-  }
-
-  .tee-print em {
-    @apply block font-script text-[1.6em] normal-case not-italic;
-  }
-
-  .art-bottle {
-    background: radial-gradient(ellipse at 50% 60%, var(--s3), var(--s1));
-  }
-
-  .bottle-shape {
-    @apply relative flex h-[80%] w-[38%] items-center justify-center;
-    background: linear-gradient(180deg, var(--mint) 0%, var(--mint-dim) 100%);
-    border-radius: 24px 24px 28px 28px;
-    box-shadow:
-      inset -10px 0 20px rgb(0 0 0 / 18%),
-      inset 8px 0 18px rgb(255 255 255 / 18%);
-  }
-
-  .bottle-shape::before,
-  .bottle-shape::after {
-    content: "";
-    @apply absolute bg-ink;
-  }
-
-  .bottle-shape::before {
-    @apply left-[30%] right-[30%] top-[-22px] h-[18px] rounded-[6px_6px_4px_4px];
-  }
-
-  .bottle-shape::after {
-    @apply left-[36%] right-[36%] top-[-34px] h-3.5 rounded;
-  }
-
-  .bottle-label {
-    @apply font-display text-[0.78rem] font-extrabold uppercase tracking-[0.18em] text-ink;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-  }
-
-  .art-mat,
-  .art-cap,
-  .art-bag,
-  .art-band,
-  .art-journal {
-    background: linear-gradient(135deg, var(--s2), var(--s1));
-  }
-
-  .mat-roll {
-    @apply relative h-[26%] w-[78%] rounded-full;
-    background: linear-gradient(180deg, var(--coral), #c93644 60%, var(--coral));
-    box-shadow: 0 14px 28px rgb(0 0 0 / 40%);
-  }
-
-  .mat-roll::before,
-  .mat-roll::after {
-    content: "";
-    @apply absolute top-1/2 size-9 rounded-full;
-    background: radial-gradient(circle at 30% 30%, #ff7e8c, #c93644);
-    transform: translateY(-50%);
-  }
-
-  .mat-roll::before {
-    @apply left-[-10px];
-  }
-
-  .mat-roll::after {
-    @apply right-[-10px];
-  }
-
-  .cap-shape {
-    @apply relative grid w-[70%] place-items-center rounded-[999px_999px_28px_28px] border border-white/20 bg-ink;
-    aspect-ratio: 1.6 / 1;
-  }
-
-  .cap-shape::before {
-    content: "";
-    @apply absolute bottom-[-10%] left-[12%] right-[12%] h-1/4 rounded-md border border-white/20 bg-ink;
-  }
-
-  .cap-logo {
-    @apply font-display text-[0.8rem] font-extrabold uppercase tracking-[0.2em] text-mint;
-  }
-
-  .bag-shape {
-    @apply relative flex h-[70%] w-[64%] items-end rounded bg-bone px-[18px] py-6;
-  }
-
-  .bag-shape::before,
-  .bag-shape::after {
-    content: "";
-    @apply absolute top-[-20px] h-[26px] w-3.5 rounded-[14px_14px_0_0] border-[3px] border-b-0 border-bone;
-  }
-
-  .bag-shape::before {
-    @apply left-[22%];
-  }
-
-  .bag-shape::after {
-    @apply right-[22%];
-  }
-
-  .bag-print {
-    @apply font-display text-[0.78rem] font-extrabold uppercase tracking-[0.04em] text-ink;
-    line-height: 1;
-  }
-
-  .bag-print em {
-    @apply block font-script text-[1.8em] normal-case not-italic text-mint-dim;
-  }
-
-  .band-set {
-    @apply grid h-[60%] w-[76%] grid-rows-3 gap-3.5;
-  }
-
-  .band {
-    @apply relative rounded-full;
-    box-shadow: inset 0 -6px 0 rgb(0 0 0 / 18%);
-  }
-
-  .band:nth-child(1) {
-    @apply bg-mint;
-  }
-
-  .band:nth-child(2) {
-    @apply bg-coral;
-  }
-
-  .band:nth-child(3) {
-    @apply bg-gold;
-  }
-
-  .journal-shape {
-    @apply relative flex h-[82%] w-[60%] flex-col justify-between rounded border border-white/20 bg-ink px-6 py-7;
-  }
-
-  .journal-shape::after {
-    content: "";
-    @apply absolute bottom-0 left-[8%] top-0 w-0.5 bg-mint;
-  }
-
-  .journal-shape__label {
-    @apply font-display text-[0.62rem] font-bold uppercase tracking-[0.22em] text-mint;
-  }
-
-  .journal-shape__title {
-    @apply font-script text-[2.2rem] text-bone;
-    line-height: 0.95;
+  .product-card__footer .product-action,
+  .product-card__footer .product-unavailable {
+    @apply mt-0;
   }
 
   .testimonials {
@@ -2364,7 +2016,7 @@
     @apply grid-cols-2;
   }
 
-  .book {
+  .product-featured {
     @apply grid-cols-1 gap-12;
   }
 
@@ -2374,10 +2026,6 @@
 
   .book-3d {
     @apply w-[260px];
-  }
-
-  .merch-grid {
-    @apply grid-cols-3;
   }
 
   .coaching {
@@ -2501,71 +2149,20 @@
     @apply min-h-[430px] p-4;
   }
 
-  .book-showcase__meta,
-  .book-showcase__footer {
-    @apply justify-center;
+  .product-featured {
+    @apply gap-8 py-8;
   }
 
-  .book-features {
-    @apply grid-cols-1 gap-2.5;
+  .product-featured__content h3 {
+    @apply text-4xl;
   }
 
-  .book-detail {
-    @apply grid-cols-1 gap-3;
+  .product-grid {
+    @apply grid-cols-1;
   }
 
-  .cta-row {
-    @apply flex-col;
-  }
-
-  .cta-row .btn-primary,
-  .cta-row .btn-ghost {
-    @apply justify-center text-center;
-  }
-
-  .merch-grid {
-    @apply grid-cols-2 gap-3.5;
-  }
-
-  .shop-bar {
-    @apply gap-1.5;
-  }
-
-  .shop-chip {
-    @apply px-3.5 py-2 text-[0.72rem];
-  }
-
-  .merch-card__body {
-    @apply px-4 pt-4;
-  }
-
-  .merch-card__footer {
-    @apply gap-3 px-4 pb-4 pt-3;
-  }
-
-  .merch-card__purchase {
-    @apply flex-col items-start gap-2;
-  }
-
-  .merch-card__title {
-    @apply text-[0.98rem];
-  }
-
-  .merch-card__price {
-    @apply text-base;
-  }
-
-  .tee-print,
-  .bag-print {
-    @apply text-[0.68rem];
-  }
-
-  .journal-shape {
-    @apply px-4 py-5;
-  }
-
-  .journal-shape__title {
-    @apply text-[1.65rem];
+  .product-card {
+    @apply min-h-[180px];
   }
 
   .journal-grid {

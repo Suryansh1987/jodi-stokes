@@ -68,20 +68,6 @@ export type Program = {
   artLabel?: string;
 };
 
-export type ShopProduct = {
-  name: string;
-  category: string;
-  price: string;
-  compareAtPrice?: string;
-  badge?: string;
-  badgeTone?: "mint" | "coral";
-  art: "tee" | "bottle" | "mat" | "cap" | "crew" | "bands" | "journal" | "bag";
-  colors: string[];
-  availability?: string;
-  shippingNote?: string;
-  quickNote?: string;
-};
-
 export type Testimonial = {
   quote: string;
   result: string;
@@ -254,7 +240,7 @@ export const aboutContent = {
   ] satisfies Credential[],
 };
 
-// [PLACEHOLDER] Product/program records use mock storefront data. [TODO] Replace with ecommerce/CMS data.
+// [PLACEHOLDER] Program records use mock storefront data. [TODO] Replace them with the centralized program content.
 export const programs: Program[] = [
   {
     title: "Strong Foundations",
@@ -304,151 +290,6 @@ export const programs: Program[] = [
     ],
     price: "$99",
     artLabel: "RESET · 6 WK",
-  },
-];
-
-export const bookContent = {
-  eyebrow: "The Book - Out Now",
-  title: "A complete guide to",
-  accent: "water exercise.",
-  description:
-    "Water exercise - for enthusiasts, teachers/trainers, and health support. Jodi's full pool-based method: low-impact strength, rehab-friendly conditioning, and class plans that actually work for every age and ability.",
-  image: {
-    src: "/images/jodi/book-water-exercise.png",
-    alt: "Water Exercise by Jodi Books-Stokes",
-  },
-  price: "$32",
-  compareAtPrice: "$42",
-  offer: "24% off · Signed copies",
-  stats: ["60+ exercises", "All ages", "Trainer-ready"],
-  features: [
-    "60+ pool exercises",
-    "Class & lesson plans",
-    "Low-impact for joints",
-    "Rehab modifications",
-    "Trainer-ready scripts",
-    "Signed by Jodi",
-  ],
-  details: [
-    {
-      title: "Pool strength",
-      description:
-        "Low-impact strength sequences for building control, balance, and confidence in the water.",
-    },
-    {
-      title: "Class planning",
-      description:
-        "Ready-to-teach lesson structures for trainers, teachers, and health support teams.",
-    },
-    {
-      title: "Joint-friendly modifications",
-      description:
-        "Regression and progression notes for mixed ages, rehab needs, and changing ability levels.",
-    },
-  ],
-  // [PLACEHOLDER] Book CTAs are static. [TODO] Wire book checkout/download/bulk inquiry.
-  ctas: [
-    { href: "#", label: "Buy the book", variant: "primary" },
-    { href: "#", label: "eBook · $14", variant: "ghost" },
-    { href: "#", label: "Bulk · trainers", variant: "ghost" },
-  ] satisfies CtaLink[],
-};
-
-export const shopCategories = [
-  "All",
-  "Apparel",
-  "Gear",
-  "Hydration",
-  "Journals",
-  "Bundles",
-];
-
-export const shopProducts: ShopProduct[] = [
-  {
-    name: "That's It Tee - Bone",
-    category: "Apparel · Tee",
-    price: "$38",
-    badge: "New",
-    art: "tee",
-    colors: ["bone", "ink", "mint", "coral"],
-    availability: "In stock",
-    shippingNote: "Ships in 2 days",
-    quickNote: "Studio cotton",
-  },
-  {
-    name: "Stainless Bottle 28oz",
-    category: "Hydration",
-    price: "$42",
-    badge: "Bestseller",
-    badgeTone: "coral",
-    art: "bottle",
-    colors: ["mint", "ink", "bone"],
-    availability: "Low stock",
-    shippingNote: "Free ship over $75",
-    quickNote: "Cold 24 hours",
-  },
-  {
-    name: "Studio Mat - 6mm",
-    category: "Gear",
-    price: "$58",
-    art: "mat",
-    colors: ["coral", "ink", "mint"],
-    availability: "In stock",
-    shippingNote: "Oversize shipping",
-    quickNote: "Joint-friendly grip",
-  },
-  {
-    name: "Studio Cap",
-    category: "Apparel · Cap",
-    price: "$32",
-    badge: "Limited",
-    art: "cap",
-    colors: ["ink", "mint", "bone"],
-    availability: "Limited run",
-    shippingNote: "Ships in 2 days",
-    quickNote: "Adjustable fit",
-  },
-  {
-    name: "Strong For Life Crew",
-    category: "Apparel · Crew",
-    price: "$62",
-    art: "crew",
-    colors: ["coral", "ink", "bone"],
-    availability: "In stock",
-    shippingNote: "Free ship over $75",
-    quickNote: "Midweight fleece",
-  },
-  {
-    name: "Resistance Band Set",
-    category: "Gear",
-    price: "$28",
-    art: "bands",
-    colors: ["mint", "coral", "gold"],
-    availability: "In stock",
-    shippingNote: "Ships in 2 days",
-    quickNote: "Three tensions",
-  },
-  {
-    name: "90-Day Training Journal",
-    category: "Journals",
-    price: "$24",
-    art: "journal",
-    colors: ["ink", "bone"],
-    availability: "In stock",
-    shippingNote: "Ships in 2 days",
-    quickNote: "Daily tracking",
-  },
-  {
-    name: "Studio Tote + Journal",
-    category: "Bundle",
-    price: "$48",
-    compareAtPrice: "$58",
-    badge: "Bundle",
-    art: "bag",
-    colors: ["bone", "ink"],
-    availability: "Bundle deal",
-    shippingNote: "Free ship over $75",
-    quickNote: "Save $10",
   },
 ];
 

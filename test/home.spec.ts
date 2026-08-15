@@ -180,11 +180,10 @@ test.describe("public home page", () => {
     await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
   });
 
-  test("renders programs and book commerce surfaces", async ({ page }) => {
+  test("renders program commerce surfaces", async ({ page }) => {
     await page.goto("/");
 
     const programsSection = page.locator("#programs");
-    const bookSection = page.locator("#book");
 
     await programsSection.scrollIntoViewIfNeeded();
     await expect(programsSection).toBeVisible();
@@ -225,88 +224,54 @@ test.describe("public home page", () => {
       programsSection.getByRole("button", { name: /Add .* to cart/ }),
     ).toHaveCount(3);
 
-    await bookSection.scrollIntoViewIfNeeded();
-    await expect(bookSection).toBeVisible();
-    await expect(
-      bookSection.getByRole("heading", {
-        level: 2,
-        name: /A complete guide to water exercise\./,
-      }),
-    ).toBeVisible();
-    await expectImageLoaded(
-      bookSection.getByRole("img", { name: "Water Exercise by Jodi Books-Stokes" }),
-    );
-    await expect(bookSection.getByText("$32")).toBeVisible();
-    await expect(bookSection.getByText("$42")).toBeVisible();
-    await expect(bookSection.getByText("24% off · Signed copies")).toBeVisible();
-    await expect(bookSection.getByText("60+ exercises")).toBeVisible();
-    await expect(bookSection.getByText("All ages")).toBeVisible();
-    await expect(bookSection.getByText("Trainer-ready", { exact: true })).toBeVisible();
-    await expect(bookSection.getByText("60+ pool exercises")).toBeVisible();
-    await expect(bookSection.getByText("Trainer-ready scripts")).toBeVisible();
-    await expect(
-      bookSection.getByRole("heading", { level: 3, name: "Pool strength" }),
-    ).toBeVisible();
-    await expect(
-      bookSection.getByRole("heading", { level: 3, name: "Class planning" }),
-    ).toBeVisible();
-    await expect(
-      bookSection.getByRole("heading", {
-        level: 3,
-        name: "Joint-friendly modifications",
-      }),
-    ).toBeVisible();
-    await expect(bookSection.getByRole("link", { name: /Buy the book/ })).toHaveAttribute(
-      "href",
-      "#",
-    );
-    await expect(bookSection.getByRole("link", { name: "eBook · $14" })).toHaveAttribute(
-      "href",
-      "#",
-    );
-    await expect(bookSection.getByRole("link", { name: "Bulk · trainers" })).toHaveAttribute(
-      "href",
-      "#",
-    );
-
     await expectNoHorizontalOverflow(page);
   });
 
-  test("renders shop categories and mock product cards", async ({ page }) => {
+  test("renders only approved products without onsite commerce", async ({
+    page,
+  }) => {
     await page.goto("/");
 
-    const shopSection = page.locator("#shop");
-    await shopSection.scrollIntoViewIfNeeded();
-    await expect(shopSection).toBeVisible();
+    const productsSection = page.locator("#products");
+    await productsSection.scrollIntoViewIfNeeded();
+    await expect(productsSection).toBeVisible();
 
     await expect(
-      shopSection.getByRole("heading", {
+      productsSection.getByRole("heading", {
         level: 2,
-        name: /Wear it\. Carry it\. Train in it\./,
+        name: "Products",
       }),
     ).toBeVisible();
 
-    for (const category of [
-      "All",
-      "Apparel",
-      "Gear",
-      "Hydration",
-      "Journals",
-      "Bundles",
+    for (const product of [
+      "Water Exercise Book",
+      "Lunch Bag",
+      "Water Bottle",
+      "Small Towel",
     ]) {
       await expect(
-        shopSection.getByRole("button", {
-          name: `Show ${category} products`,
-        }),
+        productsSection.getByRole("heading", { level: 3, name: product }),
       ).toBeVisible();
     }
 
+    await expect(productsSection.getByRole("article")).toHaveCount(4);
+    await expect(productsSection.locator('[data-product-id="water-exercise-book"]')).toHaveClass(
+      /product-featured/,
+    );
+    await expectImageLoaded(
+      productsSection.getByRole("img", {
+        name: "Water Exercise by Jodi Books-Stokes book cover",
+      }),
+    );
     await expect(
-      shopSection.getByRole("button", { name: "Show All products" }),
-    ).toHaveAttribute("aria-pressed", "true");
-    await expect(shopSection.locator(".merch-card")).toHaveCount(8);
+      productsSection.getByText("Purchase link unavailable", { exact: true }),
+    ).toHaveCount(4);
+    await expect(productsSection.getByRole("link")).toHaveCount(0);
+    await expect(productsSection.getByRole("button")).toHaveCount(0);
+    await expect(page.locator("#book")).toHaveCount(0);
+    await expect(page.locator("#shop")).toHaveCount(0);
 
-    for (const product of [
+    for (const staleContent of [
       "That's It Tee - Bone",
       "Stainless Bottle 28oz",
       "Studio Mat - 6mm",
@@ -315,49 +280,11 @@ test.describe("public home page", () => {
       "Resistance Band Set",
       "90-Day Training Journal",
       "Studio Tote + Journal",
+      "Low stock",
+      "Add to cart",
     ]) {
-      await expect(
-        shopSection.getByRole("heading", { level: 3, name: product }),
-      ).toBeVisible();
-      await expect(
-        shopSection.getByRole("button", { name: `Save ${product}` }),
-      ).toBeVisible();
-      await expect(
-        shopSection.getByRole("button", { name: `Add ${product} to cart` }),
-      ).toBeVisible();
+      await expect(productsSection.getByText(staleContent, { exact: true })).toHaveCount(0);
     }
-
-    const badges = shopSection.locator(".merch-badge");
-    await expect(badges.getByText("New", { exact: true })).toBeVisible();
-    await expect(badges.getByText("Bestseller", { exact: true })).toBeVisible();
-    await expect(badges.getByText("Limited", { exact: true })).toBeVisible();
-    await expect(badges.getByText("Bundle", { exact: true })).toBeVisible();
-    await expect(shopSection.getByText("$38")).toBeVisible();
-    await expect(shopSection.getByText("$48")).toBeVisible();
-    await expect(shopSection.getByText("Studio cotton")).toBeVisible();
-    await expect(shopSection.getByText("Low stock")).toBeVisible();
-    await expect(shopSection.getByText("Free ship over $75").first()).toBeVisible();
-    await expect(shopSection.getByText("Joint-friendly grip")).toBeVisible();
-    await expect(shopSection.getByText("Save $10")).toBeVisible();
-    await expect(
-      shopSection.locator(".merch-card__price").filter({ hasText: "$58" }),
-    ).toHaveCount(2);
-    await expect(
-      shopSection.getByLabel("That's It Tee - Bone color mint"),
-    ).toBeVisible();
-    await expect(
-      shopSection.getByLabel("Studio Tote + Journal color bone"),
-    ).toBeVisible();
-
-    await expect(shopSection.locator(".art-tee")).toHaveCount(2);
-    await expect(shopSection.locator(".art-bottle")).toHaveCount(1);
-    await expect(shopSection.locator(".art-mat")).toHaveCount(1);
-    await expect(shopSection.locator(".art-cap")).toHaveCount(1);
-    await expect(shopSection.locator(".art-band")).toHaveCount(1);
-    await expect(shopSection.locator(".art-journal")).toHaveCount(1);
-    await expect(shopSection.locator(".art-bag")).toHaveCount(1);
-    await expect(shopSection.locator(".merch-save")).toHaveCount(8);
-    await expect(shopSection.locator(".merch-add")).toHaveCount(8);
 
     await expectNoHorizontalOverflow(page);
   });
