@@ -1,0 +1,91 @@
+{
+  "programs": [
+    {
+      "id": "unstoppable-you",
+      "name": "Unstoppable You",
+      "type": "1:1 Coaching",
+      "price": {
+        "amount": 2400,
+        "currency": "USD",
+        "approximate": true
+      },
+      "sessions": {
+        "count": 8,
+        "durationMinutes": 55,
+        "durationApproximate": true,
+        "frequency": {
+          "count": 2,
+          "period": "week",
+          "approximate": true
+        }
+      },
+      "delivery": "Virtual",
+      "inclusions": [
+        {
+          "id": "members-only-youtube",
+          "label": "Members-only YouTube content"
+        },
+        {
+          "id": "workout-videos-homework",
+          "label": "Additional workout videos and workout homework"
+        },
+        {
+          "id": "nutrition-guidance",
+          "label": "Nutritional guidance and direction"
+        },
+        {
+          "id": "measurements-weigh-ins",
+          "label": "Measurements or weigh-ins"
+        }
+      ],
+      "notedAreas": ["Motivation", "Hormones", "Metabolism"],
+      "estimatedNewClientsPerMonth": {
+        "minimum": 2,
+        "maximum": 3,
+        "approximate": true
+      },
+      "ctaLabel": "Register"
+    }
+  ],
+  "products": [
+    {
+      "id": "water-exercise-book",
+      "name": "Water Exercise Book",
+      "featured": true,
+      "price": null,
+      "description": null,
+      "image": {
+        "src": "/images/jodi/book-water-exercise.png",
+        "alt": "Water Exercise by Jodi Books-Stokes book cover"
+      },
+      "externalUrl": null
+    },
+    {
+      "id": "lunch-bag",
+      "name": "Lunch Bag",
+      "featured": false,
+      "price": null,
+      "description": null,
+      "image": null,
+      "externalUrl": null
+    },
+    {
+      "id": "water-bottle",
+      "name": "Water Bottle",
+      "featured": false,
+      "price": null,
+      "description": null,
+      "image": null,
+      "externalUrl": null
+    },
+    {
+      "id": "small-towel",
+      "name": "Small Towel",
+      "featured": false,
+      "price": null,
+      "description": null,
+      "image": null,
+      "externalUrl": null
+    }
+  ]
+}
