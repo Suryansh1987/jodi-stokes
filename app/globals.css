@@ -236,25 +236,6 @@
     @apply size-4;
   }
 
-  .topbar {
-    @apply relative z-[90] overflow-hidden whitespace-nowrap bg-mint py-2 font-display text-[0.78rem] font-bold uppercase tracking-[0.16em] text-ink;
-  }
-
-  .topbar__marquee {
-    display: inline-flex;
-    gap: 48px;
-    padding-left: 48px;
-    animation: marquee-scroll 32s linear infinite;
-  }
-
-  .topbar__marquee span {
-    @apply inline-flex items-center gap-4;
-  }
-
-  .topbar__marquee i {
-    @apply block size-1.5 rounded-full bg-ink;
-  }
-
   .site-header {
     @apply sticky top-0 z-[80] border-b border-white/10 px-5 py-3 transition-all duration-300 md:px-12 md:py-[18px];
     background: rgb(10 11 10 / 75%);
@@ -309,10 +290,6 @@
     @apply relative z-[82] flex shrink-0 items-center gap-3.5;
   }
 
-  .cart-bubble {
-    @apply absolute -right-1 -top-1 grid size-4 place-items-center rounded-full bg-coral font-body text-[0.62rem] font-bold text-white;
-  }
-
   .mobile-menu-button {
     @apply hidden size-[42px] shrink-0 cursor-pointer place-items-center rounded-[10px] border border-white/20 bg-transparent text-white transition;
   }
@@ -363,8 +340,7 @@
     @apply flex items-center justify-between rounded-2xl border border-white/10 bg-white/6 px-4 py-3 font-display text-xs font-bold uppercase tracking-[0.16em] text-white/70;
   }
 
-  .mobile-nav__cta .btn-primary,
-  .mobile-nav__cta .btn-ghost {
+  .mobile-nav__cta .btn-primary {
     @apply justify-center px-6 py-4;
   }
 
@@ -1763,15 +1739,6 @@
   }
 }
 
-@keyframes marquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 @keyframes pulse-dot {
   0%,
   100% {
@@ -1829,7 +1796,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .topbar__marquee,
   .hero-tag__dot,
   .hero__content,
   .hero-photo,

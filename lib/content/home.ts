@@ -1,3 +1,5 @@
+import { products, programs } from "@/lib/content/programs-products";
+
 export type NavLink = {
   href: string;
   label: string;
@@ -86,17 +88,8 @@ export type FooterLinkGroup = {
 export const navLinks: NavLink[] = [
   { href: "#about", label: "About" },
   { href: "#programs", label: "Programs" },
-  { href: "#book", label: "The Book" },
-  { href: "#shop", label: "Shop" },
-  { href: "#coaching", label: "Coaching" },
+  { href: "#products", label: "Products" },
   { href: "#journal", label: "Journal" },
-];
-
-export const marqueeMessages = [
-  "Free shipping over $75",
-  'New Book "Water Exercise" - signed copies available',
-  "1:1 coaching slots open for fall",
-  "Train · Lifestyle · Nutrition",
 ];
 
 export const mobileSocialLinks = [
@@ -113,11 +106,10 @@ export const heroContent = {
     script: "be fitt.",
     outro: "Train with Jodi.",
   },
-  lead:
-    "Sustainable fitness, smart nutrition, and a lifestyle you'll actually keep. 15 years of coaching boiled down into programs, products, and one good book.",
+  lead: "Sustainable fitness, smart nutrition, and a lifestyle you'll actually keep.",
   ctas: [
     { href: "#programs", label: "Start training", variant: "primary" },
-    { href: "#book", label: 'Read "Water Exercise"', variant: "ghost" },
+    { href: "#products", label: "Explore products", variant: "ghost" },
   ] satisfies CtaLink[],
   stats: [
     { value: "15", accent: "+", label: "Years coaching" },
@@ -205,7 +197,7 @@ export const aboutContent = {
     title: "The full method",
     description:
       "Strength, sleep, food, and recovery are coached together so progress lasts outside the gym.",
-    cta: { href: "#coaching", label: "Train with Jodi" },
+    cta: { href: "#program-registration", label: "Register" },
   } satisfies AboutBreakout,
   stats: [
     { value: "15+", label: "Years coaching" },
@@ -327,29 +319,26 @@ export const footerContent = {
   largeName: "Jodi Stokes Fitness",
   kicker: "Train · Lifestyle · Nutrition",
   description:
-    "Sustainable fitness, smart nutrition, and a lifestyle you'll actually keep. Coaching since 2009, online since 2014, in your inbox every Monday.",
+    "Sustainable fitness, smart nutrition, and a lifestyle you'll actually keep.",
   copyright: "© 2026 Jodi Stokes Fitness. All rights reserved.",
   // [PLACEHOLDER] Footer links include temporary legal and studio URLs. [TODO] Replace with real routes.
   linkGroups: [
     {
-      title: "Shop",
+      title: "Programs",
       links: [
-        { href: "#shop", label: "Apparel" },
-        { href: "#shop", label: "Hydration" },
-        { href: "#shop", label: "Gear" },
-        { href: "#shop", label: "Journals" },
-        { href: "#shop", label: "Bundles" },
+        ...programs.map((program) => ({
+          href: "#programs",
+          label: program.name,
+        })),
+        { href: "#program-registration", label: "Register" },
       ],
     },
     {
-      title: "Train",
-      links: [
-        { href: "#programs", label: "Strong Foundations" },
-        { href: "#programs", label: "Lean & Lifted" },
-        { href: "#programs", label: "The Reset" },
-        { href: "#coaching", label: "1:1 Coaching" },
-        { href: "#book", label: "The Book" },
-      ],
+      title: "Products",
+      links: products.map((product) => ({
+        href: "#products",
+        label: product.name,
+      })),
     },
     {
       title: "Studio",
@@ -365,7 +354,6 @@ export const footerContent = {
   legalLinks: [
     { href: "#", label: "Terms" },
     { href: "#", label: "Privacy" },
-    { href: "#", label: "Returns" },
     { href: "#", label: "Accessibility" },
   ] satisfies NavLink[],
 };

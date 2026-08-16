@@ -13,7 +13,6 @@ const registrationSteps = [
 export function ProgramRegistrationSection() {
   return (
     <section
-      id="coaching"
       className="section-shell registration-shell"
       data-screen-label="Registration"
     >

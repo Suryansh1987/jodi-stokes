@@ -1,4 +1,4 @@
-import { ArrowRight, Search, ShoppingBag } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import Link from "next/link";
 
 import { BrandLogo } from "@/components/section/shared/brand-logo";
@@ -17,26 +17,20 @@ export function SiteHeader() {
             <Search size={16} strokeWidth={2.2} aria-hidden="true" />
           </button>
 
-          {/* [PLACEHOLDER] Visual-only cart count. [TODO] Connect cart state and checkout. */}
-          <button className="icon-btn" type="button" aria-label="Cart">
-            <ShoppingBag size={16} strokeWidth={2.2} aria-hidden="true" />
-            <span className="cart-bubble">3</span>
-          </button>
-
-          <Link className="btn-primary site-header__cta" href="#coaching">
-            Book a call
+          <Link
+            className="btn-primary site-header__cta"
+            href="#program-registration"
+          >
+            Register
             <ArrowRight size={14} strokeWidth={2.4} aria-hidden="true" />
           </Link>
         </>
       }
       mobileActions={
         <div className="mobile-nav__cta">
-          <Link className="btn-primary" href="#coaching">
-            Book a call
+          <Link className="btn-primary" href="#program-registration">
+            Register
             <ArrowRight size={14} strokeWidth={2.4} aria-hidden="true" />
-          </Link>
-          <Link className="btn-ghost" href="#shop">
-            Shop the store
           </Link>
         </div>
       }

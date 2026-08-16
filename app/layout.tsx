@@ -24,7 +24,7 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   title: "Jodi Stokes Fitness - Train. Lifestyle. Nutrition.",
   description:
-    "Sustainable fitness, smart nutrition, lifestyle coaching, training programs, shop drops, and the Monday Note from Jodi Stokes.",
+    "Sustainable fitness, smart nutrition, lifestyle coaching, fitness products, and the Monday Note from Jodi Stokes.",
   applicationName: "Jodi Stokes Fitness",
   authors: [{ name: "Jodi Stokes" }],
   creator: "Jodi Stokes",

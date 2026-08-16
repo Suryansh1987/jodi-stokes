@@ -12,7 +12,7 @@ const pillarIcons: Record<string, LucideIcon> = {
 
 export function PillarsSection() {
   return (
-    <section id="about" className="pillars" data-screen-label="Pillars">
+    <section className="pillars" data-screen-label="Pillars">
       <div className="pillar-grid">
         {pillars.map((pillar, index) => {
           const Icon = pillarIcons[pillar.role] ?? Dumbbell;

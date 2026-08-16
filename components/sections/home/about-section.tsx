@@ -6,7 +6,11 @@ import { aboutContent } from "@/lib/content/home";
 
 export function AboutSection() {
   return (
-    <section className="about section-shell" data-screen-label="About">
+    <section
+      id="about"
+      className="about section-shell"
+      data-screen-label="About"
+    >
       <div className="about-heading">
         <div>
           <span className="eyebrow">{aboutContent.eyebrow}</span>

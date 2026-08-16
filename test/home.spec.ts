@@ -24,7 +24,7 @@ test.describe("public home page", () => {
       }),
     ).toBeVisible();
 
-    await expect(heroSection.getByText("Now coaching")).toBeVisible();
+    await expect(heroSection.getByText("1:1 coaching")).toBeVisible();
     await expect(heroSection.getByText("+12 lbs lean")).toBeVisible();
     await expect(heroSection.getByText("Sleep · Stress · Plate")).toBeVisible();
     await expect(heroSection.getByText("15+")).toBeVisible();
@@ -78,8 +78,8 @@ test.describe("public home page", () => {
     await expect(aboutSection.getByText("Years coaching")).toBeVisible();
     await expect(aboutSection.getByText("4.9★")).toBeVisible();
     await expect(
-      aboutSection.getByRole("link", { name: "Train with Jodi" }),
-    ).toHaveAttribute("href", "#coaching");
+      aboutSection.getByRole("link", { name: "Register" }),
+    ).toHaveAttribute("href", "#program-registration");
     const credentials = page.locator(".about-credentials");
     await expect(credentials.getByText("NASM-CPT", { exact: true })).toBeVisible();
     await expect(credentials.getByText("PN Level 2", { exact: true })).toBeVisible();
@@ -110,16 +110,33 @@ test.describe("public home page", () => {
     await expect(page).toHaveURL(/#programs$/);
     await expect(page.locator("#programs")).toBeInViewport();
 
-    await page.getByRole("link", { name: 'Read "Water Exercise"' }).click();
-    await expect(page).toHaveURL(/#book$/);
-    await expect(page.locator("#book")).toBeInViewport();
+    await page.getByRole("link", { name: "Explore products" }).click();
+    await expect(page).toHaveURL(/#products$/);
+    await expect(page.locator("#products")).toBeInViewport();
 
-    await page
-      .locator(".site-header__nav")
-      .getByRole("link", { name: "Shop" })
-      .click();
-    await expect(page).toHaveURL(/#shop$/);
-    await expect(page.locator("#shop")).toBeInViewport();
+    const header = page.locator(".site-header");
+    const primaryNavigation = header.getByRole("navigation", {
+      name: "Primary navigation",
+    });
+
+    for (const [label, target] of [
+      ["About", "about"],
+      ["Programs", "programs"],
+      ["Products", "products"],
+      ["Journal", "journal"],
+    ] as const) {
+      await primaryNavigation.getByRole("link", { name: label }).click();
+      await expect(page).toHaveURL(new RegExp(`#${target}$`));
+      await expect(page.locator(`#${target}`)).toBeInViewport();
+    }
+
+    await expect(header.getByRole("button", { name: "Search" })).toBeVisible();
+    await expect(header.getByRole("button", { name: "Cart" })).toHaveCount(0);
+    await expect(header.locator(".cart-bubble")).toHaveCount(0);
+
+    await header.locator(".site-header__cta").click();
+    await expect(page).toHaveURL(/#program-registration$/);
+    await expect(page.locator("#program-registration")).toBeInViewport();
   });
 
   test("uses hamburger navigation below 1200px", async ({ page }) => {
@@ -139,6 +156,12 @@ test.describe("public home page", () => {
     await expect(menuButton).toHaveAttribute("aria-expanded", "true");
     await expect(mobileDialog).toHaveAttribute("data-open", "true");
     await expect(mobileDialog).toHaveAttribute("aria-hidden", "false");
+    await expect(
+      mobileDialog.getByRole("link", { name: "Products" }),
+    ).toHaveAttribute("href", "#products");
+    await expect(
+      mobileDialog.getByRole("link", { name: "Register" }),
+    ).toHaveAttribute("href", "#program-registration");
 
     await mobileDialog.getByRole("link", { name: "Journal" }).click();
 
@@ -171,12 +194,26 @@ test.describe("public home page", () => {
     await expect(mobileDialog).toHaveAttribute("aria-hidden", "false");
     await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
 
+    await page.keyboard.press("Escape");
+    await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+    await expect(mobileDialog).toHaveAttribute("data-open", "false");
+    await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
+
+    await openMenu.click({ force: true });
+
     await mobileDialog.getByRole("link", { name: "Programs" }).click();
 
     await expect(page).toHaveURL(/#programs$/);
     await expect(menuButton).toHaveAttribute("aria-expanded", "false");
     await expect(mobileDialog).toHaveAttribute("data-open", "false");
     await expect(mobileDialog).toHaveAttribute("aria-hidden", "true");
+    await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
+
+    await openMenu.click({ force: true });
+    await mobileDialog.getByRole("link", { name: "Register" }).click();
+    await expect(page).toHaveURL(/#program-registration$/);
+    await expect(page.locator("#program-registration")).toBeInViewport();
+    await expect(menuButton).toHaveAttribute("aria-expanded", "false");
     await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
   });
 
@@ -243,7 +280,9 @@ test.describe("public home page", () => {
   test("renders a blocked program registration form", async ({ page }) => {
     await page.goto("/");
 
-    const registrationSection = page.locator("#coaching");
+    const registrationSection = page.locator(
+      '[data-screen-label="Registration"]',
+    );
     const registrationForm = page.locator("#program-registration");
 
     await registrationSection.scrollIntoViewIfNeeded();
@@ -562,7 +601,7 @@ test.describe("public home page", () => {
     );
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
       "content",
-      /Sustainable fitness, smart nutrition, lifestyle coaching/,
+      "Sustainable fitness, smart nutrition, lifestyle coaching, fitness products, and the Monday Note from Jodi Stokes.",
     );
     await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
       "content",
@@ -598,7 +637,7 @@ test.describe("public home page", () => {
       );
     }
 
-    for (const group of ["Shop", "Train", "Studio"]) {
+    for (const group of ["Programs", "Products", "Studio"]) {
       await expect(
         footer.getByRole("navigation", { name: group }).getByRole("heading", {
           name: group,
@@ -606,27 +645,51 @@ test.describe("public home page", () => {
       ).toBeVisible();
     }
 
-    await expect(footer.getByRole("link", { name: "Apparel" })).toHaveAttribute(
-      "href",
-      "#shop",
-    );
     await expect(
-      footer.getByRole("link", { name: "Strong Foundations" }),
+      footer.getByRole("link", { name: "Unstoppable You" }),
     ).toHaveAttribute("href", "#programs");
     await expect(
-      footer.getByRole("link", { name: "1:1 Coaching" }),
-    ).toHaveAttribute("href", "#coaching");
+      footer.getByRole("link", { name: "Register" }),
+    ).toHaveAttribute("href", "#program-registration");
+
+    for (const product of [
+      "Water Exercise Book",
+      "Lunch Bag",
+      "Water Bottle",
+      "Small Towel",
+    ]) {
+      await expect(
+        footer.getByRole("link", { name: product }),
+      ).toHaveAttribute("href", "#products");
+    }
+
     await expect(footer.getByRole("link", { name: "About Jodi" })).toHaveAttribute(
       "href",
       "#about",
     );
 
     const legal = footer.getByRole("navigation", { name: "Legal" });
-    for (const link of ["Terms", "Privacy", "Returns", "Accessibility"]) {
+    for (const link of ["Terms", "Privacy", "Accessibility"]) {
       await expect(legal.getByRole("link", { name: link })).toHaveAttribute(
         "href",
         "#",
       );
+    }
+    await expect(legal.getByRole("link", { name: "Returns" })).toHaveCount(0);
+
+    await expect(page.locator(".topbar")).toHaveCount(0);
+    await expect(page.locator("#coaching")).toHaveCount(0);
+    for (const staleText of [
+      "Book a call",
+      "Shop the store",
+      "Free shipping over $75",
+      'New Book "Water Exercise" - signed copies available',
+      "1:1 coaching slots open for fall",
+      "Strong Foundations",
+      "Lean & Lifted",
+      "The Reset",
+    ]) {
+      await expect(page.getByText(staleText, { exact: true })).toHaveCount(0);
     }
     await expect(
       footer.getByText("© 2026 Jodi Stokes Fitness. All rights reserved."),

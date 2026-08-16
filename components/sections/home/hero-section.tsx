@@ -87,7 +87,7 @@ export function HeroSection() {
         <div className="hero-photo">
           <div className="hero-photo__badge">
             <span aria-hidden="true" />
-            Now coaching
+            1:1 coaching
           </div>
           <Image
             src={heroContent.image.src}
