@@ -5,7 +5,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 Project documentation, implementation plans, architecture notes, and other reference material live in the `<reference>/` directory.
 
 Before making changes:
-
 - Read [`AGENTS.md`](./AGENTS.md) for project-wide development guidelines.
 - Review any relevant documentation or task specifications in the `<reference>/` folder.
 
