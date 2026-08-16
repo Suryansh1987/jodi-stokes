@@ -910,168 +910,71 @@
     @apply border-y border-white/10 bg-surface-1 py-24;
   }
 
-  .prog-grid {
-    @apply grid gap-[22px] lg:grid-cols-[1.4fr_1fr_1fr];
+  .program-list {
+    @apply grid gap-6;
   }
 
-  .prog-card {
-    @apply relative min-h-[520px] gap-0 overflow-hidden rounded-3xl border border-white/10 bg-black-deep py-0 text-white transition md:min-h-[520px];
-    background:
-      linear-gradient(180deg, rgb(255 255 255 / 4%), transparent 42%),
-      var(--black-deep);
-    transition-duration: 0.4s;
-    transition-timing-function: var(--ease);
+  .program-card {
+    @apply gap-0 rounded-lg border border-mint/35 bg-black-deep py-0 text-white shadow-[0_28px_85px_rgb(20_232_176_/_0.1)];
   }
 
-  .prog-card--featured {
-    @apply border-mint/45;
-    box-shadow: 0 28px 85px rgb(20 232 176 / 12%);
+  .program-card__header {
+    @apply grid gap-5 border-b border-white/10 px-6 py-7 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:px-8;
   }
 
-  .prog-card:hover {
-    @apply border-mint;
-    transform: translateY(-6px);
+  .program-card__type {
+    @apply mb-3 font-display text-xs font-semibold uppercase tracking-[0.18em] text-coral;
   }
 
-  .prog-card__pricing {
-    @apply order-2 flex flex-1 flex-col;
-  }
-
-  .prog-card__media {
-    @apply relative order-1 h-[170px] overflow-hidden;
-    background: linear-gradient(135deg, var(--s2), var(--s3));
-  }
-
-  .prog-card--featured .prog-card__media {
-    @apply h-[250px];
-  }
-
-  .prog-card__image {
-    object-fit: cover;
-    object-position: center;
-    filter: saturate(1.1);
-  }
-
-  .prog-card__overlay {
-    @apply absolute inset-0;
-    background: linear-gradient(180deg, rgb(10 11 10 / 5%) 0%, rgb(10 11 10 / 65%) 100%);
-  }
-
-  .prog-card__script {
-    @apply absolute bottom-5 left-6 font-script text-[3.4rem] text-mint;
-    line-height: 0.85;
-    text-shadow: 0 4px 30px var(--mint-glow);
-    transform: rotate(-3deg);
-  }
-
-  .prog-card__media--photo {
-    background: #0e2620;
-  }
-
-  .prog-card__media--art {
-    @apply grid place-items-center;
-    background: linear-gradient(135deg, var(--coral), #7a2530);
-  }
-
-  .prog-card__media--art[data-art="reset"] {
-    background: linear-gradient(135deg, var(--gold), #a07415);
-  }
-
-  .prog-card__art-label {
-    @apply grid place-items-center text-center font-display text-5xl font-extrabold text-white;
-    line-height: 0.9;
+  .program-card__header h3 {
+    @apply font-display text-3xl font-extrabold leading-none text-white md:text-5xl;
     letter-spacing: 0;
   }
 
-  .prog-card__media--art[data-art="reset"] .prog-card__art-label {
-    @apply text-[2.6rem] text-ink;
-  }
-
-  .prog-card__art-label span {
-    @apply block;
-  }
-
-  .prog-card__header {
-    @apply gap-4 rounded-[22px] border border-white/10 bg-white/5 px-5 pt-5 pb-5 md:m-2 md:px-6 md:pt-6 md:pb-6;
-    background:
-      linear-gradient(180deg, rgb(255 255 255 / 7%), transparent 100%),
-      rgb(255 255 255 / 4%);
-  }
-
-  .prog-card__plan {
-    @apply flex items-start justify-between gap-4;
-  }
-
-  .prog-card__badge {
-    @apply shrink-0 rounded-full border border-mint/40 bg-mint px-3 py-1 font-display text-[0.66rem] font-bold uppercase tracking-[0.14em] text-ink;
-  }
-
-  .prog-card__tags {
-    @apply flex flex-wrap gap-2;
-  }
-
-  .prog-tag {
-    @apply rounded-full border border-white/10 bg-white/6 px-3 py-1.5 font-display text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/80;
-  }
-
-  .prog-tag--mint {
-    @apply border-mint bg-mint text-ink;
-  }
-
-  .prog-card__title {
-    @apply font-display text-2xl font-bold text-white;
-    line-height: 1.05;
+  .program-card__price {
+    @apply font-display text-2xl font-extrabold text-mint md:text-3xl;
     letter-spacing: 0;
   }
 
-  .prog-card--featured .prog-card__title {
-    @apply text-3xl;
+  .program-card__content {
+    @apply grid gap-8 px-6 py-7 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:px-8;
   }
 
-  .prog-card__body {
-    @apply flex-1 px-6 pt-5 pb-0;
+  .program-details {
+    @apply grid gap-3;
   }
 
-  .prog-card__body p {
-    @apply text-[0.94rem] leading-[1.55] text-white/60;
+  .program-details div {
+    @apply grid gap-1 border-b border-white/10 pb-3 last:border-b-0 last:pb-0;
   }
 
-  .prog-card__features {
-    @apply mt-6 grid gap-3;
+  .program-details dt,
+  .program-inclusions > p {
+    @apply font-display text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-mint;
   }
 
-  .prog-card__features li {
-    @apply flex items-start gap-3 text-sm leading-snug text-white/72;
+  .program-details dd {
+    @apply text-[0.96rem] text-white/75;
   }
 
-  .prog-card__features svg {
+  .program-inclusions ul {
+    @apply mt-3 grid gap-3;
+  }
+
+  .program-inclusions li {
+    @apply flex items-start gap-3 text-sm leading-snug text-white/75;
+  }
+
+  .program-inclusions svg {
     @apply mt-0.5 shrink-0 text-mint;
   }
 
-  .prog-card__footer {
-    @apply mt-auto px-6 pt-6 pb-6;
+  .program-card__footer {
+    @apply border-t border-white/10 px-6 py-6 md:px-8;
   }
 
-  .prog-card__price {
-    @apply flex items-end gap-1 font-display text-[clamp(2rem,4vw,3rem)] font-bold text-white;
-    letter-spacing: 0;
-  }
-
-  .prog-card__price small {
-    @apply pb-1 text-xs font-medium uppercase tracking-[0.08em] text-white/60;
-  }
-
-  .prog-card__add {
-    @apply inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-white px-5 py-3.5 font-display text-[0.74rem] font-extrabold uppercase tracking-[0.14em] text-ink transition;
-  }
-
-  .prog-card__add:hover {
-    @apply bg-mint;
-    transform: translateY(-2px);
-  }
-
-  .prog-card__add:focus-visible {
-    @apply outline-2 outline-offset-4 outline-mint;
+  .program-card__footer .btn-primary {
+    @apply w-full justify-center sm:w-auto;
   }
 
   .products {
@@ -1375,150 +1278,140 @@
     @apply outline-2 outline-offset-4 outline-mint;
   }
 
-  .coaching-shell {
+  .registration-shell {
     @apply py-24;
   }
 
-  .coaching {
-    @apply grid overflow-hidden rounded-[30px] border border-white/10 bg-surface-1 shadow-[0_28px_80px_rgba(0,0,0,0.28)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)];
+  .registration-layout {
+    @apply grid overflow-hidden rounded-lg border border-white/10 bg-surface-1 shadow-[0_28px_80px_rgba(0,0,0,0.28)] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)];
   }
 
-  .coach-left {
-    @apply relative flex min-h-[680px] flex-col justify-between gap-12 overflow-hidden bg-mint px-14 py-16 text-ink;
+  .registration-process {
+    @apply relative flex min-h-[600px] flex-col justify-between gap-12 overflow-hidden bg-mint px-12 py-14 text-ink;
   }
 
-  .coach-left::after {
+  .registration-process::after {
     content: "";
-    @apply absolute bottom-[-150px] right-[-120px] size-96 rounded-full border border-dashed border-ink/20;
+    @apply pointer-events-none absolute bottom-[-150px] right-[-120px] size-96 rounded-full border border-dashed border-ink/20;
   }
 
-  .coach-left__kicker {
-    @apply mb-5 inline-flex rounded-full border border-ink/15 bg-ink/10 px-3.5 py-2 font-display text-[0.68rem] font-bold uppercase tracking-[0.2em] text-ink/75;
+  .registration-process__kicker {
+    @apply mb-5 font-display text-[0.7rem] font-bold uppercase tracking-[0.18em] text-ink/70;
   }
 
-  .coach-left h2 {
-    @apply max-w-[9ch] font-display text-[clamp(2.4rem,4.4vw,4.25rem)] font-extrabold text-ink;
-    line-height: 0.96;
+  .registration-process h3 {
+    @apply max-w-[10ch] font-display text-[clamp(2.5rem,4.2vw,4.2rem)] font-extrabold leading-none text-ink;
     letter-spacing: 0;
   }
 
-  .coach-left h2 em {
-    @apply font-script not-italic;
-  }
-
-  .coach-feat {
+  .registration-process ul {
     @apply relative z-[1] grid list-none gap-3;
   }
 
-  .coach-feat li {
-    @apply flex items-center gap-3 rounded-2xl border border-ink/10 bg-white/[0.18] px-4 py-3 font-display text-base font-semibold text-ink shadow-[0_14px_30px_rgba(20,28,26,0.08)] backdrop-blur;
+  .registration-process li {
+    @apply flex items-center gap-3 border-b border-ink/15 py-3 font-display text-base font-semibold text-ink last:border-b-0;
     letter-spacing: 0;
   }
 
-  .coach-feat svg {
-    @apply shrink-0 text-ink;
+  .registration-process svg {
+    @apply shrink-0;
   }
 
-  .coach-left__label {
-    @apply font-display text-[0.74rem] font-bold uppercase tracking-[0.22em] text-ink/70;
+  .registration-panel {
+    @apply flex min-w-0 flex-col justify-center gap-5 bg-ink px-12 py-14;
   }
 
-  .coach-left__date {
-    @apply mt-1 font-display text-[1.6rem] font-extrabold text-ink;
+  .registration-panel__header {
+    @apply flex items-center gap-4 border-b border-white/10 pb-5;
+  }
+
+  .registration-panel__icon {
+    @apply grid size-11 shrink-0 place-items-center rounded-lg bg-mint text-ink;
+  }
+
+  .registration-panel__header .eyebrow {
+    @apply mb-1;
+  }
+
+  .registration-panel__header p {
+    @apply font-display text-lg font-bold text-white;
     letter-spacing: 0;
   }
 
-  .coach-left__footer {
-    @apply relative z-[1] grid gap-6;
+  .registration-form {
+    @apply grid gap-4;
+    scroll-margin-top: 7rem;
   }
 
-  .coach-detail-grid {
-    @apply grid gap-2 sm:grid-cols-3;
+  .registration-form__fields {
+    @apply grid min-w-0 gap-3 border-0 p-0;
   }
 
-  .coach-detail-grid span {
-    @apply rounded-2xl border border-ink/10 bg-ink/[0.08] px-3.5 py-3 font-display text-[0.72rem] font-bold uppercase tracking-[0.12em] text-ink/80;
-  }
-
-  .coach-right {
-    @apply relative flex flex-col justify-center gap-6 bg-ink px-14 py-16;
-  }
-
-  .coach-right::before {
-    content: "";
-    @apply absolute bottom-[8%] left-[-1px] top-[8%] w-0.5 bg-mint;
-  }
-
-  .coach-card-head {
-    @apply flex items-center gap-4 rounded-3xl border border-white/10 bg-white/[0.035] p-4;
-  }
-
-  .coach-card-head__icon {
-    @apply grid size-12 shrink-0 place-items-center rounded-2xl bg-mint text-ink;
-  }
-
-  .coach-card-head__title {
-    @apply mt-1 font-display text-[1.1rem] font-bold text-white;
-    letter-spacing: 0;
-  }
-
-  .coach-tier {
-    @apply flex items-end justify-between gap-5 rounded-3xl border border-white/10 bg-surface-1 px-5 py-4;
-  }
-
-  .coach-tier__price {
-    @apply font-display text-[4rem] font-extrabold text-white;
-    line-height: 1;
-    letter-spacing: 0;
-  }
-
-  .coach-tier__note {
-    @apply text-[0.94rem] text-white/60;
-  }
-
-  .coach-form {
-    @apply grid gap-3 rounded-3xl border border-white/10 bg-white/[0.035] p-4;
-  }
-
-  .coach-form__field {
+  .registration-form__field {
     @apply min-w-0;
   }
 
-  .coach-form label {
-    @apply mb-1.5 block font-display text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/60;
+  .registration-form label {
+    @apply mb-1.5 block font-display text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/60;
   }
 
-  .coach-form input,
-  .coach-form select,
-  .coach-form textarea {
-    @apply w-full rounded-xl border border-white/10 bg-surface-1 px-[18px] py-3.5 font-body text-[0.96rem] text-white outline-none transition;
+  .registration-form label span {
+    @apply normal-case text-white/40;
   }
 
-  .coach-form textarea {
+  .registration-form input,
+  .registration-form select,
+  .registration-form textarea {
+    @apply w-full rounded-lg border border-white/10 bg-surface-1 px-[18px] py-3.5 font-body text-[0.96rem] text-white outline-none;
+  }
+
+  .registration-form textarea {
     @apply min-h-28 resize-y;
   }
 
-  .coach-form input::placeholder,
-  .coach-form textarea::placeholder {
-    @apply text-white/40;
+  .registration-form input::placeholder,
+  .registration-form textarea::placeholder {
+    @apply text-white/35;
   }
 
-  .coach-form input:focus,
-  .coach-form select:focus,
-  .coach-form textarea:focus {
-    @apply border-mint;
+  .registration-form__fields:disabled input,
+  .registration-form__fields:disabled select,
+  .registration-form__fields:disabled textarea {
+    @apply cursor-not-allowed opacity-55;
   }
 
-  .coach-form__row {
+  .registration-form__row {
     @apply grid gap-3 md:grid-cols-2;
   }
 
-  .coach-form__submit {
-    @apply mt-1 w-full py-4;
+  .registration-agreement {
+    @apply grid grid-cols-[auto_1fr] gap-3 rounded-lg border border-gold/35 bg-gold/5 p-4 text-white/70;
   }
 
-  .form-status {
-    @apply min-h-[1.5rem] text-sm text-mint;
+  .registration-agreement > svg {
+    @apply mt-0.5 text-gold;
+  }
+
+  .registration-agreement p {
+    @apply mb-2 font-display text-sm font-bold text-white;
+    letter-spacing: 0;
+  }
+
+  .registration-agreement label {
+    @apply mb-0 flex items-start gap-2.5 text-sm font-normal normal-case leading-5 text-white/55;
+    letter-spacing: 0;
+  }
+
+  .registration-agreement input {
+    @apply mt-0.5 size-4 shrink-0 p-0 accent-mint;
+  }
+
+  .registration-form__submit {
+    @apply w-full justify-center py-4 disabled:cursor-not-allowed disabled:opacity-45;
+  }
+
+  .registration-status {
+    @apply min-h-[2.75rem] border-l-2 border-gold pl-3 text-sm leading-6 text-white/65;
   }
 
   .journal {
@@ -1861,9 +1754,9 @@
 
   .site-footer a:focus-visible,
   .site-footer button:focus-visible,
-  .coach-form input:focus-visible,
-  .coach-form select:focus-visible,
-  .coach-form textarea:focus-visible,
+  .registration-form input:focus-visible,
+  .registration-form select:focus-visible,
+  .registration-form textarea:focus-visible,
   .btn-primary:focus-visible,
   .btn-ghost:focus-visible {
     @apply outline-2 outline-offset-4 outline-mint;
@@ -2012,10 +1905,6 @@
     @apply bottom-4 right-4;
   }
 
-  .prog-grid {
-    @apply grid-cols-2;
-  }
-
   .product-featured {
     @apply grid-cols-1 gap-12;
   }
@@ -2028,7 +1917,7 @@
     @apply w-[260px];
   }
 
-  .coaching {
+  .registration-layout {
     @apply grid-cols-1;
   }
 
@@ -2132,14 +2021,6 @@
     @apply grid-cols-1;
   }
 
-  .prog-grid {
-    @apply grid-cols-1;
-  }
-
-  .prog-card--featured .prog-card__media {
-    @apply h-[220px];
-  }
-
   .book-3d {
     @apply w-[180px];
     transform: perspective(900px) rotateY(-12deg) rotateX(2deg);
@@ -2210,36 +2091,20 @@
     @apply min-h-[190px];
   }
 
-  .coaching {
-    @apply rounded-[20px];
-  }
-
-  .coach-left,
-  .coach-right {
+  .registration-process,
+  .registration-panel {
     @apply px-6 py-9;
   }
 
-  .coach-left {
+  .registration-process {
     @apply min-h-0;
   }
 
-  .coach-right::before {
-    @apply hidden;
+  .registration-process h3 {
+    @apply text-4xl;
   }
 
-  .coach-tier {
-    @apply flex-col items-start gap-1 rounded-2xl;
-  }
-
-  .coach-tier__price {
-    @apply text-[2.8rem];
-  }
-
-  .coach-form {
-    @apply rounded-2xl p-3;
-  }
-
-  .coach-form__row {
+  .registration-form__row {
     @apply grid-cols-1;
   }
 

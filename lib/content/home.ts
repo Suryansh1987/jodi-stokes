@@ -53,21 +53,6 @@ export type AboutBreakout = {
   cta: NavLink;
 };
 
-export type Program = {
-  title: string;
-  description: string;
-  tags: string[];
-  features: string[];
-  price: string;
-  priceNote?: string;
-  featured?: boolean;
-  image?: {
-    src: string;
-    alt: string;
-  };
-  artLabel?: string;
-};
-
 export type Testimonial = {
   quote: string;
   result: string;
@@ -240,59 +225,6 @@ export const aboutContent = {
   ] satisfies Credential[],
 };
 
-// [PLACEHOLDER] Program records use mock storefront data. [TODO] Replace them with the centralized program content.
-export const programs: Program[] = [
-  {
-    title: "Strong Foundations",
-    description:
-      "The full method, start to finish. Strength block, mobility, nutrition habits, sleep audit, and weekly mini-courses. Includes printable journal + private community.",
-    tags: ["Most popular", "16 weeks", "All levels"],
-    features: [
-      "Strength block",
-      "Mobility",
-      "Nutrition habits",
-      "Sleep audit",
-      "Printable journal",
-      "Private community",
-    ],
-    price: "$249",
-    priceNote: "/ full program",
-    featured: true,
-    image: {
-      src: "/images/jodi/jodi-plank.png",
-      alt: "Jodi side plank outdoors",
-    },
-  },
-  {
-    title: "Lean & Lifted",
-    description:
-      "Body recomp block - hypertrophy + nutrition. For people who already lift.",
-    tags: ["12 weeks", "Intermediate"],
-    features: [
-      "Hypertrophy focus",
-      "Body recomp nutrition",
-      "Progressive lifting",
-      "Intermediate pacing",
-    ],
-    price: "$189",
-    artLabel: "LEAN & LIFTED",
-  },
-  {
-    title: "The Reset",
-    description:
-      "Six-week kickstart. Habits, basics, and a confidence-building block.",
-    tags: ["6 weeks", "Beginner"],
-    features: [
-      "Six-week kickstart",
-      "Habit basics",
-      "Confidence block",
-      "Beginner-friendly structure",
-    ],
-    price: "$99",
-    artLabel: "RESET · 6 WK",
-  },
-];
-
 // [PLACEHOLDER] Testimonials are mock client stories. [TODO] Replace with approved client proof.
 export const testimonials: Testimonial[] = [
   {
@@ -338,40 +270,6 @@ export const testimonials: Testimonial[] = [
     imageAlt: "Jodi side plank outdoors",
   },
 ];
-
-export const coachingContent = {
-  eyebrow: "1:1 coaching",
-  title: "Work directly",
-  accent: "with Jodi.",
-  description:
-    "Twelve weeks, eight clients per cohort, zero copy-paste. You get the program, the food plan, the weekly call, and Jodi's phone for the in-between moments.",
-  methodTitle: "The full method. Twelve weeks. Eight clients.",
-  features: [
-    "Weekly 1:1 video call",
-    "Custom training + nutrition plan",
-    "Daily WhatsApp access",
-    "Quarterly bloodwork review",
-    "Private cohort community",
-    "Signed copy of the book",
-  ],
-  nextCohort: "Sep 8, 2026 · 3 seats left",
-  investment: "$2,400",
-  investmentNote: "/ 12 weeks · or 3× $850",
-  applicationKicker: "Private application",
-  applicationDetails: [
-    "10-minute fit review",
-    "48-hour response",
-    "Limited to 8 clients",
-  ],
-  messagePrompt: "What do you want Jodi to know before the first call?",
-  // [PLACEHOLDER] Form options are static. [TODO] Wire coaching application to CRM/backend.
-  goalOptions: [
-    "Body recomposition",
-    "Strength + longevity",
-    "Sustainable habits",
-    "Post-injury return",
-  ],
-};
 
 // [PLACEHOLDER] Journal posts are static mock content. [TODO] Replace with CMS/blog entries.
 export const journalPosts: JournalPost[] = [

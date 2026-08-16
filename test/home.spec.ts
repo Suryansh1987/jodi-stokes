@@ -180,7 +180,7 @@ test.describe("public home page", () => {
     await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
   });
 
-  test("renders program commerce surfaces", async ({ page }) => {
+  test("renders the Unstoppable You program", async ({ page }) => {
     await page.goto("/");
 
     const programsSection = page.locator("#programs");
@@ -190,40 +190,120 @@ test.describe("public home page", () => {
     await expect(
       programsSection.getByRole("heading", {
         level: 2,
-        name: /Programs that actually end somewhere\./,
+        name: "Programs",
       }),
     ).toBeVisible();
     await expect(
-      programsSection.getByRole("heading", { name: "Strong Foundations" }),
+      programsSection.getByRole("heading", { name: "Unstoppable You" }),
+    ).toBeVisible();
+    await expect(programsSection.getByRole("article")).toHaveCount(1);
+    await expect(programsSection.getByText("1:1 Coaching")).toBeVisible();
+    await expect(programsSection.getByText("Approximately $2,400")).toBeVisible();
+    await expect(programsSection.getByText("8 virtual sessions")).toBeVisible();
+    await expect(
+      programsSection.getByText("Approximately 55 minutes per session"),
     ).toBeVisible();
     await expect(
-      programsSection.getByRole("heading", { name: "Lean & Lifted" }),
+      programsSection.getByText("Approximately 2 sessions per week"),
+    ).toBeVisible();
+
+    for (const inclusion of [
+      "Members-only YouTube content",
+      "Additional workout videos and workout homework",
+      "Nutritional guidance and direction",
+      "Measurements or weigh-ins",
+    ]) {
+      await expect(
+        programsSection.getByText(inclusion, { exact: true }),
+      ).toBeVisible();
+    }
+
+    const registerLink = programsSection.getByRole("link", { name: "Register" });
+    await expect(registerLink).toHaveAttribute("href", "#program-registration");
+    await registerLink.focus();
+    await expect(registerLink).toBeFocused();
+    await registerLink.click();
+    await expect(page).toHaveURL(/#program-registration$/);
+    await expect(page.locator("#program-registration")).toBeInViewport();
+
+    for (const staleProgram of [
+      "Strong Foundations",
+      "Lean & Lifted",
+      "The Reset",
+      "Add to cart",
+    ]) {
+      await expect(
+        programsSection.getByText(staleProgram, { exact: true }),
+      ).toHaveCount(0);
+    }
+
+    await expectNoHorizontalOverflow(page);
+  });
+
+  test("renders a blocked program registration form", async ({ page }) => {
+    await page.goto("/");
+
+    const registrationSection = page.locator("#coaching");
+    const registrationForm = page.locator("#program-registration");
+
+    await registrationSection.scrollIntoViewIfNeeded();
+    await expect(registrationSection).toBeVisible();
+    await expect(
+      registrationSection.getByRole("heading", { level: 2, name: "Register" }),
     ).toBeVisible();
     await expect(
-      programsSection.getByRole("heading", { name: "The Reset" }),
-    ).toBeVisible();
-    await expect(programsSection.getByText("Most popular")).toBeVisible();
-    await expect(programsSection.locator(".prog-card")).toHaveCount(3);
-    await expect(programsSection.locator(".prog-card--featured")).toHaveCount(1);
-    await expect(programsSection.getByText("$249")).toBeVisible();
-    await expect(programsSection.getByText("$189")).toBeVisible();
-    await expect(programsSection.getByText("$99")).toBeVisible();
-    await expect(
-      programsSection.getByText("Printable journal", { exact: true }),
+      registrationSection.getByRole("heading", {
+        level: 3,
+        name: "Work directly with Jodi.",
+      }),
     ).toBeVisible();
     await expect(
-      programsSection.getByText("Hypertrophy focus", { exact: true }),
+      registrationSection.getByText(
+        "Formal signed paperwork is handled privately",
+      ),
     ).toBeVisible();
     await expect(
-      programsSection.getByText("Six-week kickstart", { exact: true }),
+      registrationSection.getByText("Medical disclosure is handled privately"),
     ).toBeVisible();
-    await expectImageLoaded(
-      programsSection.getByRole("img", { name: "Jodi side plank outdoors" }),
+
+    const name = registrationForm.getByLabel("Full name");
+    const email = registrationForm.getByLabel("Email");
+    const phone = registrationForm.getByLabel("Phone");
+    const program = registrationForm.getByLabel("Program");
+    const message = registrationForm.getByLabel(
+      "Message or fitness goals (optional)",
+    );
+    const agreement = registrationForm.getByLabel(
+      "Agreement acknowledgement unavailable",
+    );
+
+    for (const requiredControl of [name, email, phone, program, agreement]) {
+      await expect(requiredControl).toHaveAttribute("required", "");
+      await expect(requiredControl).toBeDisabled();
+    }
+    await expect(message).not.toHaveAttribute("required", "");
+    await expect(message).toBeDisabled();
+    await expect(program).toHaveValue("unstoppable-you");
+    await expect(program.locator("option")).toHaveText(
+      "Unstoppable You - 1:1 Coaching",
     );
     await expect(
-      programsSection.getByRole("button", { name: /Add .* to cart/ }),
-    ).toHaveCount(3);
+      registrationForm.getByRole("button", { name: "Register" }),
+    ).toBeDisabled();
+    await expect(registrationForm.getByRole("status")).toHaveText(
+      "Registration is unavailable until the client-approved agreement and waiver are ready to review.",
+    );
 
+    await expect(
+      registrationForm.locator('[name*="medication" i]'),
+    ).toHaveCount(0);
+    await expect(registrationForm.locator('[name*="diagnos" i]')).toHaveCount(0);
+    await expect(registrationForm.locator('[name*="injur" i]')).toHaveCount(0);
+    await expect(
+      registrationSection.getByText(/application received/i),
+    ).toHaveCount(0);
+    await expect(registrationSection.locator('input[type="date"]')).toHaveCount(0);
+    await expect(registrationSection.locator('input[type="payment"]')).toHaveCount(0);
     await expectNoHorizontalOverflow(page);
   });
 
@@ -289,7 +369,7 @@ test.describe("public home page", () => {
     await expectNoHorizontalOverflow(page);
   });
 
-  test("renders testimonials, coaching, journal, and newsletter sections", async ({
+  test("renders testimonials, journal, and newsletter sections", async ({
     page,
   }) => {
     await page.goto("/");
@@ -355,49 +435,6 @@ test.describe("public home page", () => {
     await expect(
       testimonialsSection.getByRole("button", { name: "Previous testimonial" }),
     ).toBeEnabled();
-    await expectNoHorizontalOverflow(page);
-
-    const coachingSection = page.locator("#coaching");
-    await coachingSection.scrollIntoViewIfNeeded();
-    await expect(coachingSection).toBeVisible();
-    await expect(
-      coachingSection.getByRole("heading", {
-        level: 2,
-        name: /Work directly with Jodi\./,
-      }),
-    ).toBeVisible();
-    await expect(coachingSection.getByText("Weekly 1:1 video call")).toBeVisible();
-    await expect(coachingSection.getByText("Sep 8, 2026 · 3 seats left")).toBeVisible();
-    await expect(coachingSection.getByText("Private application")).toBeVisible();
-    await expect(coachingSection.getByText("10-minute fit review")).toBeVisible();
-    await expect(coachingSection.getByText("48-hour response")).toBeVisible();
-    await expect(coachingSection.getByText("Limited to 8 clients")).toBeVisible();
-    await expect(
-      coachingSection.getByText("Apply for the next cohort"),
-    ).toBeVisible();
-    await expect(coachingSection.getByText("$2,400")).toBeVisible();
-    await expect(coachingSection.getByLabel("Your name")).toBeVisible();
-    await expect(coachingSection.getByLabel("Email")).toBeVisible();
-    await expect(coachingSection.getByLabel("Phone")).toBeVisible();
-    await expect(coachingSection.getByLabel("Main goal")).toBeVisible();
-    await expect(
-      coachingSection.getByLabel(
-        "What do you want Jodi to know before the first call?",
-      ),
-    ).toBeVisible();
-    await coachingSection.getByLabel("Your name").fill("Avery Client");
-    await coachingSection.getByLabel("Email").fill("avery@example.com");
-    await coachingSection.getByLabel("Phone").fill("+15551234567");
-    await coachingSection
-      .getByLabel("Main goal")
-      .selectOption("Strength + longevity");
-    await coachingSection
-      .getByLabel("What do you want Jodi to know before the first call?")
-      .fill("I want a sustainable strength plan around travel.");
-    await coachingSection.getByRole("button", { name: /Apply for fall cohort/ }).click();
-    await expect(
-      coachingSection.getByText("Application received. Jodi's team will follow up."),
-    ).toBeVisible();
     await expectNoHorizontalOverflow(page);
 
     const journalSection = page.locator("#journal");

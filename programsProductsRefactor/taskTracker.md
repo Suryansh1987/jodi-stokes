@@ -16,7 +16,7 @@ Allowed verification statuses: `Not Run`, `Passed`, `Failed`, `Blocked`, `N/A`.
 |---:|---|---|---|---|---|
 | 1 | [Centralize approved program and product data](./1.%20Centralized%20Programs%20and%20Products%20Data.md) | None | Complete | Passed | Added JSON content source and typed adapter; see Task 1 evidence. |
 | 2 | [Replace Book and Shop with the real Products section](./2.%20Real%20Products%20Section.md) | Task 1 | Complete | Passed | Added one centralized Products section and removed mock product commerce; see Task 2 evidence. |
-| 3 | [Refactor Programs and Coaching into registration](./3.%20Program%20and%20Registration%20Experience.md) | Task 1 | Not Started | Not Run | Add evidence in Task 3. |
+| 3 | [Refactor Programs and Coaching into registration](./3.%20Program%20and%20Registration%20Experience.md) | Task 1 | Blocked | Passed | Safe disabled registration implemented; awaiting approved agreement/waiver content. |
 | 4 | [Add server-side registration email delivery](./4.%20Registration%20Email%20Delivery.md) | Task 3 | Not Started | Not Run | Add evidence in Task 4. |
 | 5 | [Remove stale storefront navigation and copy](./5.%20Navigation%20Content%20and%20SEO%20Cleanup.md) | Tasks 2-4 | Not Started | Not Run | Add evidence in Task 5. |
 | 6 | [Run regression verification and evidence pass](./6.%20Regression%20Verification.md) | Tasks 1-5 | Not Started | Not Run | Add evidence in Task 6. |
@@ -73,6 +73,9 @@ Allowed verification statuses: `Not Run`, `Passed`, `Failed`, `Blocked`, `N/A`.
 - Task 1 retains `null` for every unconfirmed product price, description, merchandise image, and external URL. The Water Exercise Book is explicitly featured and is the only product with an existing local image reference.
 - Task 2 replaced the rendered Book and Shop sections with one `#products` section. It preserves the book-cover presentation, renders the other three products as shadcn cards, omits missing fields, and uses a plain `Purchase link unavailable` state until a validated HTTP(S) URL exists.
 - Task 2 removed the old Book/Shop components, mock product types/data, category/filter/favorite/cart UI, CSS merchandise art, inventory/shipping claims, and related tests. Site-wide Book/Shop navigation copy remains assigned to Task 5.
+- Task 3 replaced the three mock program cards with one centralized Unstoppable You card and removed all program add-to-cart behavior. The card displays only the confirmed approximate price and session facts plus the four supplied inclusions.
+- Task 3 replaced `CoachingSection` with `ProgramRegistrationSection`. The outer `#coaching` anchor remains temporarily for existing navigation compatibility, while the program CTA targets the stable `#program-registration` form anchor.
+- Task 3 defines the future form contract as required `name`, `email`, `phone`, `programId`, and `agreementAcknowledged` fields with optional `message`. All controls and submission remain disabled, with no handler or success state, until approved agreement/waiver content is supplied; Task 4 owns email delivery.
 - Keep older private-training prices as non-public source material unless the client explicitly approves a public services/policies use.
 - Recommended registration boundary: `app/api/program-registration/route.ts`. It fits the current client component, isolates the email secret, and lets Playwright mock the endpoint for loading/success/failure states.
 - Recommended email provider: Resend's server-side Node SDK, conditional on account/domain setup. Use a verified sender, send to the configured Jodi address, and set the registrant as `replyTo` rather than `from`.
@@ -85,3 +88,4 @@ Allowed verification statuses: `Not Run`, `Passed`, `Failed`, `Blocked`, `N/A`.
 
 - Tasks may be implemented with missing values represented as `null`/omitted and honest unavailable UI, but final launch is blocked by approved agreement copy, product URLs, product photos/descriptions, merchandise prices, and verified email sender configuration.
 - Do not mark the overall refactor complete while any public page presents an invented URL, price, claim, date, seat count, inventory status, or legal statement.
+- Task 3 cannot be marked complete or handed to Task 4 for an enabled public form until the client supplies approved agreement/waiver copy and confirms whether it should appear inline, in a disclosure, or on a separate public route.

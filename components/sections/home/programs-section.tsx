@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { CheckCircle2, Plus } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 
 import { SectionIntro } from "@/components/section/shared/section-intro";
 import {
@@ -8,7 +8,11 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { programs } from "@/lib/content/home";
+import {
+  formatMoney,
+  programs,
+  type ProgramContent,
+} from "@/lib/content/programs-products";
 
 export function ProgramsSection() {
   return (
@@ -18,112 +22,71 @@ export function ProgramsSection() {
       data-screen-label="Programs"
     >
       <div className="mx-auto max-w-6xl">
-        <SectionIntro
-          eyebrow="Train with Jodi"
-          title="Programs that"
-          accent="actually end somewhere."
-          description="Three signature builds - six, twelve, or sixteen weeks. Each comes with full video library, weekly check-in templates, and a printable training journal."
-        />
+        <SectionIntro eyebrow="Train with Jodi" title="Programs" />
 
-        <div className="prog-grid">
+        <div className="program-list">
           {programs.map((program) => (
-            <Card
-              key={program.title}
-              className={
-                program.featured ? "prog-card prog-card--featured" : "prog-card"
-              }
-            >
-              <div className="prog-card__pricing">
-                <CardHeader className="prog-card__header">
-                  <div className="prog-card__plan">
-                    <h3 className="prog-card__title">{program.title}</h3>
-                    {program.featured ? (
-                      <span className="prog-card__badge">Best value</span>
-                    ) : null}
-                  </div>
-
-                  <div className="prog-card__tags">
-                    {program.tags.map((tag, index) => (
-                      <span
-                        key={tag}
-                        className={
-                          index === 0 && program.featured
-                            ? "prog-tag prog-tag--mint"
-                            : "prog-tag"
-                        }
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="prog-card__price">
-                    {program.price}
-                    {program.priceNote ? <small>{program.priceNote}</small> : null}
-                  </div>
-                </CardHeader>
-
-                <CardContent className="prog-card__body">
-                  <p>{program.description}</p>
-                  <ul className="prog-card__features">
-                    {program.features.map((feature) => (
-                      <li key={feature}>
-                        <CheckCircle2 size={15} strokeWidth={2.2} aria-hidden="true" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-
-                <CardFooter className="prog-card__footer">
-                  {/* [PLACEHOLDER] Visual-only add-to-cart action. [TODO] Wire program product details, cart state, and checkout. */}
-                  <button
-                    className="prog-card__add"
-                    type="button"
-                    aria-label={`Add ${program.title} to cart`}
-                  >
-                    Add program
-                    <Plus size={16} strokeWidth={2.4} aria-hidden="true" />
-                  </button>
-                </CardFooter>
-              </div>
-
-              <div
-                className={
-                  program.featured
-                    ? "prog-card__media prog-card__media--photo"
-                    : "prog-card__media prog-card__media--art"
-                }
-                data-art={program.title === "The Reset" ? "reset" : "lifted"}
-              >
-                {program.image ? (
-                  <>
-                    <Image
-                      src={program.image.src}
-                      alt={program.image.alt}
-                      fill
-                      sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 38vw"
-                      className="prog-card__image"
-                    />
-                    <div className="prog-card__overlay" aria-hidden="true" />
-                    <div className="prog-card__script" aria-hidden="true">
-                      Strong
-                      <br />
-                      Foundations
-                    </div>
-                  </>
-                ) : (
-                  <div className="prog-card__art-label" aria-hidden="true">
-                    {program.artLabel?.split(" ").map((word) => (
-                      <span key={word}>{word}</span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </Card>
+            <ProgramCard key={program.id} program={program} />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function ProgramCard({ program }: { program: ProgramContent }) {
+  const duration = `${program.sessions.durationApproximate ? "Approximately " : ""}${program.sessions.durationMinutes} minutes per session`;
+  const frequency = `${program.sessions.frequency.approximate ? "Approximately " : ""}${program.sessions.frequency.count} sessions per ${program.sessions.frequency.period}`;
+
+  return (
+    <article aria-labelledby={`program-${program.id}-title`}>
+      <Card className="program-card">
+        <CardHeader className="program-card__header">
+          <div>
+            <p className="program-card__type">{program.type}</p>
+            <h3 id={`program-${program.id}-title`}>{program.name}</h3>
+          </div>
+          <p className="program-card__price">{formatMoney(program.price)}</p>
+        </CardHeader>
+
+        <CardContent className="program-card__content">
+          <dl className="program-details">
+            <div>
+              <dt>Format</dt>
+              <dd>
+                {program.sessions.count} {program.delivery.toLowerCase()} sessions
+              </dd>
+            </div>
+            <div>
+              <dt>Session length</dt>
+              <dd>{duration}</dd>
+            </div>
+            <div>
+              <dt>Frequency</dt>
+              <dd>{frequency}</dd>
+            </div>
+          </dl>
+
+          <div className="program-inclusions">
+            <p>Includes</p>
+            <ul>
+              {program.inclusions.map((inclusion) => (
+                <li key={inclusion.id}>
+                  <CheckCircle2 size={16} strokeWidth={2.3} aria-hidden="true" />
+                  <span>{inclusion.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </CardContent>
+
+        <CardFooter className="program-card__footer">
+          <Link className="btn-primary" href="#program-registration">
+            {program.ctaLabel}
+            <ArrowRight size={15} strokeWidth={2.4} aria-hidden="true" />
+          </Link>
+        </CardFooter>
+      </Card>
+    </article>
   );
 }
