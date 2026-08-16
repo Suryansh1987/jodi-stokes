@@ -17,7 +17,7 @@ Allowed verification statuses: `Not Run`, `Passed`, `Failed`, `Blocked`, `N/A`.
 | 1 | [Centralize approved program and product data](./1.%20Centralized%20Programs%20and%20Products%20Data.md) | None | Complete | Passed | Added JSON content source and typed adapter; see Task 1 evidence. |
 | 2 | [Replace Book and Shop with the real Products section](./2.%20Real%20Products%20Section.md) | Task 1 | Complete | Passed | Added one centralized Products section and removed mock product commerce; see Task 2 evidence. |
 | 3 | [Refactor Programs and Coaching into registration](./3.%20Program%20and%20Registration%20Experience.md) | Task 1 | Blocked | Passed | Safe disabled registration implemented; awaiting approved agreement/waiver content. |
-| 4 | [Add server-side registration email delivery](./4.%20Registration%20Email%20Delivery.md) | Task 3 | Not Started | Not Run | Add evidence in Task 4. |
+| 4 | [Add server-side registration email delivery](./4.%20Registration%20Email%20Delivery.md) | Task 3 | Blocked | Passed | Validated Resend delivery plumbing implemented; public activation remains blocked. |
 | 5 | [Remove stale storefront navigation and copy](./5.%20Navigation%20Content%20and%20SEO%20Cleanup.md) | Tasks 2-4 | Not Started | Not Run | Add evidence in Task 5. |
 | 6 | [Run regression verification and evidence pass](./6.%20Regression%20Verification.md) | Tasks 1-5 | Not Started | Not Run | Add evidence in Task 6. |
 
@@ -28,9 +28,9 @@ Allowed verification statuses: `Not Run`, `Passed`, `Failed`, `Blocked`, `N/A`.
 - `lib/content/home.ts` is the established centralized static-content module, and `tsconfig.json` enables `resolveJsonModule`.
 - `ProgramsSection`, `BookSection`, `ShopSection`, and `CoachingSection` are composed by the thin home page.
 - Program, product, book, coaching, navigation, and footer data are static TypeScript exports. Several section headings and actions remain hardcoded in JSX.
-- Program add buttons, shop filters, favorites, add-to-cart buttons, header search/cart, and book purchase links are placeholders. There is no cart, checkout, external purchase redirect, database, CMS, API route, server action, email dependency, authentication, analytics, or booking integration.
+- Program add buttons, shop filters, favorites, add-to-cart buttons, header search/cart, and book purchase links were identified as placeholders. There is no cart, checkout, database, CMS, server action, authentication, analytics, or booking integration. Task 4 added the first API Route Handler and email dependency without adding persistence.
 - The coaching and newsletter forms only set local React status text. Newsletter is out of scope.
-- The project has no environment files or documented deployment target. `next.config.ts` is not configured for static export, and `package.json` has standard Node-compatible `build` and `start` scripts.
+- The project now has a secret-free `.env.example` but no documented deployment target. `next.config.ts` is not configured for static export, and `package.json` has standard Node-compatible `build` and `start` scripts.
 - Playwright owns a production-mode server and currently asserts the mock program/product names, prices, controls, and hash links on desktop and mobile.
 - The public book cover exists at `public/images/jodi/book-water-exercise.png`; approved merchandise photos are not present.
 - Local Next.js 16 documentation supports App Router Route Handlers under `app/**/route.ts`; non-public environment variables remain server-only.
@@ -63,7 +63,7 @@ Allowed verification statuses: `Not Run`, `Passed`, `Failed`, `Blocked`, `N/A`.
 - External purchase URLs for all four products, including the exact Amazon URL for the book.
 - Approved photos, alt text, and final descriptions for Lunch Bag, Water Bottle, and Small Towel.
 - Production hosting target and confirmation that it supports Next.js server execution.
-- Resend account/provider approval, verified sending domain, approved `from` address, and production API key.
+- Resend account, verified sending domain, approved `from` address, and production API key. Resend is the approved provider for this implementation.
 - Preferred reply/confirmation behavior for the registrant; the current requirement only confirms the email to Jodi.
 
 ## Implementation Notes
@@ -82,10 +82,14 @@ Allowed verification statuses: `Not Run`, `Passed`, `Failed`, `Blocked`, `N/A`.
 - Use server-side allowlisting against program IDs from centralized content; never trust a submitted display name.
 - Use native HTML constraints plus explicit server validation. A small honeypot and input length limits are sufficient initial anti-abuse measures; do not add a database-backed rate limiter without evidence it is needed.
 - Automated tests must not call Resend. Mock endpoint responses for form UI tests and test malformed requests against the Route Handler before email configuration is accessed.
-- The current `.gitignore` ignores `.env*.local` but not every `.env` form. Before adding environment documentation, ignore `.env*` while explicitly allowing a secret-free `.env.example`.
+- Task 4 updated `.gitignore` to ignore `.env*` while explicitly allowing the secret-free `.env.example`.
+- Task 4 installed `resend@6.20.0` and added `POST /api/program-registration` with a 16 KiB JSON limit, strict known-field validation, centralized program allowlisting, boolean acknowledgement validation, a honeypot suppression path, and generic `400`/`503` responses.
+- Task 4 uses server-only `RESEND_API_KEY`, `REGISTRATION_EMAIL_FROM`, and `REGISTRATION_EMAIL_TO`. Automated Playwright servers explicitly blank these values so tests cannot send email.
+- The public registration form remains disabled. Loading, success, failure, retry, timeout, and reset behavior must be added only when approved agreement copy can replace the unavailable acknowledgement state.
 
 ## Blockers
 
 - Tasks may be implemented with missing values represented as `null`/omitted and honest unavailable UI, but final launch is blocked by approved agreement copy, product URLs, product photos/descriptions, merchandise prices, and verified email sender configuration.
 - Do not mark the overall refactor complete while any public page presents an invented URL, price, claim, date, seat count, inventory status, or legal statement.
 - Task 3 cannot be marked complete or handed to Task 4 for an enabled public form until the client supplies approved agreement/waiver copy and confirms whether it should appear inline, in a disclosure, or on a separate public route.
+- Task 4 server plumbing is implemented, but completion remains blocked by the Task 3 legal-content gate, an actual Next.js server deployment target, Resend credentials, an approved sender on a verified domain, and one controlled staging smoke test.

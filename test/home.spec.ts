@@ -276,6 +276,7 @@ test.describe("public home page", () => {
     const agreement = registrationForm.getByLabel(
       "Agreement acknowledgement unavailable",
     );
+    const honeypot = registrationForm.locator('[name="company"]');
 
     for (const requiredControl of [name, email, phone, program, agreement]) {
       await expect(requiredControl).toHaveAttribute("required", "");
@@ -283,6 +284,17 @@ test.describe("public home page", () => {
     }
     await expect(message).not.toHaveAttribute("required", "");
     await expect(message).toBeDisabled();
+    await expect(honeypot.locator("..")).toHaveClass(/sr-only/);
+    await expect(honeypot.locator("..")).toHaveAttribute(
+      "aria-hidden",
+      "true",
+    );
+    await expect(honeypot).toHaveAttribute("tabindex", "-1");
+    await expect(honeypot).toBeDisabled();
+    await expect(name).toHaveAttribute("maxlength", "100");
+    await expect(email).toHaveAttribute("maxlength", "254");
+    await expect(phone).toHaveAttribute("maxlength", "40");
+    await expect(message).toHaveAttribute("maxlength", "2000");
     await expect(program).toHaveValue("unstoppable-you");
     await expect(program.locator("option")).toHaveText(
       "Unstoppable You - 1:1 Coaching",
@@ -302,8 +314,15 @@ test.describe("public home page", () => {
     await expect(
       registrationSection.getByText(/application received/i),
     ).toHaveCount(0);
-    await expect(registrationSection.locator('input[type="date"]')).toHaveCount(0);
-    await expect(registrationSection.locator('input[type="payment"]')).toHaveCount(0);
+    await expect(
+      registrationSection.locator('input[type="date"]'),
+    ).toHaveCount(0);
+    await expect(
+      registrationSection.locator('input[type="payment"]'),
+    ).toHaveCount(0);
+    const renderedHtml = await page.content();
+    expect(renderedHtml).not.toContain("RESEND_API_KEY");
+    expect(renderedHtml).not.toContain("REGISTRATION_EMAIL_FROM");
     await expectNoHorizontalOverflow(page);
   });
 

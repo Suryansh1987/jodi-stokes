@@ -49,13 +49,25 @@ export function ProgramRegistrationSection() {
             </div>
 
             {/* [PLACEHOLDER] Registration is blocked until client-approved agreement and waiver content is available. */}
-            {/* [TODO] Enable this form only after the agreement content is approved and Task 4 email delivery is implemented. */}
+            {/* [TODO] Enable this form only after the agreement content, sender domain, and production email configuration are approved. */}
             <form
               id="program-registration"
               className="registration-form"
               aria-describedby="registration-status"
             >
               <fieldset disabled className="registration-form__fields">
+                <div className="sr-only" aria-hidden="true">
+                  <label htmlFor="registration-company">Company</label>
+                  <input
+                    id="registration-company"
+                    name="company"
+                    type="text"
+                    autoComplete="off"
+                    maxLength={200}
+                    tabIndex={-1}
+                  />
+                </div>
+
                 <div className="registration-form__field">
                   <label htmlFor="registration-name">Full name</label>
                   <input
@@ -63,6 +75,7 @@ export function ProgramRegistrationSection() {
                     name="name"
                     type="text"
                     autoComplete="name"
+                    maxLength={100}
                     placeholder="Full name"
                     required
                   />
@@ -76,6 +89,7 @@ export function ProgramRegistrationSection() {
                       name="email"
                       type="email"
                       autoComplete="email"
+                      maxLength={254}
                       placeholder="you@example.com"
                       required
                     />
@@ -87,6 +101,7 @@ export function ProgramRegistrationSection() {
                       name="phone"
                       type="tel"
                       autoComplete="tel"
+                      maxLength={40}
                       placeholder="+1 555 123 4567"
                       required
                     />
@@ -117,6 +132,7 @@ export function ProgramRegistrationSection() {
                     id="registration-message"
                     name="message"
                     placeholder="Share any goals or context you would like Jodi to know."
+                    maxLength={2000}
                     rows={4}
                   />
                 </div>

@@ -28,6 +28,11 @@ export default defineConfig({
   },
   webServer: {
     command: `npm run build && npm run start -- --hostname ${host} --port ${port}`,
+    env: {
+      REGISTRATION_EMAIL_FROM: "",
+      REGISTRATION_EMAIL_TO: "",
+      RESEND_API_KEY: "",
+    },
     reuseExistingServer: false,
     timeout: 180_000,
     url: baseURL,
