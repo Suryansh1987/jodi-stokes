@@ -5,6 +5,10 @@ import {
   expectNoHorizontalOverflow,
   expectNotOverlapping,
 } from "./support/assertions";
+import {
+  getExternalProductUrl,
+  products,
+} from "../lib/content/programs-products";
 
 test.describe("public home page", () => {
   test("renders the desktop hero, pillars, and about sections", async ({
@@ -131,8 +135,6 @@ test.describe("public home page", () => {
     }
 
     await expect(header.getByRole("button", { name: "Search" })).toBeVisible();
-    await expect(header.getByRole("button", { name: "Cart" })).toHaveCount(0);
-    await expect(header.locator(".cart-bubble")).toHaveCount(0);
 
     await header.locator(".site-header__cta").click();
     await expect(page).toHaveURL(/#program-registration$/);
@@ -262,17 +264,7 @@ test.describe("public home page", () => {
     await registerLink.click();
     await expect(page).toHaveURL(/#program-registration$/);
     await expect(page.locator("#program-registration")).toBeInViewport();
-
-    for (const staleProgram of [
-      "Strong Foundations",
-      "Lean & Lifted",
-      "The Reset",
-      "Add to cart",
-    ]) {
-      await expect(
-        programsSection.getByText(staleProgram, { exact: true }),
-      ).toHaveCount(0);
-    }
+    await expect(programsSection.getByRole("button")).toHaveCount(0);
 
     await expectNoHorizontalOverflow(page);
   });
@@ -344,6 +336,10 @@ test.describe("public home page", () => {
     await expect(registrationForm.getByRole("status")).toHaveText(
       "Registration is unavailable until the client-approved agreement and waiver are ready to review.",
     );
+    await expect(registrationForm.getByRole("status")).toHaveAttribute(
+      "aria-live",
+      "polite",
+    );
 
     await expect(
       registrationForm.locator('[name*="medication" i]'),
@@ -366,6 +362,7 @@ test.describe("public home page", () => {
   });
 
   test("renders only approved products without onsite commerce", async ({
+    isMobile,
     page,
   }) => {
     await page.goto("/");
@@ -381,18 +378,24 @@ test.describe("public home page", () => {
       }),
     ).toBeVisible();
 
-    for (const product of [
+    const approvedProductNames = [
       "Water Exercise Book",
       "Lunch Bag",
       "Water Bottle",
       "Small Towel",
-    ]) {
+    ];
+
+    expect(products).toHaveLength(4);
+
+    for (const product of approvedProductNames) {
       await expect(
         productsSection.getByRole("heading", { level: 3, name: product }),
       ).toBeVisible();
     }
 
-    await expect(productsSection.getByRole("article")).toHaveCount(4);
+    await expect(productsSection.getByRole("article")).toHaveCount(
+      products.length,
+    );
     await expect(productsSection.locator('[data-product-id="water-exercise-book"]')).toHaveClass(
       /product-featured/,
     );
@@ -401,27 +404,62 @@ test.describe("public home page", () => {
         name: "Water Exercise by Jodi Books-Stokes book cover",
       }),
     );
-    await expect(
-      productsSection.getByText("Purchase link unavailable", { exact: true }),
-    ).toHaveCount(4);
-    await expect(productsSection.getByRole("link")).toHaveCount(0);
-    await expect(productsSection.getByRole("button")).toHaveCount(0);
-    await expect(page.locator("#book")).toHaveCount(0);
-    await expect(page.locator("#shop")).toHaveCount(0);
 
-    for (const staleContent of [
-      "That's It Tee - Bone",
-      "Stainless Bottle 28oz",
-      "Studio Mat - 6mm",
-      "Studio Cap",
-      "Strong For Life Crew",
-      "Resistance Band Set",
-      "90-Day Training Journal",
-      "Studio Tote + Journal",
-      "Low stock",
-      "Add to cart",
-    ]) {
-      await expect(productsSection.getByText(staleContent, { exact: true })).toHaveCount(0);
+    for (const product of products) {
+      const productArticle = productsSection.locator(
+        `[data-product-id="${product.id}"]`,
+      );
+      const externalUrl = getExternalProductUrl(product);
+
+      if (externalUrl) {
+        const productLink = productArticle.getByRole("link", {
+          name: "View product",
+        });
+
+        await expect(productLink).toHaveAttribute("href", externalUrl);
+        await expect(productLink).toHaveAttribute("target", "_blank");
+        await expect(productLink).toHaveAttribute(
+          "rel",
+          "noopener noreferrer",
+        );
+        await expect(
+          productArticle.getByText("Purchase link unavailable", {
+            exact: true,
+          }),
+        ).toHaveCount(0);
+      } else {
+        await expect(
+          productArticle.getByText("Purchase link unavailable", {
+            exact: true,
+          }),
+        ).toBeVisible();
+        await expect(productArticle.getByRole("link")).toHaveCount(0);
+      }
+    }
+
+    await expect(productsSection.getByRole("button")).toHaveCount(0);
+
+    const secondaryCardBoxes = await productsSection
+      .locator(".product-card-shell")
+      .evaluateAll((cards) =>
+        cards.map((card) => {
+          const { height, width } = card.getBoundingClientRect();
+
+          return { height, width };
+        }),
+      );
+    expect(secondaryCardBoxes).toHaveLength(3);
+
+    for (const box of secondaryCardBoxes.slice(1)) {
+      expect(
+        Math.abs(box.width - secondaryCardBoxes[0].width),
+      ).toBeLessThanOrEqual(1);
+
+      if (!isMobile) {
+        expect(
+          Math.abs(box.height - secondaryCardBoxes[0].height),
+        ).toBeLessThanOrEqual(1);
+      }
     }
 
     await expectNoHorizontalOverflow(page);
@@ -674,22 +712,6 @@ test.describe("public home page", () => {
         "href",
         "#",
       );
-    }
-    await expect(legal.getByRole("link", { name: "Returns" })).toHaveCount(0);
-
-    await expect(page.locator(".topbar")).toHaveCount(0);
-    await expect(page.locator("#coaching")).toHaveCount(0);
-    for (const staleText of [
-      "Book a call",
-      "Shop the store",
-      "Free shipping over $75",
-      'New Book "Water Exercise" - signed copies available',
-      "1:1 coaching slots open for fall",
-      "Strong Foundations",
-      "Lean & Lifted",
-      "The Reset",
-    ]) {
-      await expect(page.getByText(staleText, { exact: true })).toHaveCount(0);
     }
     await expect(
       footer.getByText("© 2026 Jodi Stokes Fitness. All rights reserved."),

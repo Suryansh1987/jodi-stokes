@@ -19,7 +19,7 @@ Allowed verification statuses: `Not Run`, `Passed`, `Failed`, `Blocked`, `N/A`.
 | 3 | [Refactor Programs and Coaching into registration](./3.%20Program%20and%20Registration%20Experience.md) | Task 1 | Blocked | Passed | Safe disabled registration implemented; awaiting approved agreement/waiver content. |
 | 4 | [Add server-side registration email delivery](./4.%20Registration%20Email%20Delivery.md) | Task 3 | Blocked | Passed | Validated Resend delivery plumbing implemented; public activation remains blocked. |
 | 5 | [Remove stale storefront navigation and copy](./5.%20Navigation%20Content%20and%20SEO%20Cleanup.md) | Tasks 2-4 | Complete | Passed | Final anchors, navigation, footer content, and metadata now match the implemented sections. |
-| 6 | [Run regression verification and evidence pass](./6.%20Regression%20Verification.md) | Tasks 1-5 | Not Started | Not Run | Add evidence in Task 6. |
+| 6 | [Run regression verification and evidence pass](./6.%20Regression%20Verification.md) | Tasks 1-5 | Blocked | Passed | Deterministic regression suite and visual audit passed; launch-only checks remain blocked. |
 
 ## Confirmed Repository Findings
 
@@ -97,3 +97,4 @@ Allowed verification statuses: `Not Run`, `Passed`, `Failed`, `Blocked`, `N/A`.
 - Do not mark the overall refactor complete while any public page presents an invented URL, price, claim, date, seat count, inventory status, or legal statement.
 - Task 3 cannot be marked complete or handed to Task 4 for an enabled public form until the client supplies approved agreement/waiver copy and confirms whether it should appear inline, in a disclosure, or on a separate public route.
 - Task 4 server plumbing is implemented, but completion remains blocked by the Task 3 legal-content gate, an actual Next.js server deployment target, Resend credentials, an approved sender on a verified domain, and one controlled staging smoke test.
+- Task 6 passed lint, build, the deterministic production Playwright matrix, stale-content scanning, and desktop/mobile visual inspection. It remains blocked from launch completion because the disabled form cannot exercise mocked client success/failure and the current dataset contains no approved external product URL; the controlled provider smoke test also remains unavailable.
